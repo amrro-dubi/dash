@@ -1,0 +1,12 @@
+/* globals.css */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
+
+body {
+  font-family: 'Montserrat', sans-serif; /* Apply Rubik font to the body */
+  
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Open Sans', sans-serif; /* Apply Inter font to all headings */
+}
+

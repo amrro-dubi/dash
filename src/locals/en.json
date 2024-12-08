@@ -1,0 +1,7 @@
+{
+    "auth":{
+        "ResetPassword":{
+            "confirmPass": "Password miss match"
+        }
+    }
+}

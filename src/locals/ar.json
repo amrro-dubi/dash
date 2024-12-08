@@ -1,0 +1,7 @@
+{
+    "auth":{
+        "resetPassword":{
+            "confirmPass": "كلمة المرور غير مطابقة"
+        }
+    }
+}

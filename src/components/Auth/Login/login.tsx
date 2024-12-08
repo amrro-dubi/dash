@@ -100,7 +100,7 @@ console.log(data)
     setToastData(data);
   };
   return (
-    <div className="w-100  login-container">
+    <div className="login-container">
       <div className="overlay"> </div>
 
       <div className="login-wrapper">
@@ -119,14 +119,14 @@ console.log(data)
               </h4>
             </div>
             <form  onSubmit={handleSubmit}>
-              <div className="row g-4">
-                <div className="col-md-12">
+              <div className="grid grid-cols-1 md:grid-col-12 gap-4">
+                <div className="">
                   <div className="form-inner">
                     <label>Enter your email address*</label>
                     <input type="email" name="email" required onChange={handleChange} placeholder="Type email" />
                   </div>
                 </div>
-                <div className="col-md-12">
+                <div className="">
                   <div className="form-inner">
                     <label>Password*</label>
                     <input
@@ -147,14 +147,14 @@ console.log(data)
                     />
                   </div>
                 </div>
-                <div className="col-lg-12">
+                <div className="">
                   <div className="form-agreement form-inner d-flex justify-content-between flex-wrap">
                     <Link to="/forgetPass" className="forgot-pass">
                       Forget Password?
                     </Link>
                   </div>
                 </div>
-                <div className="col-md-12">
+                <div className="">
                   <div className="form-inner">
                     <button className="primary-btn2" type="submit">
                       Log In

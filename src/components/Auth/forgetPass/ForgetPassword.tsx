@@ -93,8 +93,8 @@ const ForgetPassword = () => {
               </h4>
             </div>
             <form onSubmit={handleSubmit}>
-              <div className="row g-4">
-                <div className="col-md-12">
+              <div className="grid grid-cols-1 gap-4">
+                <div className="">
                   <div className="form-inner">
                     <label>Enter your email address*</label>
                     <input
@@ -107,14 +107,14 @@ const ForgetPassword = () => {
                   </div>
                 </div>
 
-                <div className="col-lg-12">
+                <div className="">
                   <div className="form-agreement form-inner d-flex justify-content-between flex-wrap">
                     <Link to="/" className="forgot-pass">
                       Remember Password?
                     </Link>
                   </div>
                 </div>
-                <div className="col-md-12">
+                <div className="">
                   <div className="form-inner">
                     <button className="primary-btn2" type="submit">
                       Send

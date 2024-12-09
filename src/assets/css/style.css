@@ -3,6 +3,7 @@
 /*===========================
      01.COMMON CSS 
 ===========================*/
+
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700;800&display=swap");
 
 * {
@@ -24737,11 +24738,8 @@ button {
   padding: 20px 25px;
   max-width: 305px;
   width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 999;
+  height: 100vh;
+  
 }
 @media (max-width: 1699px) {
   .dashboard-wrapper .dashboard-sidebar-wrapper {

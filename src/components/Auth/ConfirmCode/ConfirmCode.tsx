@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-// import { Form, InputGroup, Row, Col } from "react-bootstrap";
+import { Form, InputGroup, Row, Col } from "react-bootstrap";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useConfirmCodeMutation } from "../../../apis/authSlice";
 import { toast } from "react-toastify";
@@ -114,8 +114,9 @@ const PinInput: React.FC = () => {
             </div>
 
             <form onSubmit={handleSubmit}>
-              <div className="flex  justify-center">
-                
+              <div className="flex justify-center">
+              
+                  
                     {pin.map((digit, index) => (
                       <input
                         key={index}
@@ -142,8 +143,8 @@ const PinInput: React.FC = () => {
                         }}
                       />
                     ))}
-                  
-                
+                 
+               
               </div>
 
               <div className="col-lg-12">

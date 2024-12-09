@@ -9,6 +9,7 @@ import { AuthProvider } from "../components/AuthProvider/AuthProvider";
 import ForgetPassword from "../components/Auth/forgetPass/ForgetPassword";
 import PinInput from "../components/Auth/ConfirmCode/ConfirmCode";
 import ResetPassword from "../components/Auth/resetPassword/ResetPassword";
+import Admins from "../Pages/Admin/Admin";
 
 
 
@@ -26,6 +27,11 @@ const routes = [
             {
             path: "/home/profile",
             element: <DashboardProfile />,
+            children: [],
+        },
+            {
+            path: "/home/admins",
+            element: <Admins />,
             children: [],
         },
     
@@ -63,14 +69,14 @@ const routes = [
     
     ],
     },
-    {
-        path: "/test",
-        element: <Test />,
-        children: [
+    // {
+    //     path: "/test",
+    //     element: <Test />,
+    //     children: [
            
     
-    ],
-    },
+    // ],
+    // },
  
     
  

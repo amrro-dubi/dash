@@ -2,19 +2,20 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import modelReducer from "./modelSlice";
 import { authApi } from "../apis/authSlice";
+import servicesApi from "../apis/serveces";
 
 
 // import { homeApi } from "@/src/api/HomeApiSlice";
 // import { catApi } from "../api/Categories";
 const store = configureStore({
     reducer: {
-     
+         
         Model: modelReducer,
       
       
         // [amaduesApi.reducerPath]: amaduesApi.reducer,
         // cart:cartReducer,
-        // [homeApi.reducerPath]: homeApi.reducer,
+        [servicesApi.reducerPath]: servicesApi.reducer,
         [authApi.reducerPath]: authApi.reducer,
         // [catApi.reducerPath]: catApi.reducer,
     },
@@ -23,7 +24,8 @@ const store = configureStore({
             immutableCheck: false,
             serializableCheck: false,
         }).concat(
-           authApi.middleware
+           authApi.middleware,
+           servicesApi.middleware
           
         ),
 });

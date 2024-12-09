@@ -123,92 +123,100 @@ console.log(data)
     setToastData(data);
   };
   return (
-    <div className="w-100  login-container">
-      <div className="overlay"> </div>
+    <div className="login-container">
+    <div className="overlay"> </div>
 
-      <div className="login-wrapper">
-        <div className="login-page">
-        
-           
-          <div className="login-content">
-            <div className="login-header">
-              <h4 className="modal-title" id="logInModal01Label">
-               Reset your password
-              </h4>
+    <div className="login-wrapper">
+      <div className="login-page">
+        {/* <div className="login-img">
+            <img src={loginImage} alt="" />
+            <div className="logo">
+              <Link to="/"><a><img src={logo} alt="" /></a></Link>
             </div>
-            <form  onSubmit={handleSubmit}>
-              <div className="row g-4">
-              
-                <div className="col-md-12">
-                  <div className="form-inner">
-                    <label>Password*</label>
-                    <input
-                      id="password6"
-                      type={passwordVisible ? "text" : "password"}
-                      value={formData.password}
-                      name="password"
-                      required
-                      onChange={handleChange}
-                      placeholder="*** ***"
-                    />
-                    <i
-                      className={`bi bi-${
-                        passwordVisible ? "eye" : "eye-slash"
-                      }`}
-                      onClick={togglePasswordVisibility}
-                      id="togglePassword"
-                    />
-                  </div>
-                </div>
-               
-                <div className="col-md-12">
-                  <div className="form-inner">
-                    <label>Confirm Password*</label>
-                    <input
-                      id="password6"
-                      type={passwordVisible ? "text" : "password"}
-                      value={formData.confirmPassword}
-                      name="confirmPassword"
-                      required
-                      onChange={handleChange}
-                      placeholder="*** ***"
-                    />
-                    <i
-                      className={`bi bi-${
-                        passwordVisible ? "eye" : "eye-slash"
-                      }`}
-                      onClick={togglePasswordVisibility}
-                      id="togglePassword"
-                    />
-                  </div>
-                </div>
-                {errors.confirmPassword && (
-  <div className="alert alert-danger" role="alert">
-    {errors.confirmPassword}
-  </div>
-)}
-
-                <div className="col-lg-12">
-                  <div className="form-agreement form-inner d-flex justify-content-between flex-wrap">
-                    <Link to="/forgetPass" className="forgot-pass">
-                      Back?
-                    </Link>
-                  </div>
-                </div>
-                <div className="col-md-12">
-                  <div className="form-inner">
-                    <button className="primary-btn2" type="submit">
-                      Reset
-                    </button>
-                  </div>
+          </div> */}
+         
+        <div className="login-content">
+          <div className="login-header">
+            <h4 className="modal-title" id="logInModal01Label">
+              Reset you password 
+            </h4>
+          </div>
+          <form  onSubmit={handleSubmit}>
+            <div className="grid grid-cols-1  gap-4">
+           
+              <div className="">
+                <div className="form-inner">
+                  <label>Password*</label>
+                  <input
+                    id="password6"
+                    type={passwordVisible ? "text" : "password"}
+                    value={formData.password}
+                    name="password"
+                    required
+                    onChange={handleChange}
+                    placeholder="*** ***"
+                  />
+                  <i
+                    className={`bi bi-${
+                      passwordVisible ? "eye" : "eye-slash"
+                    }`}
+                    onClick={togglePasswordVisibility}
+                    id="togglePassword"
+                  />
                 </div>
               </div>
-            
-            </form>
-          </div>
+              <div className="">
+                <div className="form-inner">
+                  <label>Confirm Password*</label>
+                  <input
+                    id="password6"
+                    type={passwordVisible ? "text" : "password"}
+                    value={formData.password}
+                    name="confirmPassword"
+                    required
+                    onChange={handleChange}
+                    placeholder="*** ***"
+                  />
+                  <i
+                    className={`bi bi-${
+                      passwordVisible ? "eye" : "eye-slash"
+                    }`}
+                    onClick={togglePasswordVisibility}
+                    id="togglePassword"
+                  />
+                </div>
+              </div>
+
+              <div className="">
+                <div className="form-agreement form-inner d-flex justify-content-between flex-wrap">
+                  <Link to="/forgetPass" className="forgot-pass">
+                    back?
+                  </Link>
+                </div>
+              </div>
+              
+              <div className="">
+                <div className="form-inner">
+                  <button className="primary-btn2" type="submit">
+                    Log In
+                  </button>
+                </div>
+              </div>
+
+            </div>
+            {/* <div className="terms-conditon">
+                <p>By sign up,you agree to the <a href="#">‘terms &amp; conditons’</a></p>
+              </div>
+              <ul className="social-icon">
+                <li><a href="#"><img src={googleIcon} alt="" /></a></li>
+                <li><a href="#"><img src={faceIcon} alt="" /></a></li>
+                <li><a href="#"><img src={twitterIcon} alt="" /></a></li>
+              </ul> */}
+          </form>
         </div>
       </div>
     </div>
+  </div>
   );
 };
 

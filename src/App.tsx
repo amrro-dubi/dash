@@ -5,18 +5,23 @@ import { Outlet } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
 
+
 const App: React.FC = () => {
   const { t } = useTranslation();
 
   return (
     <>
       <div className="dashboard-wrapper">
-        {/* @ts-ignore */}
-        <div className=""> {t("homee")} </div>
-
-        <Sidebar />
-        <Outlet />
+     
+      <div className="grid grid-cols-12">
+        <div className="col-span-2"><Sidebar /></div>
+        <div className="col-span-10">  <Outlet /></div>
       </div>
+
+        
+      
+      </div>
+    
     </>
   );
 };

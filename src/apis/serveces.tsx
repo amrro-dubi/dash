@@ -18,7 +18,7 @@ const servicesApi = createApi({
         );
       }
       headers.set("Accept", "application/json");
-      // headers.set("Accept-Language", "ar");
+      headers.set("lang", "ar");
       
   
 
@@ -64,18 +64,67 @@ const servicesApi = createApi({
           return { status: meta?.response?.status, response };
       },
   }),
-
-    getRoles: builder.query<any, void>({
-      query: () => `admin/role`,
-      providesTags: ["roles"],
-    }),
-
-    deleteRole: builder.mutation({
-      query: (id) => ({
-        url: `admin/admin/${id}`,
-        method: "DELETE",
+    editAdmin: builder.mutation<any, any>({
+      query: ({formData, id}) => ({
+          url: `admin/admin/${id}`,
+          method: 'POST',
+          body: formData,
       }),
       invalidatesTags: ["admins"],
+      transformResponse: (response, meta) => {
+          console.log(meta?.response?.status);
+        
+          return { status: meta?.response?.status, response };
+      },
+      transformErrorResponse: (response, meta) => {
+ 
+          return { status: meta?.response?.status, response };
+      },
+  }),
+
+    getRoles: builder.query<any,{page?:number, per_page?:number}>({
+      query: ({page, per_page}) => `admin/role?page=${page}&per_page${per_page}`,
+      providesTags: ["roles"],
+    }),
+    createRole: builder.mutation<any, any>({
+      query: (formData) => ({
+          url: `admin/role`,
+          method: 'POST',
+          body: formData,
+      }),
+      invalidatesTags: ["roles"],
+      transformResponse: (response, meta) => {
+          console.log(meta?.response?.status);
+        
+          return { status: meta?.response?.status, response };
+      },
+      transformErrorResponse: (response, meta) => {
+ 
+          return { status: meta?.response?.status, response };
+      },
+  }),
+    deleteRole: builder.mutation({
+      query: (id) => ({
+        url: `admin/role/${id}`,
+        method: "DELETE",
+      }),
+      
+      transformResponse: (response, meta) => {
+        console.log(meta?.response?.status);
+      
+        return { status: meta?.response?.status, response };
+    },
+    transformErrorResponse: (response, meta) => {
+
+        return { status: meta?.response?.status, response };
+    },
+      invalidatesTags: ["roles"],
+    }),
+
+
+    getPermissions: builder.query<any,{page?:number, per_page?:number}>({
+      query: ({page, per_page}) => `admin/permission?page=${page}&per_page${per_page}`,
+      providesTags: ["roles"],
     }),
 
    
@@ -94,6 +143,9 @@ export const {
   useGetAdminsQuery,
   useDeleteAdminMutation,
   useGetRolesQuery,
-  useCreateAdminMutation
+  useCreateAdminMutation,
+  useEditAdminMutation,
+  useGetPermissionsQuery,
+  useCreateRoleMutation, useDeleteRoleMutation
 } = servicesApi;
 export default servicesApi;

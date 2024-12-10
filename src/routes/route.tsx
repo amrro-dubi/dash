@@ -10,6 +10,7 @@ import ForgetPassword from "../components/Auth/forgetPass/ForgetPassword";
 import PinInput from "../components/Auth/ConfirmCode/ConfirmCode";
 import ResetPassword from "../components/Auth/resetPassword/ResetPassword";
 import Admins from "../Pages/Admin/Admin";
+import Roles from "../Pages/Roles/Roles";
 
 
 
@@ -32,6 +33,11 @@ const routes = [
             {
             path: "/home/admins",
             element: <Admins />,
+            children: [],
+        },
+            {
+            path: "/home/roles",
+            element: <Roles />,
             children: [],
         },
     

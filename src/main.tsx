@@ -10,7 +10,7 @@ import "./globals.css";
 // import "./assets/css/fontawesome.min.css";
 // import "./assets/css/bootstrap.min.css";
 // import 'bootstrap/dist/css/bootstrap.min.css';
-import "./assets/css/swiper-bundle.min.css";
+// import "./assets/css/swiper-bundle.min.css";
 import "./assets/css/nice-select.css";
 import "./assets/css/style.css";
 import './tailwind.css'

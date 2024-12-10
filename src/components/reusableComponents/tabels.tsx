@@ -49,7 +49,7 @@ const isRtl = true
         direction: 'asc',
     });
 
-    const [hideCols, setHideCols] = useState<any>(['age', 'dob', 'user', "cv", "role"]);
+    const [hideCols, setHideCols] = useState<any>(['ID','age', 'dob', 'user', "cv", "role"]);
 
     const formatDate = (date: any) => {
         if (date) {

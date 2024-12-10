@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 
 import swal from 'sweetalert';
 
 import { Loader } from '@mantine/core';
-import { useDeleteAdminMutation, useGetAdminsQuery } from '../../apis/serveces';
+import { useDeleteAdminMutation, useDeleteRoleMutation, useGetAdminsQuery, useGetRolesQuery } from '../../apis/serveces';
 import Main_list from '../../components/reusableComponents/Main_list';
 
 import CustomModal from '../../components/reusableComponents/CustomModal';
 import ColumnChooser from '../../components/reusableComponents/tabels';
-import AdminForm from './AdminForm';
+
 import { showAlert } from '../../components/Error';
+import RolesForm from './RolesForm';
 
 
 
-export default function Admins() {
+export default function Roles() {
    
     const [page, setPage] = useState(1);
    
@@ -21,9 +22,9 @@ export default function Admins() {
     const [editData, setEditData] = useState<any>([]);
    
 
-    const { data, isLoading, isSuccess } = useGetAdminsQuery({page:page, per_page:10})
+    const { data, isLoading, isSuccess } = useGetRolesQuery({page:page, per_page:10})
 
-    const [deleteAdmin, {deleteIsLoading}] = useDeleteAdminMutation()
+    const [deleteRole, {deleteIsLoading}] = useDeleteRoleMutation()
    
 
 
@@ -39,9 +40,9 @@ export default function Admins() {
     let keys: string[] = [];
     useEffect(() => {
         //@ts-ignore
-        if (data?.data?.data?.length > 0) {
+        if (data?.data?.length > 0) {
             //@ts-ignore
-            keys = Object?.keys(data?.data?.data[0]);
+            keys = Object?.keys(data?.data[0]);
             setColKeys(keys);
 
         }
@@ -51,15 +52,13 @@ console.log(colKeys)
     useEffect(() => {
 
         colKeys?.map((key: any, i :number) => {
-            if (key === "files") {
-            }
-
+            
             const formattedKey = key
                 .replace(/_/g, ' ')
                 .split(' ')
                 .map((word: string) => word?.charAt(0).toUpperCase() + word?.slice(1))
                 .join(' ');
-            colss?.push({ accessor: key, title: data?.data?.head[i] });
+            colss?.push({ accessor: key, title: formattedKey });
 
         });
         if (colss?.length > 0) {
@@ -71,13 +70,13 @@ console.log(colKeys)
     const deleteSubmitHandler = async (id: string) => {
         console.log(id)
         swal({
-            title: 'Are you sure you want to delete this ADMIN?',
+            title: 'Are you sure you want to delete this Role?',
             icon: 'error',
             buttons: ['Cancel', 'Delete'],
             dangerMode: true,
         }).then(async (willDelete: any) => {
             if (willDelete) {
-                const data = await deleteAdmin(id);
+                const data = await deleteRole(id);
                 console.log(data)
                 //@ts-ignore
                 if (data?.error?.data?.status === 400) {
@@ -144,12 +143,12 @@ console.log(colKeys)
             {/* <MainPageCard> */}
                 {open && (
                     <CustomModal openCloseModal={setOpen} title="Add Admin">
-                       <AdminForm  />
+                       <RolesForm openCloseModal={setOpen}  />
                     </CustomModal>
                 )}
                 {open && editData?.id  && (
                     <CustomModal openCloseModal={setOpen} title="Edit Admin" resetEditData={setEditData} >
-                       <AdminForm  editData={editData} resetEditData={setEditData} openCloseModal={setOpen} />
+                       <RolesForm  editData={editData} resetEditData={setEditData} openCloseModal={setOpen} />
                     </CustomModal>
                 )}
 
@@ -160,13 +159,13 @@ console.log(colKeys)
                     isLoadingDelivery={loadingDelivery}
                     setPage={setPage}
                     page={page}
-                    pagination={data?.data?.pagination}
+                    pagination={data?.pagination}
                     onUpdateDelivery={updateDeliveryHander}
                     Enabel_edit={true}
                     Accept_button={false}
                     Reject_button={false}
                     //@ts-ignore
-                    TableBody={data?.data?.data?.length > 0 ? data?.data?.data : []}
+                    TableBody={data?.data?.length > 0 ? data?.data : []}
                     //@ts-ignore
                     tabelHead={finslColsKeys? finslColsKeys : []
                     }

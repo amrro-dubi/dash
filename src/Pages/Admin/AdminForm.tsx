@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 // import LoadingButton from '../../components/reusableComponents/Loading_button';
 import InputComponent from "../../components/reusableComponents/InputComponent";
 import CustomSelect from "../../components/reusableComponents/CustomSelect";
-import { useCreateAdminMutation, useGetRolesQuery } from "../../apis/serveces";
+import { useCreateAdminMutation, useEditAdminMutation, useGetRolesQuery } from "../../apis/serveces";
 // import { useCreateCategoryMutation, useEditCategoryMutation } from '../../../api/Resturants/Categories';
 import { useValidationMessages } from "../../components/Auth/authValidation";
 const formSchema = (message: any) =>
@@ -40,7 +40,7 @@ interface adminFormData {
   role: string;
 }
 
-export default function AdminForm(props: adminFormData) {
+export default function AdminForm({editData, resetEditData, openCloseModal}:{editData?:any, resetEditData?: React.Dispatch<any>,openCloseModal: React.Dispatch<React.SetStateAction<boolean>>}) {
   const navigate = useNavigate();
   const validationMessages = useValidationMessages();
   const [formData, setFormData] = useState<adminFormData>({
@@ -51,6 +51,19 @@ export default function AdminForm(props: adminFormData) {
     confirm_password: "",
     role: "",
   });
+
+  const closeModal = () => {
+    openCloseModal((prevState) => !prevState);
+    if (resetEditData) {
+        resetEditData([]);
+    }
+};
+  useEffect(()=>{
+if (editData){
+  setFormData({...formData, name:editData?.name, username:editData?.username, email:editData?.email, role: editData?.role?.id})
+
+}
+  },[])
   const [options, setOptions] = useState<{ value: any; label: string }[]>([]);
 
   const [toastData, setToastData] = useState<any>({});
@@ -61,13 +74,14 @@ export default function AdminForm(props: adminFormData) {
   };
 
   const [createAdmin, {isLoading}] = useCreateAdminMutation()
+  const [editAdmin ,{isLoading:editIsLoading}] = useEditAdminMutation()
   const { data, isSuccess } = useGetRolesQuery();
 
   useEffect(() => {
     const optionss = data?.data?.map((item: any) => {
       return { value: item?.id, label: item?.title };
     });
-    console.log(optionss);
+    
     setOptions(optionss);
   }, [isSuccess]);
 
@@ -76,20 +90,15 @@ export default function AdminForm(props: adminFormData) {
     setFormData({ ...formData, [name]: value });
   };
 
-  // useEffect(() => {
-  //     setFormData({
-  //         ...formData,
-  //         name: props?.data?.name,
-  //     });
-  // }, []);
-  console.log(formData);
+  console.log(formData)
   useEffect(() => {
     if (toastData?.data?.status === 200) {
       showAlert("Added", toastData?.data?.response?.message);
       
       setToastData({});
+      closeModal()
     }
-    console.log(toastData.data);
+   
     if (toastData?.error?.status === 422) {
       toast.error(toastData?.error?.response.data?.message, {});
       setToastData({});
@@ -134,14 +143,16 @@ export default function AdminForm(props: adminFormData) {
     }
 
     try {
-      if (props?.data?.id) {
-        //   const response = await editCategory({ id: props?.data?.id, formData });
-        //   console.log(response);
-        //   setToastData(response);
-        //   setErrors({});
+      if (editData?.id ) {
+        formDataRequest.append("_method", 'patch');
+          const response = await editAdmin({ id: editData?.id, formData: formDataRequest });
+          console.log(response);
+          setToastData(response);
+          setErrors({});
+         
       } else {
           const response = await createAdmin(formDataRequest);
-          console.log(response);
+         
           setToastData(response);
           setErrors({});
       }
@@ -162,6 +173,7 @@ export default function AdminForm(props: adminFormData) {
               type="text"
               name="name"
               placeholder="please enter name"
+              value={formData.name}
             />
           </div>
           <div className="lg:col-span-6 col-span-12">
@@ -172,6 +184,7 @@ export default function AdminForm(props: adminFormData) {
               type="text"
               name="username"
               placeholder="please enter name"
+              value={formData.username}
             />
           </div>
           <div className="lg:col-span-6 col-span-12">
@@ -182,6 +195,7 @@ export default function AdminForm(props: adminFormData) {
               onChange={handleChange}
               name="email"
               placeholder="please enter email"
+              value={formData.email}
             />
           </div>
           <div className="lg:col-span-6 col-span-12">
@@ -192,6 +206,7 @@ export default function AdminForm(props: adminFormData) {
               onChange={handleChange}
               name="password"
               placeholder="please enter password"
+              value={formData.password}
             />
           </div>
           <div className="lg:col-span-6 col-span-12">
@@ -202,6 +217,7 @@ export default function AdminForm(props: adminFormData) {
               name="confirm_password"
               onChange={handleChange}
               placeholder="please enter confirm_password"
+              value={formData.confirm_password}
             />
             {errors.confirm_password && (
             <p className="text-[#FF0000] text-[12px]">
@@ -218,36 +234,7 @@ export default function AdminForm(props: adminFormData) {
             />{" "}
           </div>
 
-          {/* <div className="lg:col-span-2 col-span-12  ">
-                        <h2 className="text-[#2E2E2E] text-center text-[16px] font-medium   pb-5">Delivery</h2>
-
-                        <div className="flex gap-4 capitalize items-center justify-center ">
-                            <span className={!isChecked ? 'text-red-500 font-semibold text-[16px]' : 'text-[16px]'}>No</span>
-
-                            <div className="relative inline-block w-8 h-4 rounded-full cursor-pointer">
-                                <input
-                                    id="switch-2"
-                                    type="checkbox"
-                                    checked={isChecked}
-                                    onChange={handleCheckboxChange}
-                                    className="absolute w-8 h-4 transition-colors duration-300 rounded-full appearance-none cursor-pointer peer bg-blue-gray-100 checked:bg-red-500 peer-checked:border-red-500 peer-checked:before:bg-red-500"
-                                />
-                                <label
-                                    htmlFor="switch-2"
-                                    className="before:content[''] absolute top-2/4 -left-1 h-5 w-5 -translate-y-2/4 cursor-pointer rounded-full border border-blue-gray-100 bg-white shadow-md transition-all duration-300 before:absolute before:top-2/4 before:left-2/4 before:block before:h-10 before:w-10 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity hover:before:opacity-10 peer-checked:translate-x-full peer-checked:border-red-500 peer-checked:before:bg-red-500"
-                                >
-                                    <div className="inline-block p-5 rounded-full top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4" data-ripple-dark="true"></div>
-                                </label>
-                            </div>
-                            <span className={isChecked ? 'text-red-500 font-semibold text-[16px]' : 'text-[16px]'}>Yes</span>
-                        </div>
-                    </div> */}
-          {/* <div className="col-span-12  ">
-                        <label htmlFor="price" className="block mb-2 text-[16px] font-medium text-[#2E2E2E]  dark:text-white">
-                            Image
-                        </label>
-                        <Upload setFile={setFile} editImgUrl={props?.data ? props?.data?.image : null} />
-                    </div> */}
+         
         </div>
         <div className="w-full  flex justify-end">
           {/* {isLoading ||editIsLoading ? (
@@ -272,7 +259,7 @@ export default function AdminForm(props: adminFormData) {
                   clipRule="evenodd"
                 ></path>
               </svg>
-              Add
+            {editData? "Edit": "Add"}
             </button>
           </>
         </div>

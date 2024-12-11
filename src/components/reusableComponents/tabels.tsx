@@ -119,7 +119,7 @@ const isRtl = true
                                                     : accessor === 'image'
                                                         ? ({ image }: any) => (
                                                             <div className="flex  justify-between w-max  gap-3">
-                                                                <img src={image} alt="" className="w-[50px] text-left h-[50px] rounded-full" />
+                                                                <img src={image?.original_url} alt="" className="w-[50px] text-left h-[50px] rounded-full" />
                                                             </div>
                                                         )
                                                         : accessor === 'main_category'

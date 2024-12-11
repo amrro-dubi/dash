@@ -5,7 +5,7 @@ const baseUrl = "https://real-estate.luxurylivinghomes.ae/";
 
 const servicesApi = createApi({
   reducerPath: "servicesApi",
-  tagTypes: ["admins", "roles", "food-basket"],
+  tagTypes: ["admins", "roles",'cites', "food-basket"],
   baseQuery: fetchBaseQuery({
     baseUrl,
     prepareHeaders: (headers) => {
@@ -26,11 +26,15 @@ const servicesApi = createApi({
     },
   }),
   endpoints: (builder) => ({
+
+
+
     getAdmins: builder.query<any, any>({
       query: ({ page, per_page }) => `admin/admin?per_page=${per_page}&page=${page}`,
       providesTags: ["admins"],
     }),
 
+    
     deleteAdmin: builder.mutation({
       query: (id) => ({
         url: `admin/admin/${id}`,
@@ -82,6 +86,7 @@ const servicesApi = createApi({
       },
   }),
 
+
     getRoles: builder.query<any,{page?:number, per_page?:number}>({
       query: ({page, per_page}) => `admin/role?page=${page}&per_page${per_page}`,
       providesTags: ["roles"],
@@ -127,15 +132,99 @@ const servicesApi = createApi({
       providesTags: ["roles"],
     }),
 
-   
-   
-   
+    getCites: builder.query<any, any>({
+      query: ({ page, per_page }) => `admin/city?per_page=${per_page}&page=${page}`,
+      providesTags: ["cites"],
+      
+    }),
+
+    deleteCity: builder.mutation({
+      query: (id) => ({
+        url: `admin/city/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["cites"],
+      transformResponse: (response, meta) => {
+        console.log(meta?.response?.status);
+      
+        return { status: meta?.response?.status, response };
+    },
+    transformErrorResponse: (response, meta) => {
+
+        return { status: meta?.response?.status, response };
+    },
+    }),
+    createCity: builder.mutation<any, any>({
+      query: (formData) => ({
+          url: `admin/city`,
+          method: 'POST',
+          body: formData,
+      }),
+      
+      invalidatesTags: ["cites"],
+      transformResponse: (response, meta) => {
+          console.log(meta?.response?.status);
+        
+          return { status: meta?.response?.status, response };
+      },
+      transformErrorResponse: (response, meta) => {
+ 
+          return { status: meta?.response?.status, response };
+      },
+  }),
+    editCity: builder.mutation<any, any>({
+      query: ({formData, id}) => ({
+          url: `admin/city/${id}`,
+          method: 'POST',
+          body: formData,
+      }),
+      invalidatesTags: ["admins"],
+      transformResponse: (response, meta) => {
+          console.log(meta?.response?.status);
+        
+          return { status: meta?.response?.status, response };
+      },
+      transformErrorResponse: (response, meta) => {
+ 
+          return { status: meta?.response?.status, response };
+      },
+  }),
+
+  
     
   
    
    
+  findRecord: builder.query<any, any>({
+    query: ({ id, url }) => `${url}/${id}`,
+    
+    
+  }),
+
+  editRecord: builder.mutation<any, { url: string; id: string; formData: any; inValid: string[] }>({
+    query: ({ formData, id, url }) => ({
+      url: `${url}/${id}`,
+      method: 'POST',
+      body: formData,
+    }),
+  //@ts-ignore
+    invalidatesTags: (result, error, { inValid }:{inValid:string[]}) => {
+      // Map the `inValid` array to a format expected by `invalidatesTags`
+      console.log(inValid)
+      return inValid; 
+    },
   
+    transformResponse: (response, meta) => {
+      console.log(meta?.response?.status);
+      return { status: meta?.response?.status, response };
+    },
   
+    transformErrorResponse: (response, meta) => {
+      return { status: meta?.response?.status, response };
+    },
+  }),
+  
+
   }),
 });
 
@@ -146,6 +235,8 @@ export const {
   useCreateAdminMutation,
   useEditAdminMutation,
   useGetPermissionsQuery,
-  useCreateRoleMutation, useDeleteRoleMutation
+  useCreateRoleMutation, useDeleteRoleMutation,
+  useGetCitesQuery,
+  useCreateCityMutation, useDeleteCityMutation, useEditCityMutation,useFindRecordQuery, useEditRecordMutation
 } = servicesApi;
 export default servicesApi;

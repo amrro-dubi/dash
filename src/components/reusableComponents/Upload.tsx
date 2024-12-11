@@ -1,40 +1,79 @@
 import React, { useRef, useState } from 'react';
-import uploadImg from '../../../public/assets/images/upload-img.png';
-import uploadUser from '../../../public/assets/images/upload-user.png';
+import uploadImg from '../../assets/img/dashboard/upload-img.png';
+
 type UploadImageProps = {
     user?: boolean;
     setFile: React.Dispatch<React.SetStateAction<File | null>>;
     editImgUrl?: string | null;
 };
+
 const Upload = (props: UploadImageProps) => {
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [imageSrc, setImageSrc] = useState<string | null>(null);
 
+    // Handle file input button click to trigger file selection
     const handleButtonClick = () => {
-        // Programmatically click the hidden file input
         if (fileInputRef.current) {
             fileInputRef.current.click();
         }
     };
 
+    // Handle the file change event
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const files = event?.target?.files;
         if (files && files.length > 0) {
             const file = files[0];
+
+            // Log the file to ensure we are receiving the correct file
+            console.log('File selected:', file);
+
+            // Validate if the file is an image
+            if (!file.type.startsWith('image/')) {
+                alert('Please select a valid image file');
+                return;
+            }
+
+            // Update parent component with the file
             props.setFile(file);
+
+            // Read the file as Data URL
             const fileReader = new FileReader();
             fileReader.onload = () => {
+                console.log('File read successful:', fileReader.result);
+                // Set the image source after reading the file
                 setImageSrc(fileReader.result as string);
             };
+
+            // Read the image file as a Data URL
             fileReader.readAsDataURL(file);
         }
     };
+
     return (
         <div className="flex flex-col items-center gap-[20px]">
-            <input type="file" ref={fileInputRef} onChange={handleFileChange} style={{ display: 'none' }} accept="image/*" />
-            <div onClick={handleButtonClick} className="flex cursor-pointer  w-[120px] h-[120px] rounded-full border-[2px] border-[#F23F39] border-solid justify-center items-center ">
-                {imageSrc ? <img src={imageSrc} alt="Uploaded" className="w-full h-full rounded-full object-cover" /> : <img src={props.user ? uploadUser : uploadImg} alt="" />}
+            {/* Hidden file input */}
+            <input 
+                type="file" 
+                ref={fileInputRef} 
+                onChange={handleFileChange} 
+                style={{ display: 'none' }} 
+                accept="image/*" 
+            />
+            
+            {/* Display the uploaded image or default image */}
+            <div onClick={handleButtonClick} className="flex cursor-pointer w-[120px] h-[120px] rounded-full border-[2px] border-[#F23F39] border-solid justify-center items-center">
+                {imageSrc ? (
+                    <img 
+                        src={imageSrc} 
+                        alt="Uploaded" 
+                        className="w-full h-full rounded-full object-cover" 
+                    />
+                ) : (
+                    <img src={uploadImg} alt="Upload placeholder" />
+                )}
             </div>
+
+            {/* Button to trigger the file input */}
             <button onClick={handleButtonClick} className="flex justify-between items-center underline gap-[2px] text-[#F23F39]">
                 <h5>Add Photo</h5>
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">

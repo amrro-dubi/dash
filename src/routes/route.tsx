@@ -11,6 +11,7 @@ import PinInput from "../components/Auth/ConfirmCode/ConfirmCode";
 import ResetPassword from "../components/Auth/resetPassword/ResetPassword";
 import Admins from "../Pages/Admin/Admin";
 import Roles from "../Pages/Roles/Roles";
+import Cites from "../Pages/cites/Cites";
 
 
 
@@ -38,6 +39,11 @@ const routes = [
             {
             path: "/home/roles",
             element: <Roles />,
+            children: [],
+        },
+            {
+            path: "/home/cites",
+            element: <Cites />,
             children: [],
         },
     

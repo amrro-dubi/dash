@@ -31,4 +31,11 @@ declare module '*.css' {
     const src: string;
     export default src;
   }
+  declare module '*.jpg' {
+    import * as React from 'react';
+    const ReactComponent: React.FunctionComponent<React.ImgHTMLAttributes<HTMLImageElement>>;
+    export { ReactComponent };
+    const src: string;
+    export default src;
+  }
   

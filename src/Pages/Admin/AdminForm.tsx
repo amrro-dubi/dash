@@ -78,7 +78,7 @@ if (editData){
   const { data, isSuccess } = useGetRolesQuery({});
 
   useEffect(() => {
-    const optionss = data?.data?.map((item: any) => {
+    const optionss = data?.data?.data?.map((item: any) => {
       return { value: item?.id, label: item?.title };
     });
     

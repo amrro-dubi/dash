@@ -1,4 +1,6 @@
 // tailwind.config.js
+import forms from '@tailwindcss/forms';
+import typography from '@tailwindcss/typography';
 export default {
     content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
     darkMode: 'class',
@@ -85,11 +87,9 @@ export default {
         },
     },
     plugins: [
-        //@ts-ignore
-        require('@tailwindcss/forms')({
-            strategy: 'class',
+        forms({
+          strategy: 'class',
         }),
-        //@ts-ignore
-        require('@tailwindcss/typography'),
-    ],
+        typography,
+      ],
 };

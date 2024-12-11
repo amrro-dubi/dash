@@ -6,12 +6,12 @@ import { useEffect, useState } from 'react';
 import Dropdown from '../../components/dropDown/Dropdown';
 // import { setPageTitle } from '../../store/themeConfigSlice';
 // import IconBell from '../../components/Icon/IconBell';
-import IconCaretDown from '../../components/icon/IconCaretDown';
+import IconCaretDown from '../../components/Icon/IconCaretDown';
 import { tabelProps } from '../../types/types';
 import { Link } from 'react-router-dom';
-import IconPencil from '../icon/IconPencil';
+import IconPencil from '../Icon/IconPencil';
 
-import IconTrashLines from '../icon/IconTrashLines';
+import IconTrashLines from '../Icon/IconTrashLines';
 
 const ColumnChooser = (props: tabelProps) => {
     // const [props.TableBody, setprops.TableBody] = useState(props.TableBody);

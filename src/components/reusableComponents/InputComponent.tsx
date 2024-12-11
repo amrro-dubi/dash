@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { customInputProps } from '../../types/types';
 import './index.css';
 const InputComponent = (props: customInputProps) => {

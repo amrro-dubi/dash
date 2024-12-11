@@ -1,6 +1,6 @@
 
 
-import { MainCardProps } from '../../types/type';
+import { MainCardProps } from '../../types/types';
 const MainPageCard = (props: MainCardProps) => {
     return <div className="flex flex-col gap-[20px] shadow-formBox w-full  rounded-[20px] p-[16px]  md:p-[28px]">{props.children}</div>;
 };

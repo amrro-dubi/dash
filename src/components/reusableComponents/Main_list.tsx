@@ -1,5 +1,5 @@
-import { Mainlist } from '../../types/type';
-import CustomSelect from './CustomSelect';
+import { Mainlist } from '../../types/types';
+
 const Main_list = (props: Mainlist) => {
 
     return <div className="flex flex-col gap-[20px]  w-full  rounded-[20px] p-[16px]  md:p-[28px]">

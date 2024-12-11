@@ -1,7 +1,7 @@
 //components / reusableComponents/ formLayout
 export type formLayoutProps = {
     children: React.ReactNode;
-    title?: String;
+    title?: string;
 };
 
 //components / reusableComponents/ mainPageCard
@@ -10,7 +10,7 @@ export type MainCardProps = {
 };
 export type Mainlist = {
     children?: React.ReactNode;
-    title?: String;
+    title?: string;
 };
 
 interface Pagination {
@@ -30,11 +30,12 @@ export type tabelProps = {
     Page_Add?: boolean;
     showAddButton?: boolean;
     Enabel_edit?: boolean;
+    Enabel_delete?: boolean;
     onEdit: (id: string) => void;
     onDelete: (id: string) => void;
-    onView: (id: string) => void;
-    onUpdate: (id: string, status: boolean) => void;
-    onUpdateDelivery?: (id: string, status: boolean) => void;
+    onView?: (id: string) => void;
+   
+
     pagination?: Pagination;
     setPage: (page: number) => void;
     page: number;

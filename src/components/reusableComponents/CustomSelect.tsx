@@ -1,4 +1,4 @@
-import React from "react";
+
 import Select, { SingleValue } from "react-select";
 import { customSelectProps } from "../../types/types";
 
@@ -11,7 +11,7 @@ const CustomSelect = (props: customSelectProps) => {
 
       // borderRadius: 4,
     }),
-    control: (provided: any, state: any) => ({
+    control: (provided: any, ) => ({
       ...provided,
       borderColor: "#d1d5db", // This will affect the border color of the control
       "&:hover": {
@@ -19,7 +19,7 @@ const CustomSelect = (props: customSelectProps) => {
       },
       boxShadow: "none", // Remove any default box-shadow
     }),
-    option: (provided: any, state: any) => ({
+    option: (provided: any, ) => ({
       ...provided,
       backgroundColor:  "white",
       color: 'black'
@@ -33,7 +33,7 @@ const CustomSelect = (props: customSelectProps) => {
   const handleSelectChange = (
     newValue: SingleValue<{ value: any; label: string }>
   ) => {
-   
+   //@ts-ignore
     props.onChange(newValue); 
   };
 

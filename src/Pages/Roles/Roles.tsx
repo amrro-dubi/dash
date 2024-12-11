@@ -1,193 +1,136 @@
-import  { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import swal from 'sweetalert';
+import swal from "sweetalert";
 
-import { Loader } from '@mantine/core';
-import { useDeleteAdminMutation, useDeleteRoleMutation, useGetAdminsQuery, useGetRolesQuery } from '../../apis/serveces';
-import Main_list from '../../components/reusableComponents/Main_list';
+import { Loader } from "@mantine/core";
+import { useDeleteRoleMutation, useGetRolesQuery } from "../../apis/serveces";
+import Main_list from "../../components/reusableComponents/Main_list";
 
-import CustomModal from '../../components/reusableComponents/CustomModal';
-import ColumnChooser from '../../components/reusableComponents/tabels';
+import CustomModal from "../../components/reusableComponents/CustomModal";
+import ColumnChooser from "../../components/reusableComponents/tabels";
 
-import { showAlert } from '../../components/Error';
-import RolesForm from './RolesForm';
-
-
+import { showAlert } from "../../components/Error";
+import RolesForm from "./RolesForm";
 
 export default function Roles() {
-   
-    const [page, setPage] = useState(1);
-   
-    const [open, setOpen] = useState(false);
-    const [editData, setEditData] = useState<any>([]);
-   
+  const [page, setPage] = useState(1);
 
-    const { data, isLoading, isSuccess } = useGetRolesQuery({page:page, per_page:10})
+  const [open, setOpen] = useState(false);
+  const [editData, setEditData] = useState<any>([]);
 
-    const [deleteRole, {deleteIsLoading}] = useDeleteRoleMutation()
-   
+  const { data, isLoading, isSuccess } = useGetRolesQuery({
+    page: page,
+    per_page: 10,
+  });
 
+  const [deleteRole] = useDeleteRoleMutation();
 
-    
-    const [toastData, setToastData] = useState<any>({});
-    const [errors, setErrors] = useState<any>({});
-    const [colKeys, setColKeys] = useState<string[]>([]);
-    const [finslColsKeys, setFinalKeys] = useState<{ accessor: string; title: string }[]>([]);
-    const [loadingDelivery, setLoadingDelivery] = useState<{ [key: string]: boolean }>({});
+  const [colKeys, setColKeys] = useState<string[]>([]);
+  const [finslColsKeys, setFinalKeys] = useState<
+    { accessor: string; title: string }[]
+  >([]);
 
-    const [loadingStatus, setLoadingStatus] = useState<{ [key: string]: boolean }>({});
-
-    let keys: string[] = [];
-    useEffect(() => {
-        //@ts-ignore
-        if (data?.data?.length > 0) {
-            //@ts-ignore
-            keys = Object?.keys(data?.data[0]);
-            setColKeys(keys);
-
-        }
-    }, [isSuccess]);
-console.log(colKeys)
-    let colss: { accessor: string; title: string }[] = [];
-    useEffect(() => {
-
-        colKeys?.map((key: any, i :number) => {
-            
-            const formattedKey = key
-                .replace(/_/g, ' ')
-                .split(' ')
-                .map((word: string) => word?.charAt(0).toUpperCase() + word?.slice(1))
-                .join(' ');
-            colss?.push({ accessor: key, title: formattedKey });
-
-        });
-        if (colss?.length > 0) {
-            colss?.push({ accessor: 'action', title: 'Action' });
-        }
-        setFinalKeys(colss);
-    }, [colKeys, isSuccess]);
-
-    const deleteSubmitHandler = async (id: string) => {
-        console.log(id)
-        swal({
-            title: 'Are you sure you want to delete this Role?',
-            icon: 'error',
-            buttons: ['Cancel', 'Delete'],
-            dangerMode: true,
-        }).then(async (willDelete: any) => {
-            if (willDelete) {
-                const data = await deleteRole(id);
-                console.log(data)
-                //@ts-ignore
-                if (data?.error?.data?.status === 400) {
-                    //@ts-ignore
-                    toast.error(data?.error?.data?.message, {});
-                    setToastData({});
-                }
-                //@ts-ignore
-                if (data?.data.status === 200) {
-                    //@ts-ignore
-                    showAlert('Added', data?.data.response?.message);
-                    setToastData({});
-                }
-                // setToastData(data);
-            } else {
-                swal('Not deleted');
-            }
-        });
-
-        // if (data?.error) setToastData(data);
-        setErrors({});
-    };
-    const viewHander = (id: string) => {
-    };
-    const EditHandelr = (data: any) => {
-        setEditData(data);
-  console.log(data)
-    };
-
-    // const [isTrue, setisTrue] = useState(false);
-    // const [isTrueFrommoale, setisTrueFrommoale] = useState(false);
-
-    const updateHander = async (id: string, status: string) => {
-        swal({
-            title: ` هل انت متاكد من ${status === "2" ? 'قبول' : 'رفض'} هذا الشخص `,
-            icon: 'warning',
-            buttons: ['الغاء', `${status === "2" ? 'قبول' : 'رفض'}`],
-            dangerMode: true,
-        }).then(async (willDelete: any) => {
-            if (willDelete) {
-              
-                const data = await deleteAdmin(id);
-               //@ts-ignore
-                if (data?.data.status === 200) {
-                   
-                    showAlert('Added', data?.data.response?.message);
-                    setToastData({});
-                }
-                setToastData(data);
-            } else {
-                swal(`لم يتم  ${status === "2" ? 'القبول' : 'الرفض'}`);
-            }
-        });
-    };
-
-    const updateDeliveryHander = async (id: string, status: boolean) => {
-    };
-    if (isLoading) {
-        return <div> <Loader /></div>
+  let keys: string[] = [];
+  useEffect(() => {
+    //@ts-ignore
+    if (data?.data?.data?.length > 0) {
+      //@ts-ignore
+      keys = Object?.keys(data?.data?.data[0]);
+      setColKeys(keys);
     }
-    console.log(finslColsKeys)
+  }, [isSuccess]);
+  console.log(colKeys);
+  const colss: { accessor: string; title: string }[] = [];
+  useEffect(() => {
+    colKeys?.map((key: any, i: number) => {
+      colss?.push({ accessor: key, title: data?.data?.head[i] });
+    });
+    if (colss?.length > 0) {
+      colss?.push({ accessor: "action", title: "Action" });
+    }
+    setFinalKeys(colss);
+  }, [colKeys, isSuccess]);
+
+  const deleteSubmitHandler = async (id: string) => {
+    console.log(id);
+    swal({
+      title: "Are you sure you want to delete this Role?",
+      icon: "error",
+      buttons: ["Cancel", "Delete"],
+      dangerMode: true,
+    }).then(async (willDelete: any) => {
+      if (willDelete) {
+        const data = await deleteRole(id);
+        console.log(data);
+        //@ts-ignore
+        if (data?.error?.data?.status === 400) {
+          //@ts-ignore
+          toast.error(data?.error?.data?.message, {});
+          
+        }
+        //@ts-ignore
+        if (data?.data.status === 200) {
+          //@ts-ignore
+          showAlert("Added", data?.data.response?.message);
+        }
+      } else {
+        swal("Not deleted");
+      }
+    });
+  };
+
+  const EditHandelr = (data: any) => {
+    setEditData(data);
+    console.log(data);
+  };
+
+  if (isLoading) {
     return (
-        <Main_list title="Admins">
-            {/* <MainPageCard> */}
-                {open && (
-                    <CustomModal openCloseModal={setOpen} title="Add Admin">
-                       <RolesForm openCloseModal={setOpen}  />
-                    </CustomModal>
-                )}
-                {open && editData?.id  && (
-                    <CustomModal openCloseModal={setOpen} title="Edit Admin" resetEditData={setEditData} >
-                       <RolesForm  editData={editData} resetEditData={setEditData} openCloseModal={setOpen} />
-                    </CustomModal>
-                )}
-
-
-
-                <ColumnChooser
-                    isLoading={loadingStatus}
-                    isLoadingDelivery={loadingDelivery}
-                    setPage={setPage}
-                    page={page}
-                    pagination={data?.pagination}
-                    onUpdateDelivery={updateDeliveryHander}
-                    Enabel_edit={true}
-                    Accept_button={false}
-                    Reject_button={false}
-                    //@ts-ignore
-                    TableBody={data?.data?.length > 0 ? data?.data : []}
-                    //@ts-ignore
-                    tabelHead={finslColsKeys? finslColsKeys : []
-                    }
-                    Chcekbox={true}
-                    Page_Add={false}
-                    showAddButton={true}
-                    onDelete={deleteSubmitHandler}
-                    onView={viewHander}
-                    onUpdate={updateHander}
-                    onEdit={EditHandelr}
-                    openCloseModal={setOpen}
-                    Enabel_delete={true}
-                />
-                {/* <Viewer
-                fileUrl='/assets/pdf-open-parameters.pdf'
-                plugins={[
-                    // Register plugins
-                    defaultLayoutPluginInstance,
-
-                ]}
-                /> */}
-            {/* </MainPageCard> */}
-        </Main_list>
+      <div>
+        {" "}
+        <Loader />
+      </div>
     );
+  }
+  console.log(finslColsKeys);
+  return (
+    <Main_list title="Admins">
+      {open && (
+        <CustomModal openCloseModal={setOpen} title="Add Admin">
+          <RolesForm openCloseModal={setOpen} />
+        </CustomModal>
+      )}
+      {open && editData?.id && (
+        <CustomModal
+          openCloseModal={setOpen}
+          title="Edit Admin"
+          resetEditData={setEditData}
+        >
+          <RolesForm
+            editData={editData}
+            resetEditData={setEditData}
+            openCloseModal={setOpen}
+          />
+        </CustomModal>
+      )}
+
+      <ColumnChooser
+        setPage={setPage}
+        page={page}
+        pagination={data?.data?.pagination}
+        Enabel_edit={true}
+        //@ts-ignore
+        TableBody={data?.data?.data?.length > 0 ? data?.data?.data : []}
+        //@ts-ignore
+        tabelHead={finslColsKeys ? finslColsKeys : []}
+        Chcekbox={true}
+        Page_Add={false}
+        showAddButton={true}
+        onDelete={deleteSubmitHandler}
+        onEdit={EditHandelr}
+        openCloseModal={setOpen}
+        Enabel_delete={true}
+      />
+    </Main_list>
+  );
 }

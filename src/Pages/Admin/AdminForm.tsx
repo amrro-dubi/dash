@@ -3,12 +3,12 @@ import React, { useEffect, useState } from "react";
 import { z } from "zod";
 import { toast } from "react-toastify";
 import { showAlert } from "../../components/Error";
-import { useNavigate } from "react-router-dom";
-// import LoadingButton from '../../components/reusableComponents/Loading_button';
+
+
 import InputComponent from "../../components/reusableComponents/InputComponent";
 import CustomSelect from "../../components/reusableComponents/CustomSelect";
 import { useCreateAdminMutation, useEditAdminMutation, useGetRolesQuery } from "../../apis/serveces";
-// import { useCreateCategoryMutation, useEditCategoryMutation } from '../../../api/Resturants/Categories';
+
 import { useValidationMessages } from "../../components/Auth/authValidation";
 const formSchema = (message: any) =>
   z
@@ -22,7 +22,7 @@ const formSchema = (message: any) =>
     })
     .refine(
       (data) => {
-        // Check if password matches password_confirmation
+        
         return data.password === data.confirm_password;
       },
       {
@@ -41,7 +41,7 @@ interface adminFormData {
 }
 
 export default function AdminForm({editData, resetEditData, openCloseModal}:{editData?:any, resetEditData?: React.Dispatch<any>,openCloseModal: React.Dispatch<React.SetStateAction<boolean>>}) {
-  const navigate = useNavigate();
+ 
   const validationMessages = useValidationMessages();
   const [formData, setFormData] = useState<adminFormData>({
     name: "",
@@ -74,8 +74,8 @@ if (editData){
   };
 
   const [createAdmin, {isLoading}] = useCreateAdminMutation()
-  const [editAdmin ,{isLoading:editIsLoading}] = useEditAdminMutation()
-  const { data, isSuccess } = useGetRolesQuery();
+  const [editAdmin ] = useEditAdminMutation()
+  const { data, isSuccess } = useGetRolesQuery({});
 
   useEffect(() => {
     const optionss = data?.data?.map((item: any) => {

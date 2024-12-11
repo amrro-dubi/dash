@@ -44,6 +44,7 @@ console.log(validationMessages)
   const navigate = useNavigate()
   const [toastData, setToastData] = useState<any>({});
   const [errors, setErrors] = useState<any>({});
+  console.log(errors)
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };

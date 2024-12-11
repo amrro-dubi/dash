@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { ModalProps } from '../../types/types';
 
 const CustomModal = (props: ModalProps) => {

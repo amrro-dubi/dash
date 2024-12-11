@@ -1,41 +1,21 @@
 import React, { useEffect, useState } from "react";
 
-import { number, z } from "zod";
+
 import { toast } from "react-toastify";
 import { showAlert } from "../../components/Error";
-import { useNavigate } from "react-router-dom";
-// import LoadingButton from '../../components/reusableComponents/Loading_button';
+
+
 import InputComponent from "../../components/reusableComponents/InputComponent";
-import CustomSelect from "../../components/reusableComponents/CustomSelect";
+
 import {
-  useCreateAdminMutation,
+ 
   useCreateRoleMutation,
   useEditAdminMutation,
   useGetPermissionsQuery,
-  useGetRolesQuery,
+
 } from "../../apis/serveces";
-// import { useCreateCategoryMutation, useEditCategoryMutation } from '../../../api/Resturants/Categories';
-import { useValidationMessages } from "../../components/Auth/authValidation";
-const formSchema = (message: any) =>
-  z
-    .object({
-      password: z.string(),
-      confirm_password: z.string(),
-      role: z
-        .number()
-        .min(1, "يجب إدخال الاسم")
-        .max(100, "يجب أن يكون الاسم أقل من 100 حرف"),
-    })
-    .refine(
-      (data) => {
-        // Check if password matches password_confirmation
-        return data.password === data.confirm_password;
-      },
-      {
-        message: message.confirmPass,
-        path: ["confirm_password"], // Specify the path to the field being validated
-      }
-    );
+
+
 
 interface RolesFormData {
   title: string;
@@ -52,7 +32,7 @@ export default function RolesForm({
   resetEditData?: React.Dispatch<any>;
   openCloseModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const validationMessages = useValidationMessages();
+ 
   const [formData, setFormData] = useState<RolesFormData>({
     title: "",
 
@@ -92,11 +72,11 @@ export default function RolesForm({
 
   const [toastData, setToastData] = useState<any>({});
 
-  const [errors, setErrors] = useState<any>({});
+  
 
   const [createRole, { isLoading }] = useCreateRoleMutation();
-  const [editAdmin, { isLoading: editIsLoading }] = useEditAdminMutation();
-  const { data, isSuccess } = useGetPermissionsQuery({});
+  const [editAdmin, ] = useEditAdminMutation();
+  const { data } = useGetPermissionsQuery({});
 
   
 
@@ -157,16 +137,16 @@ export default function RolesForm({
         });
         console.log(response);
         setToastData(response);
-        setErrors({});
+       
       } else {
         const response = await createRole(formDataRequest);
 
         setToastData(response);
-        setErrors({});
+      
       }
     } catch (err) {
       setToastData(err);
-      setErrors(err);
+    
     }
   };
   console.log(formData.permissions)
@@ -185,14 +165,15 @@ export default function RolesForm({
               value={formData.title}
             />
             <div className="flex flex-col justify-between w-full gap-7">
-              {data?.data?.map((item) => {
+              {data?.data?.map((item:any) => {
                 for (const [key, value] of Object.entries(item)) {
                   return (
                     <div className="flex justify-between  w-full">
                       {" "}
                       <div className="flex">{key} </div>{" "}
                       <div className="flex justify-between items-center gap-3">
-                        {value?.permissions?.map((per) => (
+                        {/* @ts-ignore */}
+                        {value?.permissions?.map((per:any) => (
                           <span>{per?.title}  <input type="checkbox" onChange={()=>permissionHandler(per?.id)} className="form-checkbox" /></span>
                         ))}
                       </div>

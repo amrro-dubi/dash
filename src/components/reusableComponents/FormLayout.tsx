@@ -1,6 +1,5 @@
-import React from 'react';
-import MainPageCard from './MainPageCard';
-import { formLayoutProps } from '../../types/type';
+
+import { formLayoutProps } from '../../types/types';
 const FormLayout = (props: formLayoutProps) => {
     return (
         <>

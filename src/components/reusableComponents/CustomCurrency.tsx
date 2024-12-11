@@ -1,6 +1,6 @@
-import React from 'react';
+
 import Select from 'react-select';
-import { customSelectProps } from '../../types/type';
+import { customSelectProps } from '../../types/types';
 
 const CustomCurrency = (props: customSelectProps) => {
   const customStyles = {

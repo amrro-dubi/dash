@@ -6,7 +6,7 @@ interface IconPencilProps {
     duotone?: boolean;
 }
 
-const IconPencil: FC<IconPencilProps> = ({ className, fill = false, duotone = true }) => {
+const IconPencil: FC<IconPencilProps> = ({ className, fill = false, }) => {
     return (
         <>
             {fill ? (

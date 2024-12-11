@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Form, InputGroup, Row, Col } from "react-bootstrap";
+
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useConfirmCodeMutation } from "../../../apis/authSlice";
 import { toast } from "react-toastify";
@@ -10,7 +10,7 @@ const PinInput: React.FC = () => {
   const location = useLocation();
   let pinEmail = "";
   if (location?.state !== null) {
-    const { email } = location?.state;
+    const { email } = location.state;
     pinEmail = email;
   }
   const [toastData, setToastData] = useState<any>({});

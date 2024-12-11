@@ -85,9 +85,11 @@ export default {
         },
     },
     plugins: [
+        //@ts-ignore
         require('@tailwindcss/forms')({
             strategy: 'class',
         }),
+        //@ts-ignore
         require('@tailwindcss/typography'),
     ],
 };

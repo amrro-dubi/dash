@@ -7,7 +7,7 @@ const baseUrl = "https://real-estate.luxurylivinghomes.ae/";
 
 const servicesApi = createApi({
   reducerPath: "servicesApi",
-  tagTypes: ["admins", "roles",'cites', "food-basket", 'areas', 'developers'],
+  tagTypes: ["admins", "roles",'cites', "food-basket", 'areas', 'developers','amenites'],
   baseQuery: fetchBaseQuery({
     baseUrl,
     prepareHeaders: (headers) => {
@@ -129,6 +129,15 @@ const servicesApi = createApi({
     }),
 
 
+    gitCity: builder.query<any,{page?:number, per_page?:number}>({
+      query: ({page, per_page}) => `admin/city?page=${page}&per_page${per_page}`,
+      providesTags: ["cites"],
+    }),
+    gitDeveloper: builder.query<any,{page?:number, per_page?:number}>({
+      query: ({page, per_page}) => `admin/developer?page=${page}&per_page${per_page}`,
+      providesTags: ["developers"],
+    }),
+
     getPermissions: builder.query<any,{page?:number, per_page?:number}>({
       query: ({page, per_page}) => `admin/permission?page=${page}&per_page${per_page}`,
       providesTags: ["roles"],
@@ -170,7 +179,7 @@ const servicesApi = createApi({
       console.log(inValid)
       return inValid; 
     },
-  
+    keepUnusedDataFor: 0,
     
   }),
 
@@ -241,6 +250,6 @@ export const {
   useEditAdminMutation,
   useGetPermissionsQuery,
   useCreateRoleMutation, useDeleteRoleMutation,
- useFindRecordQuery, useEditRecordMutation, useCreatRecordMutation, useGetRecordsQuery, useDeleteRecordMutation
+ useFindRecordQuery, useEditRecordMutation, useCreatRecordMutation, useGetRecordsQuery, useDeleteRecordMutation, useGitCityQuery, useGitDeveloperQuery
 } = servicesApi;
 export default servicesApi;

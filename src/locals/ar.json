@@ -11,15 +11,20 @@
         "edit": "تعديل",
         "areasTitle":"المناطق",
         "areaTitle":"منطقة",
+        "developersTitle":"المطورين",
+        "developerTitle":"مطور",
          
         "labels": {
-            "nameEn": "الاسم بالإنجليزية",
-            "nameAr": "الاسم بالعربية",
+           "nameEn": "الاسم بالإنجليزية",
+            "nameAr": "الاسم بالعربية", 
+           "descEn": "الوصف بالإنجليزية",
+            "descAr": "الوصف بالعربية", 
             "city": "المدينة",
             "upload":"ارفق صورة"
           },
           "placeholders": {
-            "name": "يرجى إدخال الاسم"
+            "name": "يرجى إدخال الاسم",
+            "desc": "يرجى إدخال الوصف"
           },
           "confirmationDialog": {
             "title": "هل أنت متأكد أنك تريد حذف هذا العنصر؟",

@@ -11,17 +11,22 @@
         "edit": "Edit",
         "areasTitle":"Areas",
         "areaTitle":"Area",
-       "nameEn": "Name En",
-    "nameAr": "Name Ar",
+       
+      "developersTitle":"Developers",
+        "developerTitle":"developer",
     "labels": {
+            "descEn": "discreption En",
+            "descAr": "discreption Ar",
             "nameEn": "Name En",
-            "nameAr": "Name Ar",
+    "nameAr": "Name Ar",
             "city": "City",
             "upload":" Upload image"
 
           },
           "placeholders": {
-            "name": "please enter name"
+            "name": "please enter name",
+            "desc": "please enter discreption"
+
           },
           "confirmationDialog": {
             "title": "Are you sure you want to delete this Item?",

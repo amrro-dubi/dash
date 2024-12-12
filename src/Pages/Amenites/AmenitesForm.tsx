@@ -9,20 +9,21 @@ import {
   useCreatRecordMutation,
   useEditRecordMutation,
   useFindRecordQuery,
-  useGetRecordsQuery,
+  
 } from "../../apis/serveces";
 
 import Upload_cover from "../../components/reusableComponents/Upload_Cover";
-import CustomSelect from "../../components/reusableComponents/CustomSelect";
 import { useTranslation } from "react-i18next";
 
 interface formDataTyps {
   nameEn: string;
   nameAr: string;
-  city_id: string;
+  descriptionAr: string;
+  descriptionEn: string;
+  
 }
 
-export default function CitesForm({
+export default function AmenitesForm({
   editData,
   resetEditData,
   openCloseModal,
@@ -31,9 +32,9 @@ export default function CitesForm({
   resetEditData?: React.Dispatch<any>;
   openCloseModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const { data: recordUpdateData, isSuccess: recordIsSuccess } =
+  const { data: recordUpdateData, isLoading, isSuccess: recordIsSuccess } =
     useFindRecordQuery(
-      { id: editData?.id, url: "admin/area" },
+      { id: editData?.id, url: "admin/amenity" },
       { skip: editData === null }
     );
     const {t} = useTranslation()
@@ -41,14 +42,12 @@ export default function CitesForm({
   const [formData, setFormData] = useState<formDataTyps>({
     nameEn: "",
     nameAr: "",
-    city_id:""
+    descriptionAr: "",
+  descriptionEn: ""
   });
-  const [options, setOptions] = useState<{ value: any; label: string }[]>([]);
-  const [editOptionId, setEditOptionId] = useState<{ value: any; label: string } |null>(null);
-  const handleSelectChange = (value: { value: any; label: string }) => {
-    console.log(value)
-    setFormData({ ...formData, city_id: value.value });
-  };
+  
+  
+ 
   
   const [file, setFile] = useState<File | null>(null);
   console.log(file);
@@ -58,47 +57,30 @@ export default function CitesForm({
       resetEditData([]);
     }
   };
-  const { data, isLoading, isSuccess } = useGetRecordsQuery({
-   
-  
-    url:'admin/city',
-    inValid:['cites']
-  });
+ 
+ 
 
-  console.log(data)
-  useEffect(() => {
-    const optionss = data?.data?.data?.map((item: any) => {
-      return { value: item?.id, label: item?.name };
-    });
-    
-    setOptions(optionss);
-  }, [isSuccess]);
   useEffect(() => {
     if (recordIsSuccess) {
       setFormData({
         ...formData,
         nameEn: recordUpdateData?.data?.locales?.en?.name,
         nameAr: recordUpdateData?.data?.locales?.ar?.name,
-        city_id: recordUpdateData?.data?.city?.id,
+        descriptionEn: recordUpdateData?.data?.locales?.en?.description,
+        descriptionAr: recordUpdateData?.data?.locales?.ar?.description,
       });
       setFile(recordUpdateData?.data?.image);
 
 
-      // const editOpitonn = options?.find((option:{ value: any; label: string }) => option.value === recordUpdateData?.data?.city?.id ) 
-      // console.log('defult opton', editOpitonn)
-      if(recordUpdateData?.data?.city?.id){
-
-        setEditOptionId(recordUpdateData?.data?.city?.id)
-      }
+      
     }
   }, [recordIsSuccess]);
-  // const [options, setOptions] = useState<{ value: any; label: string }[]>([]);
-console.log(editOptionId)
+ 
   const [toastData, setToastData] = useState<any>({});
 
   const [createRecord, { isLoading:createIsLoading }] = useCreatRecordMutation();
 
-  // const [editCity ] = useEditCityMutation()
+  
   const [editRecord, {isLoading:editIsLoading}] = useEditRecordMutation();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -124,7 +106,7 @@ console.log(editOptionId)
       setToastData({});
     }
 
-    if (isLoading || createIsLoading || editIsLoading) {
+    if (isLoading|| createIsLoading || editIsLoading) {
       toast.loading("Loading...", {
         toastId: "loginLoadingToast",
         autoClose: false,
@@ -140,7 +122,8 @@ console.log(editOptionId)
 
     formDataRequest.append("locales[ar][name]", formData.nameAr);
     formDataRequest.append("locales[en][name]", formData.nameEn);
-    formDataRequest.append("city_id", formData.city_id);
+   
+    
     if (file) {
       formDataRequest.append("image", file);
     }
@@ -151,16 +134,16 @@ console.log(editOptionId)
         const response = await editRecord({
           id: editData?.id,
           formData: formDataRequest,
-          url: "admin/area",
-          inValid: ["areas",],
+          url: "admin/amenity",
+          inValid: ["amenites"],
         });
         console.log(response);
         setToastData(response);
       } else {
         const response = await createRecord({
           formData: formDataRequest,
-          url: "admin/area",
-          inValid: ["areas"],
+          url: "admin/amenity",
+          inValid: ["amenites"],
         });
 
         setToastData(response);
@@ -195,14 +178,9 @@ console.log(editOptionId)
               value={formData.nameAr}
             />
           </div>
-          <div className="lg:col-span-6 col-span-12">
-            <CustomSelect
-            editOptionId={editOptionId}
-              options={options}
-              label={t("tableForms.labels.city")}
-              onChange={handleSelectChange}
-            />{" "}
-          </div>
+         
+        
+         
           <div className=" col-span-12 mt-7">
             {/* @ts-ignore */}
             <Upload_cover setFile={setFile} editImgUrl={file?.original_url} />

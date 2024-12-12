@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import swal from "sweetalert";
 
 import { Loader } from "@mantine/core";
-import {  useDeleteRecordMutation, useGitDeveloperQuery } from "../../apis/serveces";
+import {  useDeleteRecordMutation, useGetRecordsQuery } from "../../apis/serveces";
 import Main_list from "../../components/reusableComponents/Main_list";
 
 import CustomModal from "../../components/reusableComponents/CustomModal";
@@ -13,9 +13,9 @@ import { showAlert } from "../../components/Error";
 
 
 import { useTranslation } from "react-i18next";
-import DeveloperForm from "./DeveloperForm";
+import AmenitesForm from "./AmenitesForm";
 
-export default function Developers() {
+export default function Amenites() {
   const [page, setPage] = useState(1);
   
   const {t} = useTranslation()
@@ -24,16 +24,11 @@ export default function Developers() {
   const [editData, setEditData] = useState<any>(null);
   // const [skipedId, setSkipedId]  = useState(false)
 
-  // const { data, isLoading, isSuccess } = useGetRecordsQuery({
-  //   page: Number(page),
-  //   per_page: 10,
-  //   url:'admin/developer',
-  //   inValid:['developers']
-  // });
-  const { data, isLoading, isSuccess } = useGitDeveloperQuery({
+  const { data, isLoading, isSuccess } = useGetRecordsQuery({
     page: Number(page),
     per_page: 10,
- 
+    url:'admin/amenity',
+    inValid:['amenites']
   });
 
   const [deleteRecord] = useDeleteRecordMutation();
@@ -95,7 +90,7 @@ export default function Developers() {
       dangerMode: true,
     }).then(async (willDelete: any) => {
       if (willDelete) {
-        const data = await deleteRecord({id, url:'admin/developer', inValid:['developers']});
+        const data = await deleteRecord({id, url:'admin/amenity', inValid:['amenites']});
         console.log(data);
         //@ts-ignore
         if (data?.error?.data?.status === 400) {
@@ -136,7 +131,7 @@ export default function Developers() {
       {/* <MainPageCard> */}
       {open && (
         <CustomModal openCloseModal={setOpen} title={`${t("tableForms.add")} ${t("tableForms.developerTitle")}`}>
-          <DeveloperForm openCloseModal={setOpen} editData={null} />
+          <AmenitesForm openCloseModal={setOpen} editData={null} />
         </CustomModal>
       )}
       {open && editData?.id && (
@@ -145,7 +140,7 @@ export default function Developers() {
           title={`${t("tableForms.edit")} ${t("tableForms.developerTitle")}`}
           resetEditData={setEditData}
         >
-          <DeveloperForm
+          <AmenitesForm
             editData={editData}
             resetEditData={setEditData}
             openCloseModal={setOpen}

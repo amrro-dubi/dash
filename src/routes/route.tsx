@@ -14,6 +14,7 @@ import Roles from "../Pages/Roles/Roles";
 import Cites from "../Pages/cites/Cites";
 import Areas from "../Pages/Area/Area";
 import Developers from "../Pages/Developers/Developers";
+import Amenites from "../Pages/Amenites/Amenites";
 
 
 
@@ -56,6 +57,11 @@ const routes = [
             {
             path: "/home/developers",
             element: <Developers />,
+            children: [],
+        },
+            {
+            path: "/home/amenites",
+            element: <Amenites />,
             children: [],
         },
     

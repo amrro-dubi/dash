@@ -26,6 +26,8 @@ export default function Cites() {
     inValid:['cites']
   });
 
+  
+
   const [deleteRecord] = useDeleteRecordMutation();
 
 

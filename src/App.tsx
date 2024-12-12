@@ -7,7 +7,7 @@ import { Outlet } from "react-router-dom";
 
 
 const App: React.FC = () => {
-  
+  localStorage.setItem("language",'ar')
 
   return (
     <>

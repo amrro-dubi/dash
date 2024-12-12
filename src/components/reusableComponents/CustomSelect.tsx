@@ -1,7 +1,9 @@
 import Select, { SingleValue } from "react-select";
 import { customSelectProps } from "../../types/types";
+import { useEffect, useState } from "react";
 
 const CustomSelect = (props: customSelectProps) => {
+  const [defultVal , setDefultVal] = useState<{ value: any; label: string }| null>(null)
   const customStyles = {
     container: (provided: any) => ({
       ...provided,
@@ -37,7 +39,16 @@ const CustomSelect = (props: customSelectProps) => {
     //@ts-ignore
     props.onChange(newValue);
   };
+  useEffect(()=>{
+ const editOpitonn = props?.options?.find((option:{ value: any; label: string }) => option.value === props.editOptionId) 
+  
+  if(editOpitonn){
 
+    setDefultVal(editOpitonn)
+  }
+
+  },[props.editOptionId])
+ 
   return (
     <>
       <div className="flex flex-col gap-0">
@@ -50,7 +61,8 @@ const CustomSelect = (props: customSelectProps) => {
         </label>
         {props?.options?.length > 0 && (
           <Select
-            defaultValue={props?.options}
+            defaultValue={defultVal? defultVal : props?.options[0]}
+         
             className="select_styles"
             options={props?.options}
             isSearchable={false}

@@ -13,6 +13,7 @@ import Admins from "../Pages/Admin/Admin";
 import Roles from "../Pages/Roles/Roles";
 import Cites from "../Pages/cites/Cites";
 import Areas from "../Pages/Area/Area";
+import Developers from "../Pages/Developers/Developers";
 
 
 
@@ -50,6 +51,11 @@ const routes = [
             {
             path: "/home/areas",
             element: <Areas />,
+            children: [],
+        },
+            {
+            path: "/home/developers",
+            element: <Developers />,
             children: [],
         },
     

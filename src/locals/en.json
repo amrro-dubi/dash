@@ -5,7 +5,32 @@
         }
     },
     "tableForms":{
-        "yes": "نعم",
-        "no":"لا"
+        "yes": "yes",
+        "no":"No",
+        "add": "Add",
+        "edit": "Edit",
+        "areasTitle":"Areas",
+        "areaTitle":"Area",
+       "nameEn": "Name En",
+    "nameAr": "Name Ar",
+    "labels": {
+            "nameEn": "Name En",
+            "nameAr": "Name Ar",
+            "city": "City",
+            "upload":" Upload image"
+
+          },
+          "placeholders": {
+            "name": "please enter name"
+          },
+          "confirmationDialog": {
+            "title": "Are you sure you want to delete this Item?",
+            "fail":"Not deleted",
+
+            "buttons": {
+              "cancel": "Cancel",
+              "delete": "Delete"
+            }
+          }
     }
 }

@@ -6,6 +6,28 @@
     },
     "tableForms":{
         "yes": "نعم",
-        "no":"لا"
+        "no":"لا", 
+        "add": "اضافة",
+        "edit": "تعديل",
+        "areasTitle":"المناطق",
+        "areaTitle":"منطقة",
+         
+        "labels": {
+            "nameEn": "الاسم بالإنجليزية",
+            "nameAr": "الاسم بالعربية",
+            "city": "المدينة",
+            "upload":"ارفق صورة"
+          },
+          "placeholders": {
+            "name": "يرجى إدخال الاسم"
+          },
+          "confirmationDialog": {
+            "title": "هل أنت متأكد أنك تريد حذف هذا العنصر؟",
+            "fail":"لم يتم المسح",
+            "buttons": {
+              "cancel": "إلغاء",
+              "delete": "حذف"
+            }
+          }
     }
 }

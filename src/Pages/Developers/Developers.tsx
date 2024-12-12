@@ -11,12 +11,12 @@ import ColumnChooser from "../../components/reusableComponents/tabels";
 
 import { showAlert } from "../../components/Error";
 
-import AreaForm from "./AreaForm";
+import AreaForm from "./DeveloperForm";
 import { useTranslation } from "react-i18next";
 
-export default function Areas() {
+export default function Developers() {
   const [page, setPage] = useState(1);
-
+  
   const {t} = useTranslation()
 
   const [open, setOpen] = useState(false);
@@ -26,8 +26,8 @@ export default function Areas() {
   const { data, isLoading, isSuccess } = useGetRecordsQuery({
     page: Number(page),
     per_page: 10,
-    url:'admin/area',
-    inValid:['areas']
+    url:'admin/developer',
+    inValid:['developers']
   });
 
   const [deleteRecord] = useDeleteRecordMutation();
@@ -89,7 +89,7 @@ export default function Areas() {
       dangerMode: true,
     }).then(async (willDelete: any) => {
       if (willDelete) {
-        const data = await deleteRecord({id, url:'admin/area', inValid:['areas']});
+        const data = await deleteRecord({id, url:'admin/developer', inValid:['developers']});
         console.log(data);
         //@ts-ignore
         if (data?.error?.data?.status === 400) {

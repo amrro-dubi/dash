@@ -1,11 +1,13 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import i18n from "../i18n";
+
 
 // Define the base URL
 const baseUrl = "https://real-estate.luxurylivinghomes.ae/";
 
 const servicesApi = createApi({
   reducerPath: "servicesApi",
-  tagTypes: ["admins", "roles",'cites', "food-basket", 'areas'],
+  tagTypes: ["admins", "roles",'cites', "food-basket", 'areas', 'developers'],
   baseQuery: fetchBaseQuery({
     baseUrl,
     prepareHeaders: (headers) => {
@@ -18,7 +20,7 @@ const servicesApi = createApi({
         );
       }
       headers.set("Accept", "application/json");
-      headers.set("lang", "ar");
+      headers.set("lang", i18n.language);
       
   
 
@@ -176,7 +178,7 @@ const servicesApi = createApi({
 
   findRecord: builder.query<any, any>({
     query: ({ id, url }) => `${url}/${id}`,
-    
+    keepUnusedDataFor: 0,
     
   }),
 
@@ -186,6 +188,7 @@ const servicesApi = createApi({
       method: 'POST',
       body: formData,
     }),
+    
   //@ts-ignore
     invalidatesTags: (result, error, { inValid }:{inValid:string[]}) => {
       // Map the `inValid` array to a format expected by `invalidatesTags`

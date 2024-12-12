@@ -126,7 +126,7 @@ export default function Cites() {
       {/* <MainPageCard> */}
       {open && (
         <CustomModal openCloseModal={setOpen} title="Add City">
-          <CitesForm openCloseModal={setOpen} />
+          <CitesForm openCloseModal={setOpen} editData={null} />
         </CustomModal>
       )}
       {open && editData?.id && (

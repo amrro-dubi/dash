@@ -185,6 +185,11 @@ console.log(data)
                     onClick={togglePasswordVisibility}
                     id="togglePassword"
                   />
+                   {errors.confirmPassword && (
+            <p className="text-[#FF0000] text-[12px]">
+              {errors.confirmPassword}
+            </p>
+          )}
                 </div>
               </div>
 

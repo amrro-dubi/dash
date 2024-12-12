@@ -22,7 +22,7 @@ interface formDataTyps {
   city_id: string;
 }
 
-export default function CitesForm({
+export default function DeveloperForm({
   editData,
   resetEditData,
   openCloseModal,

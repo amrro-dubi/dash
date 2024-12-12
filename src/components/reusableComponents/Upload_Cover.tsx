@@ -1,12 +1,15 @@
 import React, { useRef, useState } from "react";
 import uploadImg from "../../assets/img/dashboard/images.jpg";
 import uploadUser from "../../assets/img/dashboard/upload-user.png";
+import { useTranslation } from "react-i18next";
 type UploadImageProps = {
   user?: boolean;
   setFile: React.Dispatch<React.SetStateAction<File | null>>;
   editImgUrl?: string | null;
 };
 const Upload_cover = (props: UploadImageProps) => {
+
+  const {t} = useTranslation()
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [imageSrc, setImageSrc] = useState<string | null>(null);
 
@@ -67,7 +70,7 @@ const Upload_cover = (props: UploadImageProps) => {
         <div className="flex flex-col">
           
           <div className="flex items-center gap-1  ">
-            <h5>Upload Image</h5>
+            <h5>{t("tableForms.labels.upload")} </h5>
           
           </div>
         </div>

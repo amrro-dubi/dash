@@ -185,7 +185,7 @@ export default function CitesForm({
           <div className="lg:col-span-6 col-span-12">
             <CustomSelect
               options={options}
-              label="Role"
+              label="City"
               onChange={handleSelectChange}
             />{" "}
           </div>

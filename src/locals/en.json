@@ -3,5 +3,9 @@
         "ResetPassword":{
             "confirmPass": "Password miss match"
         }
+    },
+    "tableForms":{
+        "yes": "نعم",
+        "no":"لا"
     }
 }

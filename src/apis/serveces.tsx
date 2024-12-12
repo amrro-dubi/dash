@@ -5,7 +5,7 @@ const baseUrl = "https://real-estate.luxurylivinghomes.ae/";
 
 const servicesApi = createApi({
   reducerPath: "servicesApi",
-  tagTypes: ["admins", "roles",'cites', "food-basket"],
+  tagTypes: ["admins", "roles",'cites', "food-basket", 'areas'],
   baseQuery: fetchBaseQuery({
     baseUrl,
     prepareHeaders: (headers) => {
@@ -132,69 +132,48 @@ const servicesApi = createApi({
       providesTags: ["roles"],
     }),
 
-    getCites: builder.query<any, any>({
-      query: ({ page, per_page }) => `admin/city?per_page=${per_page}&page=${page}`,
-      providesTags: ["cites"],
-      
-    }),
-
-    deleteCity: builder.mutation({
-      query: (id) => ({
-        url: `admin/city/${id}`,
-        method: "DELETE",
-      }),
-      invalidatesTags: ["cites"],
-      transformResponse: (response, meta) => {
-        console.log(meta?.response?.status);
-      
-        return { status: meta?.response?.status, response };
-    },
-    transformErrorResponse: (response, meta) => {
-
-        return { status: meta?.response?.status, response };
-    },
-    }),
-    createCity: builder.mutation<any, any>({
-      query: (formData) => ({
-          url: `admin/city`,
-          method: 'POST',
-          body: formData,
-      }),
-      
-      invalidatesTags: ["cites"],
-      transformResponse: (response, meta) => {
-          console.log(meta?.response?.status);
-        
-          return { status: meta?.response?.status, response };
-      },
-      transformErrorResponse: (response, meta) => {
- 
-          return { status: meta?.response?.status, response };
-      },
-  }),
-    editCity: builder.mutation<any, any>({
-      query: ({formData, id}) => ({
-          url: `admin/city/${id}`,
-          method: 'POST',
-          body: formData,
-      }),
-      invalidatesTags: ["admins"],
-      transformResponse: (response, meta) => {
-          console.log(meta?.response?.status);
-        
-          return { status: meta?.response?.status, response };
-      },
-      transformErrorResponse: (response, meta) => {
- 
-          return { status: meta?.response?.status, response };
-      },
-  }),
-
+   
   
     
   
+  creatRecord: builder.mutation<any, { url: string;  formData: any; inValid: string[] }>({
+    query: ({ formData,  url }) => ({
+      url: `${url}`,
+      method: 'POST',
+      body: formData,
+    }),
+  //@ts-ignore
+    invalidatesTags: (result, error, { inValid }:{inValid:string[]}) => {
+      // Map the `inValid` array to a format expected by `invalidatesTags`
+     
+      return inValid; 
+    },
+  
+    transformResponse: (response, meta) => {
+      console.log(meta?.response?.status);
+      return { status: meta?.response?.status, response };
+    },
+  
+    transformErrorResponse: (response, meta) => {
+      return { status: meta?.response?.status, response };
+    },
+  }),
    
-   
+
+  getRecords: builder.query<any, { page?:number, per_page?:number,url:string, inValid: string[]  }>({
+    query: ({ page, per_page , url}) => `${url}${page? `?per_page=${per_page}&page=${page}` : ''}`,
+    //@ts-ignore
+    providesTags: (result, error, { inValid }:{inValid:string[]}) => {
+      // Map the `inValid` array to a format expected by `invalidatesTags`
+      console.log(inValid)
+      return inValid; 
+    },
+  
+    
+  }),
+
+
+
   findRecord: builder.query<any, any>({
     query: ({ id, url }) => `${url}/${id}`,
     
@@ -223,6 +202,29 @@ const servicesApi = createApi({
       return { status: meta?.response?.status, response };
     },
   }),
+
+
+  deleteRecord: builder.mutation<any, {id:string, url:string, inValid:string[]}>({
+    query: ({id, url}) => ({
+      url: `${url}/${id}`,
+      method: "DELETE",
+    }),
+      //@ts-ignore
+      invalidatesTags: (result, error, { inValid }:{inValid:string[]}) => {
+        // Map the `inValid` array to a format expected by `invalidatesTags`
+        console.log(inValid)
+        return inValid; 
+      },
+    transformResponse: (response, meta) => {
+      console.log(meta?.response?.status);
+    
+      return { status: meta?.response?.status, response };
+  },
+  transformErrorResponse: (response, meta) => {
+
+      return { status: meta?.response?.status, response };
+  },
+  }),
   
 
   }),
@@ -236,7 +238,6 @@ export const {
   useEditAdminMutation,
   useGetPermissionsQuery,
   useCreateRoleMutation, useDeleteRoleMutation,
-  useGetCitesQuery,
-  useCreateCityMutation, useDeleteCityMutation, useEditCityMutation,useFindRecordQuery, useEditRecordMutation
+ useFindRecordQuery, useEditRecordMutation, useCreatRecordMutation, useGetRecordsQuery, useDeleteRecordMutation
 } = servicesApi;
 export default servicesApi;

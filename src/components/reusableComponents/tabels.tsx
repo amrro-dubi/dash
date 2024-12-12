@@ -12,8 +12,10 @@ import { Link } from 'react-router-dom';
 import IconPencil from '../Icon/IconPencil';
 
 import IconTrashLines from '../Icon/IconTrashLines';
+import { useTranslation } from 'react-i18next';
 
 const ColumnChooser = (props: tabelProps) => {
+    const {t}= useTranslation()
     // const [props.TableBody, setprops.TableBody] = useState(props.TableBody);
     const [cols, setcols] = useState(props.tabelHead);
 console.log(props)
@@ -122,11 +124,11 @@ const isRtl = true
                                                                 <img src={image?.original_url} alt="" className="w-[50px] text-left h-[50px] rounded-full" />
                                                             </div>
                                                         )
-                                                        : accessor === 'main_category'
-                                                            ? ({ main_category }: any) => {
+                                                        : accessor === 'highlighted_in_apartment'
+                                                            ? ({ highlighted_in_apartment }: any) => {
                                                                 return (
                                                                     <div className="flex justify-between w-max gap-3">
-                                                                        <p>{main_category?.name}</p>
+                                                                        <p>{highlighted_in_apartment? t('tableForms.yes'):t('tableForms.no')}</p>
                                                                     </div>
                                                                 );
                                                             }

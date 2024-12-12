@@ -3,5 +3,9 @@
         "resetPassword":{
             "confirmPass": "كلمة المرور غير مطابقة"
         }
+    },
+    "tableForms":{
+        "yes": "نعم",
+        "no":"لا"
     }
 }

@@ -3,16 +3,17 @@ import { useEffect, useState } from "react";
 import swal from "sweetalert";
 
 import { Loader } from "@mantine/core";
-import {  useDeleteRecordMutation,useGetRecordsQuery } from "../../apis/serveces";
+import {  useDeleteRecordMutation, useGetRecordsQuery } from "../../apis/serveces";
 import Main_list from "../../components/reusableComponents/Main_list";
 
 import CustomModal from "../../components/reusableComponents/CustomModal";
 import ColumnChooser from "../../components/reusableComponents/tabels";
 
 import { showAlert } from "../../components/Error";
-import CitesForm from "./CitesForm";
 
-export default function Cites() {
+import AreaForm from "./AreaForm";
+
+export default function Areas() {
   const [page, setPage] = useState(1);
 
   const [open, setOpen] = useState(false);
@@ -22,8 +23,8 @@ export default function Cites() {
   const { data, isLoading, isSuccess } = useGetRecordsQuery({
     page: Number(page),
     per_page: 10,
-    url:'admin/city',
-    inValid:['cites']
+    url:'admin/area',
+    inValid:['areas']
   });
 
   const [deleteRecord] = useDeleteRecordMutation();
@@ -85,7 +86,7 @@ export default function Cites() {
       dangerMode: true,
     }).then(async (willDelete: any) => {
       if (willDelete) {
-        const data = await deleteRecord({id, url:'admin/city', inValid:['cites']});
+        const data = await deleteRecord({id, url:'admin/area', inValid:['areas']});
         console.log(data);
         //@ts-ignore
         if (data?.error?.data?.status === 400) {
@@ -122,20 +123,20 @@ export default function Cites() {
   }
   console.log(finslColsKeys);
   return (
-    <Main_list title="Cites">
+    <Main_list title="Areas">
       {/* <MainPageCard> */}
       {open && (
-        <CustomModal openCloseModal={setOpen} title="Add City">
-          <CitesForm openCloseModal={setOpen} />
+        <CustomModal openCloseModal={setOpen} title="Add Area">
+          <AreaForm openCloseModal={setOpen} />
         </CustomModal>
       )}
       {open && editData?.id && (
         <CustomModal
           openCloseModal={setOpen}
-          title="Edit City"
+          title="Edit Area"
           resetEditData={setEditData}
         >
-          <CitesForm
+          <AreaForm
             editData={editData}
             resetEditData={setEditData}
             openCloseModal={setOpen}

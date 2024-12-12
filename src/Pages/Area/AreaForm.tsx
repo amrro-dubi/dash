@@ -9,13 +9,16 @@ import {
   useCreatRecordMutation,
   useEditRecordMutation,
   useFindRecordQuery,
+  useGetRecordsQuery,
 } from "../../apis/serveces";
 
 import Upload_cover from "../../components/reusableComponents/Upload_Cover";
+import CustomSelect from "../../components/reusableComponents/CustomSelect";
 
 interface formDataTyps {
   nameEn: string;
   nameAr: string;
+  city_id: string;
 }
 
 export default function CitesForm({
@@ -29,15 +32,20 @@ export default function CitesForm({
 }) {
   const { data: recordUpdateData, isSuccess: recordIsSuccess } =
     useFindRecordQuery(
-      { id: editData?.id, url: "admin/city" },
+      { id: editData?.id, url: "admin/area" },
       { skip: editData === null }
     );
 
   const [formData, setFormData] = useState<formDataTyps>({
     nameEn: "",
     nameAr: "",
+    city_id:""
   });
-
+  const [options, setOptions] = useState<{ value: any; label: string }[]>([]);
+  const handleSelectChange = (value: { value: any; label: string }) => {
+    console.log(value)
+    setFormData({ ...formData, city_id: value.value });
+  };
   const [file, setFile] = useState<File | null>(null);
   console.log(file);
   const closeModal = () => {
@@ -46,7 +54,21 @@ export default function CitesForm({
       resetEditData([]);
     }
   };
-  console.log(editData);
+  const { data, isLoading, isSuccess } = useGetRecordsQuery({
+   
+  
+    url:'admin/city',
+    inValid:['areas']
+  });
+
+  console.log(data)
+  useEffect(() => {
+    const optionss = data?.data?.data?.map((item: any) => {
+      return { value: item?.id, label: item?.name };
+    });
+    
+    setOptions(optionss);
+  }, [isSuccess]);
   useEffect(() => {
     if (recordIsSuccess) {
       setFormData({
@@ -61,7 +83,7 @@ export default function CitesForm({
 
   const [toastData, setToastData] = useState<any>({});
 
-  const [createRecord, { isLoading }] = useCreatRecordMutation();
+  const [createRecord, { isLoading:createIsLoading }] = useCreatRecordMutation();
 
   // const [editCity ] = useEditCityMutation()
   const [editRecord] = useEditRecordMutation();
@@ -89,7 +111,7 @@ export default function CitesForm({
       setToastData({});
     }
 
-    if (isLoading) {
+    if (isLoading || createIsLoading) {
       toast.loading("Loading...", {
         toastId: "loginLoadingToast",
         autoClose: false,
@@ -97,7 +119,7 @@ export default function CitesForm({
     } else {
       toast.dismiss("loginLoadingToast");
     }
-  }, [toastData, isLoading]);
+  }, [toastData, isLoading, createIsLoading]);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -105,6 +127,7 @@ export default function CitesForm({
 
     formDataRequest.append("locales[ar][name]", formData.nameAr);
     formDataRequest.append("locales[en][name]", formData.nameEn);
+    formDataRequest.append("city_id", formData.city_id);
     if (file) {
       formDataRequest.append("image", file);
     }
@@ -115,16 +138,16 @@ export default function CitesForm({
         const response = await editRecord({
           id: editData?.id,
           formData: formDataRequest,
-          url: "admin/city",
-          inValid: ["cites", "admins"],
+          url: "admin/area",
+          inValid: ["areas",],
         });
         console.log(response);
         setToastData(response);
       } else {
         const response = await createRecord({
           formData: formDataRequest,
-          url: "admin/city",
-          inValid: ["cites"],
+          url: "admin/area",
+          inValid: ["areas"],
         });
 
         setToastData(response);
@@ -159,7 +182,13 @@ export default function CitesForm({
               value={formData.nameAr}
             />
           </div>
-
+          <div className="lg:col-span-6 col-span-12">
+            <CustomSelect
+              options={options}
+              label="Role"
+              onChange={handleSelectChange}
+            />{" "}
+          </div>
           <div className=" col-span-12 mt-7">
             {/* @ts-ignore */}
             <Upload_cover setFile={setFile} editImgUrl={file?.original_url} />

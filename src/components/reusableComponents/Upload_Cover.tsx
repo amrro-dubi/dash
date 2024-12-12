@@ -42,7 +42,7 @@ const Upload_cover = (props: UploadImageProps) => {
         onClick={handleButtonClick}
         className="flex cursor-pointer  lg:w-[220px] h-[120px] rounded-2xl border-[1px] border-[#EFB93F] border-solid justify-center items-center "
       >
-        {props.editImgUrl? <img src={`${props?.editImgUrl}`}/> : <> {
+        {props.editImgUrl? <img className="w-full h-full rounded-2xl object-cover" src={`${props?.editImgUrl}`}/> : <> {
           imageSrc ? (
             <img
               src={imageSrc}

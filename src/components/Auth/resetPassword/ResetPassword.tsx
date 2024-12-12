@@ -172,7 +172,7 @@ console.log(data)
                   <input
                     id="password6"
                     type={passwordVisible ? "text" : "password"}
-                    value={formData.password}
+                    value={formData.confirmPassword}
                     name="confirmPassword"
                     required
                     onChange={handleChange}
@@ -199,7 +199,7 @@ console.log(data)
               <div className="">
                 <div className="form-inner">
                   <button className="primary-btn2" type="submit">
-                    Log In
+                    Reset
                   </button>
                 </div>
               </div>

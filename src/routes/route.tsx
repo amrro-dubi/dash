@@ -12,6 +12,7 @@ import ResetPassword from "../components/Auth/resetPassword/ResetPassword";
 import Admins from "../Pages/Admin/Admin";
 import Roles from "../Pages/Roles/Roles";
 import Cites from "../Pages/cites/Cites";
+import Areas from "../Pages/Area/Area";
 
 
 
@@ -44,6 +45,11 @@ const routes = [
             {
             path: "/home/cites",
             element: <Cites />,
+            children: [],
+        },
+            {
+            path: "/home/areas",
+            element: <Areas />,
             children: [],
         },
     

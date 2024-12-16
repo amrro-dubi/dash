@@ -10,10 +10,11 @@ import CustomModal from "../../components/reusableComponents/CustomModal";
 import ColumnChooser from "../../components/reusableComponents/tabels";
 import AdminForm from "./AdminForm";
 import { showAlert } from "../../components/Error";
+import { useTranslation } from "react-i18next";
 
 export default function Admins() {
   const [page, setPage] = useState(1);
-
+   const {t} = useTranslation()
   const [open, setOpen] = useState(false);
   const [editData, setEditData] = useState<any>([]);
 
@@ -94,17 +95,17 @@ export default function Admins() {
   }
   console.log(finslColsKeys);
   return (
-    <Main_list title="Admins">
+    <Main_list title={t("tableForms.adminsTitle")}>
       {/* <MainPageCard> */}
       {open && (
-        <CustomModal openCloseModal={setOpen} title="Add Admin">
+        <CustomModal openCloseModal={setOpen} title={`${t("tableForms.add")} ${t("tableForms.adminTitle")}`}>
           <AdminForm openCloseModal={setOpen} />
         </CustomModal>
       )}
       {open && editData?.id && (
         <CustomModal
           openCloseModal={setOpen}
-          title="Edit Admin"
+          title={`${t("tableForms.edit")} ${t("tableForms.adminTitle")}`}
           resetEditData={setEditData}
         >
           <AdminForm

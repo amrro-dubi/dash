@@ -12,6 +12,7 @@ import {
 } from "../../apis/serveces";
 
 import Upload_cover from "../../components/reusableComponents/Upload_Cover";
+import { useTranslation } from "react-i18next";
 
 interface formDataTyps {
   nameEn: string;
@@ -27,6 +28,8 @@ export default function CitesForm({
   resetEditData?: React.Dispatch<any>;
   openCloseModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
+
+  const {t} = useTranslation()
   const { data: recordUpdateData, isSuccess: recordIsSuccess } =
     useFindRecordQuery(
       { id: editData?.id, url: "admin/city" },
@@ -139,23 +142,23 @@ export default function CitesForm({
         <div className="grid gap-6  mb-4 grid-cols-12">
           <div className="lg:col-span-6 col-span-12">
             <InputComponent
-              label="Name En"
+            label={t("tableForms.labels.nameEn")}
               onChange={handleChange}
               required
               type="text"
               name="nameEn"
-              placeholder="please enter name"
+              placeholder={t("tableForms.placeholders.name")}
               value={formData.nameEn}
             />
           </div>
           <div className="lg:col-span-6 col-span-12">
             <InputComponent
-              label="Name Ar"
+               label={t("tableForms.labels.nameAr")}
               onChange={handleChange}
               required
               type="text"
               name="nameAr"
-              placeholder="please enter name"
+              placeholder={t("tableForms.placeholders.name")}
               value={formData.nameAr}
             />
           </div>
@@ -189,7 +192,7 @@ export default function CitesForm({
                   clipRule="evenodd"
                 ></path>
               </svg>
-              {editData ? "Edit" : "Add"}
+              {editData ? t("tableForms.edit") : t("tableForms.add")}
             </button>
           </>
         </div>

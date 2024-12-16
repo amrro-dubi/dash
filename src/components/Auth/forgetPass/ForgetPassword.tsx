@@ -5,6 +5,7 @@ import "../Login/login";
 
 import { toast } from "react-toastify";
 import { useForgetPasswordMutation } from "../../../apis/authSlice";
+import { useTranslation } from "react-i18next";
 
 type loginFormData = {
   email: string;
@@ -13,6 +14,7 @@ const initalData = {
   email: "",
 };
 const ForgetPassword = () => {
+  const {t} = useTranslation()
   const [formData, setFormData] = useState<loginFormData>(initalData);
 
   const navigate = useNavigate();
@@ -81,52 +83,54 @@ const ForgetPassword = () => {
     setToastData(data);
   };
   return (
-    <div className="w-100  login-container">
-      <div className="overlay"> </div>
-
-      <div className="login-wrapper">
-        <div className="login-page">
-          <div className="login-content">
-            <div className="login-header">
-              <h4 className="modal-title" id="logInModal01Label">
-                Forget Password
-              </h4>
-            </div>
-            <form onSubmit={handleSubmit}>
-              <div className="grid grid-cols-1 gap-4">
-                <div className="">
-                  <div className="form-inner">
-                    <label>Enter your email address*</label>
-                    <input
-                      type="email"
-                      name="email"
-                      required
-                      onChange={handleChange}
-                      placeholder="Type email"
-                    />
-                  </div>
-                </div>
-
-                <div className="">
-                  <div className="form-agreement form-inner d-flex justify-content-between flex-wrap">
-                    <Link to="/" className="forgot-pass">
-                      Remember Password?
-                    </Link>
-                  </div>
-                </div>
-                <div className="">
-                  <div className="form-inner">
-                    <button className="primary-btn2" type="submit">
-                      Send
-                    </button>
-                  </div>
+    <div className="w-100 login-container">
+    <div className="overlay"> </div>
+  
+    <div className="login-wrapper">
+      <div className="login-page">
+        <div className="login-content">
+          <div className="login-header">
+            <h4 className="modal-title" id="logInModal01Label">
+              {t("auth.forgotPassword.title")}
+            </h4>
+          </div>
+          <form onSubmit={handleSubmit}>
+            <div className="grid grid-cols-1 gap-4">
+              <div className="">
+                <div className="form-inner">
+                  <label>{t("auth.forgotPassword.labels.email")}</label>
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    onChange={handleChange}
+                    placeholder={t("auth.forgotPassword.placeholders.email")}
+                  />
                 </div>
               </div>
-            </form>
-          </div>
+  
+              <div className="">
+                <div className="form-agreement form-inner d-flex justify-content-between flex-wrap">
+                  <Link to="/" className="forgot-pass">
+                    {t("auth.forgotPassword.links.rememberPassword")}
+                  </Link>
+                </div>
+              </div>
+  
+              <div className="">
+                <div className="form-inner">
+                  <button className="primary-btn2" type="submit">
+                    {t("auth.forgotPassword.buttons.submit")}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
+  </div>
+  
   );
 };
 

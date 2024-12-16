@@ -10,6 +10,7 @@ import CustomSelect from "../../components/reusableComponents/CustomSelect";
 import { useCreateAdminMutation, useEditAdminMutation, useGetRolesQuery } from "../../apis/serveces";
 
 import { useValidationMessages } from "../../components/Auth/authValidation";
+import { useTranslation } from "react-i18next";
 const formSchema = (message: any) =>
   z
     .object({
@@ -41,7 +42,7 @@ interface adminFormData {
 }
 
 export default function AdminForm({editData, resetEditData, openCloseModal}:{editData?:any, resetEditData?: React.Dispatch<any>,openCloseModal: React.Dispatch<React.SetStateAction<boolean>>}) {
- 
+ const {t} = useTranslation()
   const validationMessages = useValidationMessages();
   const [formData, setFormData] = useState<adminFormData>({
     name: "",
@@ -164,106 +165,108 @@ if (editData){
   return (
     <>
       <form onSubmit={handleSubmit} className="p-4 md:p-5">
-        <div className="grid gap-4  mb-4 grid-cols-12">
-          <div className="lg:col-span-6 col-span-12">
-            <InputComponent
-              label="Name"
-              onChange={handleChange}
-              required
-              type="text"
-              name="name"
-              placeholder="please enter name"
-              value={formData.name}
-            />
-          </div>
-          <div className="lg:col-span-6 col-span-12">
-            <InputComponent
-              label="username"
-              onChange={handleChange}
-              required
-              type="text"
-              name="username"
-              placeholder="please enter name"
-              value={formData.username}
-            />
-          </div>
-          <div className="lg:col-span-6 col-span-12">
-            <InputComponent
-              label="Email"
-              type="email"
-              required
-              onChange={handleChange}
-              name="email"
-              placeholder="please enter email"
-              value={formData.email}
-            />
-          </div>
-          <div className="lg:col-span-6 col-span-12">
-            <InputComponent
-              label="password"
-              type="password"
-              required
-              onChange={handleChange}
-              name="password"
-              placeholder="please enter password"
-              value={formData.password}
-            />
-          </div>
-          <div className="lg:col-span-6 col-span-12">
-            <InputComponent
-              label="Confirm Password"
-              required
-              type="password"
-              name="confirm_password"
-              onChange={handleChange}
-              placeholder="please enter confirm_password"
-              value={formData.confirm_password}
-            />
-            {errors.confirm_password && (
-            <p className="text-[#FF0000] text-[12px]">
-              {errors.confirm_password}
-            </p>
-          )}
-          </div>
-          
-          <div className="lg:col-span-6 col-span-12">
-            <CustomSelect
-              options={options}
-              label="Role"
-              onChange={handleSelectChange}
-            />{" "}
-          </div>
+  <div className="grid gap-4 mb-4 grid-cols-12">
+    {/* Name */}
+    <div className="lg:col-span-6 col-span-12">
+      <InputComponent
+        label={t("tableForms.labels.name")}
+        onChange={handleChange}
+        required
+        type="text"
+        name="name"
+        placeholder={t("tableForms.placeholders.name")}
+        value={formData.name}
+      />
+    </div>
 
-         
-        </div>
-        <div className="w-full  flex justify-end">
-          {/* {isLoading ||editIsLoading ? (
-                        <>
-                            <LoadingButton />
-                        </>
-                    ) : ( */}
-          <>
-            <button
-              type="submit"
-              className="text-white flex    bg-gradient-to-r from-[black] to-[black]  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              <svg
-                className="me-1 -ms-1 w-5 h-5"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
-            {editData? "Edit": "Add"}
-            </button>
-          </>
-        </div>
-      </form>
+    {/* Username */}
+    <div className="lg:col-span-6 col-span-12">
+      <InputComponent
+        label={t("tableForms.labels.username")}
+        onChange={handleChange}
+        required
+        type="text"
+        name="username"
+        placeholder={t("tableForms.placeholders.username")}
+        value={formData.username}
+      />
+    </div>
+
+    {/* Email */}
+    <div className="lg:col-span-6 col-span-12">
+      <InputComponent
+        label={t("tableForms.labels.email")}
+        type="email"
+        required
+        onChange={handleChange}
+        name="email"
+        placeholder={t("tableForms.placeholders.email")}
+        value={formData.email}
+      />
+    </div>
+
+    {/* Password */}
+    <div className="lg:col-span-6 col-span-12">
+      <InputComponent
+        label={t("tableForms.labels.password")}
+        type="password"
+        required
+        onChange={handleChange}
+        name="password"
+        placeholder={t("tableForms.placeholders.password")}
+        value={formData.password}
+      />
+    </div>
+
+    {/* Confirm Password */}
+    <div className="lg:col-span-6 col-span-12">
+      <InputComponent
+        label={t("tableForms.labels.confirmPassword")}
+        required
+        type="password"
+        name="confirm_password"
+        onChange={handleChange}
+        placeholder={t("tableForms.placeholders.confirmPassword")}
+        value={formData.confirm_password}
+      />
+      {errors.confirm_password && (
+        <p className="text-[#FF0000] text-[12px]">{errors.confirm_password}</p>
+      )}
+    </div>
+
+    {/* Role */}
+    <div className="lg:col-span-6 col-span-12">
+      <CustomSelect
+        options={options}
+        label={t("tableForms.labels.role")}
+        onChange={handleSelectChange}
+      />
+    </div>
+  </div>
+
+  {/* Submit Button */}
+  <div className="w-full flex justify-end">
+    <button
+      type="submit"
+      className="text-white flex bg-gradient-to-r from-[black] to-[black] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+    >
+      <svg
+        className="me-1 -ms-1 w-5 h-5"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fillRule="evenodd"
+          d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+          clipRule="evenodd"
+        ></path>
+      </svg>
+      {editData ? t("tableForms.edit") : t("tableForms.add")}
+    </button>
+  </div>
+</form>
+
     </>
   );
 }

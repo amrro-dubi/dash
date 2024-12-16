@@ -2,12 +2,13 @@ import React from "react";
 
 import Sidebar from "./components/dashboard/Sidebar";
 import { Outlet } from "react-router-dom";
+import Navbar from "./components/nav/Navbar";
 
 
 
 
 const App: React.FC = () => {
-  localStorage.setItem("language",'ar')
+ 
 
   return (
     <>
@@ -15,7 +16,10 @@ const App: React.FC = () => {
      
       <div className="grid grid-cols-12">
         <div className="col-span-2"><Sidebar /></div>
-        <div className="col-span-10">  <Outlet /></div>
+        <div className="flex flex-col gap-6 col-span-10">  
+          <Navbar/>
+        <Outlet />
+        </div>
       </div>
 
         

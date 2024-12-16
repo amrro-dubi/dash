@@ -127,17 +127,17 @@ export default function Amenites() {
   }
   console.log(finslColsKeys);
   return (
-    <Main_list title={`${t("tableForms.developersTitle")}`}>
+    <Main_list title={`${t("tableForms.amenitiesTitle")}`}>
       {/* <MainPageCard> */}
       {open && (
-        <CustomModal openCloseModal={setOpen} title={`${t("tableForms.add")} ${t("tableForms.developerTitle")}`}>
+        <CustomModal openCloseModal={setOpen} title={`${t("tableForms.add")} ${t("tableForms.amenityTitle")}`}>
           <AmenitesForm openCloseModal={setOpen} editData={null} />
         </CustomModal>
       )}
       {open && editData?.id && (
         <CustomModal
           openCloseModal={setOpen}
-          title={`${t("tableForms.edit")} ${t("tableForms.developerTitle")}`}
+          title={`${t("tableForms.edit")} ${t("tableForms.amenityTitle")}`}
           resetEditData={setEditData}
         >
           <AmenitesForm

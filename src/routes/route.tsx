@@ -15,6 +15,7 @@ import Cites from "../Pages/cites/Cites";
 import Areas from "../Pages/Area/Area";
 import Developers from "../Pages/Developers/Developers";
 import Amenites from "../Pages/Amenites/Amenites";
+import CanvasComponent from "../Pages/Canvas";
 
 
 
@@ -62,6 +63,11 @@ const routes = [
             {
             path: "/home/amenites",
             element: <Amenites />,
+            children: [],
+        },
+            {
+            path: "/home/canvas",
+            element: <CanvasComponent />,
             children: [],
         },
     

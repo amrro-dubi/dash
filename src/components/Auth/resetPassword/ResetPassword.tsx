@@ -6,6 +6,7 @@ import { useValidationMessages } from "../authValidation";
 import { toast } from "react-toastify";
 import {  useResetPasswordMutation } from "../../../apis/authSlice";
 import { z } from "zod";
+import { useTranslation } from "react-i18next";
 const formSchema = (message: any) =>
   z
     .object({
@@ -35,6 +36,7 @@ const initalData = {
   confirmPassword:""
 };
 const ResetPassword = () => {
+  const {t} = useTranslation()
   const [formData, setFormData ] = useState<loginFormData>(initalData);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const locatoin = useLocation()
@@ -126,28 +128,21 @@ console.log(data)
   return (
     <div className="login-container">
     <div className="overlay"> </div>
-
+  
     <div className="login-wrapper">
       <div className="login-page">
-        {/* <div className="login-img">
-            <img src={loginImage} alt="" />
-            <div className="logo">
-              <Link to="/"><a><img src={logo} alt="" /></a></Link>
-            </div>
-          </div> */}
-         
         <div className="login-content">
           <div className="login-header">
             <h4 className="modal-title" id="logInModal01Label">
-              Reset you password 
+              {t("auth.resetPassword.title")}
             </h4>
           </div>
-          <form  onSubmit={handleSubmit}>
-            <div className="grid grid-cols-1  gap-4">
-           
+  
+          <form onSubmit={handleSubmit}>
+            <div className="grid grid-cols-1 gap-4">
               <div className="">
                 <div className="form-inner">
-                  <label>Password*</label>
+                  <label>{t("auth.resetPassword.labels.password")}</label>
                   <input
                     id="password6"
                     type={passwordVisible ? "text" : "password"}
@@ -155,20 +150,19 @@ console.log(data)
                     name="password"
                     required
                     onChange={handleChange}
-                    placeholder="*** ***"
+                    placeholder={t("auth.resetPassword.placeholders.password")}
                   />
                   <i
-                    className={`bi bi-${
-                      passwordVisible ? "eye" : "eye-slash"
-                    }`}
+                    className={`bi bi-${passwordVisible ? "eye" : "eye-slash"}`}
                     onClick={togglePasswordVisibility}
                     id="togglePassword"
                   />
                 </div>
               </div>
+  
               <div className="">
                 <div className="form-inner">
-                  <label>Confirm Password*</label>
+                  <label>{t("auth.resetPassword.labels.confirmPassword")}</label>
                   <input
                     id="password6"
                     type={passwordVisible ? "text" : "password"}
@@ -176,53 +170,44 @@ console.log(data)
                     name="confirmPassword"
                     required
                     onChange={handleChange}
-                    placeholder="*** ***"
+                    placeholder={t("auth.resetPassword.placeholders.confirmPassword")}
                   />
                   <i
-                    className={`bi bi-${
-                      passwordVisible ? "eye" : "eye-slash"
-                    }`}
+                    className={`bi bi-${passwordVisible ? "eye" : "eye-slash"}`}
                     onClick={togglePasswordVisibility}
                     id="togglePassword"
                   />
-                   {errors.confirmPassword && (
-            <p className="text-[#FF0000] text-[12px]">
-              {errors.confirmPassword}
-            </p>
-          )}
+                  {errors.confirmPassword && (
+                    <p className="text-[#FF0000] text-[12px]">
+                      {errors.confirmPassword}
+                    </p>
+                  )}
                 </div>
               </div>
-
+  
               <div className="">
                 <div className="form-agreement form-inner d-flex justify-content-between flex-wrap">
                   <Link to="/forgetPass" className="forgot-pass">
-                    back?
+                    {t("auth.resetPassword.links.back")}
                   </Link>
                 </div>
               </div>
-              
+  
               <div className="">
                 <div className="form-inner">
                   <button className="primary-btn2" type="submit">
-                    Reset
+                    {t("auth.resetPassword.buttons.reset")}
                   </button>
                 </div>
               </div>
-
             </div>
-            {/* <div className="terms-conditon">
-                <p>By sign up,you agree to the <a href="#">‘terms &amp; conditons’</a></p>
-              </div>
-              <ul className="social-icon">
-                <li><a href="#"><img src={googleIcon} alt="" /></a></li>
-                <li><a href="#"><img src={faceIcon} alt="" /></a></li>
-                <li><a href="#"><img src={twitterIcon} alt="" /></a></li>
-              </ul> */}
           </form>
         </div>
       </div>
     </div>
   </div>
+  
+  
   );
 };
 

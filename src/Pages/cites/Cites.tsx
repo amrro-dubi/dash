@@ -11,10 +11,11 @@ import ColumnChooser from "../../components/reusableComponents/tabels";
 
 import { showAlert } from "../../components/Error";
 import CitesForm from "./CitesForm";
+import { useTranslation } from "react-i18next";
 
 export default function Cites() {
   const [page, setPage] = useState(1);
-
+const {t}= useTranslation()
   const [open, setOpen] = useState(false);
   const [editData, setEditData] = useState<any>(null);
   // const [skipedId, setSkipedId]  = useState(false)
@@ -124,17 +125,17 @@ export default function Cites() {
   }
   console.log(finslColsKeys);
   return (
-    <Main_list title="Cites">
+    <Main_list title={t("tableForms.citiesTitle")}>
       {/* <MainPageCard> */}
       {open && (
-        <CustomModal openCloseModal={setOpen} title="Add City">
+        <CustomModal openCloseModal={setOpen} title={`${t("tableForms.add")} ${t("tableForms.cityTitle")}`}>
           <CitesForm openCloseModal={setOpen} editData={null} />
         </CustomModal>
       )}
       {open && editData?.id && (
         <CustomModal
           openCloseModal={setOpen}
-          title="Edit City"
+          title={`${t("tableForms.edit")} ${t("tableForms.cityTitle")}`}
           resetEditData={setEditData}
         >
           <CitesForm

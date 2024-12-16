@@ -3,8 +3,10 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useConfirmCodeMutation } from "../../../apis/authSlice";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const PinInput: React.FC = () => {
+  const {t} = useTranslation()
   const [pin, setPin] = useState<string[]>(["", "", "", "", "", ""]);
   const navigate = useNavigate();
   const location = useLocation();
@@ -100,72 +102,65 @@ const PinInput: React.FC = () => {
 
   return (
     <div className="w-100 login-container">
-      <div className="overlay"> </div>
-      <div className="login-wrapper">
-        <div className="login-page">
-          <div className="login-content">
-            <div className="login-header mb">
-              <h4 className="modal-title" id="logInModal01Label">
-                Code Confirmation
-              </h4>
-              <p className="modal-title" id="logInModal01Label">
-                We sent 6 digits to your email. Please enter it to confirm.
-              </p>
-            </div>
-
-            <form onSubmit={handleSubmit}>
-              <div className="flex justify-center">
-              
-                  
-                    {pin.map((digit, index) => (
-                      <input
-                        key={index}
-                        id={`pin-input-${index}`}
-                        type="text"
-                        maxLength={1}
-                        value={digit}
-                        onChange={(e) =>
-                          handleChange(e.target.value, index)
-                        }
-                        onKeyDown={(e) =>
-                          e.key === "Backspace" &&
-                          handleBackspace(
-                            e.currentTarget.value,
-                            index
-                          )
-                        }
-                        onPaste={handlePaste}
-                        className="text-center mx-1 mb-4"
-                        style={{
-                          width: "50px",
-                          height: "50px",
-                          fontSize: "24px",
-                        }}
-                      />
-                    ))}
-                 
-               
-              </div>
-
-              <div className="col-lg-12">
-                <div className="form-agreement form-inner d-flex justify-content-between flex-wrap mb-3">
-                  <Link to="/forgetPass" className="forgot-pass">
-                    Back?
-                  </Link>
-                </div>
-              </div>
-              <div className="col-md-12">
-                <div className="form-inner">
-                  <button className="primary-btn2" type="submit">
-                    Send
-                  </button>
-                </div>
-              </div>
-            </form>
+    <div className="overlay"> </div>
+    <div className="login-wrapper">
+      <div className="login-page">
+        <div className="login-content">
+          <div className="login-header mb">
+            <h4 className="modal-title" id="logInModal01Label">
+              {t("auth.codeConfirmation.title")}
+            </h4>
+            <p className="modal-title" id="logInModal01Label">
+              {t("auth.codeConfirmation.description")}
+            </p>
           </div>
+  
+          <form onSubmit={handleSubmit}>
+            <div className="flex justify-center">
+              {pin.map((digit, index) => (
+                <input
+                  key={index}
+                  id={`pin-input-${index}`}
+                  type="text"
+                  maxLength={1}
+                  value={digit}
+                  onChange={(e) => handleChange(e.target.value, index)}
+                  onKeyDown={(e) =>
+                    e.key === "Backspace" &&
+                    handleBackspace(e.currentTarget.value, index)
+                  }
+                  onPaste={handlePaste}
+                  className="text-center mx-1 mb-4"
+                  style={{
+                    width: "50px",
+                    height: "50px",
+                    fontSize: "24px",
+                  }}
+                />
+              ))}
+            </div>
+  
+            <div className="col-lg-12">
+              <div className="form-agreement form-inner d-flex justify-content-between flex-wrap mb-3">
+                <Link to="/forgetPass" className="forgot-pass">
+                  {t("auth.codeConfirmation.links.back")}
+                </Link>
+              </div>
+            </div>
+  
+            <div className="col-md-12">
+              <div className="form-inner">
+                <button className="primary-btn2" type="submit">
+                  {t("auth.codeConfirmation.buttons.submit")}
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
+  </div>
+  
   );
 };
 

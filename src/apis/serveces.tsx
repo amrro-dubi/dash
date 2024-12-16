@@ -171,7 +171,7 @@ const servicesApi = createApi({
   }),
    
 
-  getRecords: builder.query<any, { page?:number, per_page?:number,url:string, inValid: string[]  }>({
+  getRecords: builder.query<unknown, { page?:number, per_page?:number,url:string, inValid: string[]  }>({
     query: ({ page, per_page , url}) => `${url}${page? `?per_page=${per_page}&page=${page}` : ''}`,
     //@ts-ignore
     providesTags: (result, error, { inValid }:{inValid:string[]}) => {

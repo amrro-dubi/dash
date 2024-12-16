@@ -8,19 +8,20 @@ type AuthModelState = {
 };
 
 const initialState: AuthModelState = {
-    openSidebar: true,
+    openSidebar: false,
   openModelMenu: false,
   isLogin: true,
   userLogin: null,
   signUp: false,
 };
 
-const ModelSlice = createSlice({
+const modal = createSlice({
   name: "model",
   initialState,
   reducers: {
     setOpenSidebar: (state: AuthModelState) => {
-      state.openSidebar = !state.openSidebar;
+      console.log(state.openSidebar)
+      state.openSidebar = false;
     },
 
     closeAuthModel: (state: AuthModelState) => {
@@ -55,5 +56,5 @@ const ModelSlice = createSlice({
   },
 });
 
-export const modelActions = ModelSlice.actions;
-export default ModelSlice.reducer;
+export const modelActions = modal.actions;
+export default modal.reducer;

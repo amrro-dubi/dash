@@ -193,7 +193,7 @@ const isRtl = true
         <div>
             <div className="flex md:items-center md:flex-row flex-col mb-5 gap-5">
                 <div className="text-left">
-                    <input type="text" className="form-input" placeholder="البحث..." value={search} onChange={(e) => setSearch(e.target.value)} />
+                    <input type="text" className="form-input" placeholder={t('tableForms.labels.search')}value={search} onChange={(e) => setSearch(e.target.value)} />
                 </div>
                 <div className="flex items-center gap-5 ltr:ml-auto rtl:mr-auto">
                     {/* <Dropdown
@@ -243,7 +243,7 @@ const isRtl = true
                                 btnClassName="!flex items-center border font-semibold border-[#EFB93F] dark:border-[#253b5c] rounded-md px-4 py-2 text-sm dark:bg-[#1b2e4b] dark:text-white-dark"
                                 button={
                                     <>
-                                        <span className="ltr:mr-1 rtl:ml-1 text-[#EFB93F]">Columns</span>
+                                        <span className="ltr:mr-1 rtl:ml-1 text-[#EFB93F]">  {t('tableForms.labels.columns')} </span>
                                         <IconCaretDown className="w-5 h-5 text-[#EFB93F]" />
                                     </>
                                 }
@@ -314,8 +314,7 @@ const isRtl = true
                                             <path d="M3.33325 8H12.6666" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
                                     </span>
-                                    Add New
-                                </Link>
+{t('tableForms.btnAdd')}                                </Link>
                             </>
                         ) : (
                             <>
@@ -327,8 +326,7 @@ const isRtl = true
                                                 <path d="M3.33325 8H12.6666" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                             </svg>
                                         </span>
-                                        Add New
-                                    </button>
+                                        {t('tableForms.labels.btnAdd')}                                     </button>
                                 )}
                             </>
                         )}
@@ -354,7 +352,7 @@ const isRtl = true
                         sortStatus={sortStatus}
                         onSortStatusChange={setSortStatus}
                         minHeight={200}
-                        paginationText={({ from, to }) => `عرض  ${from} الي ${to} من ${props?.pagination?.total} من الصفوف`}
+                        paginationText={({ from, to }) => `${t("tableForms.pagination.display")} ${from} ${t("tableForms.pagination.to")} ${to} ${t("tableForms.pagination.of")} ${props?.pagination?.total} ${t("tableForms.pagination.rows")}`}
                         {...(props.Chcekbox && { selectedRecords, onSelectedRecordsChange: setSelectedRecords })}
                     />
                 </div>

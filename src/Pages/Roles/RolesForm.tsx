@@ -14,6 +14,7 @@ import {
   useGetPermissionsQuery,
 
 } from "../../apis/serveces";
+import { useTranslation } from "react-i18next";
 
 
 
@@ -32,7 +33,7 @@ export default function RolesForm({
   resetEditData?: React.Dispatch<any>;
   openCloseModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
- 
+ const {t} = useTranslation()
   const [formData, setFormData] = useState<RolesFormData>({
     title: "",
 
@@ -156,12 +157,12 @@ export default function RolesForm({
         <div className="grid gap-4  mb-4 grid-cols-12">
           <div className=" flex flex-col gap-8 col-span-12">
             <InputComponent
-              label="Title"
+              label={t('tableForms.labels.title')}
               onChange={handleChange}
               required
               type="text"
               name="title"
-              placeholder="please enter role title"
+              placeholder={t("tableForms.labels.roleTitlePlaceholder")}
               value={formData.title}
             />
             <div className="flex flex-col justify-between w-full gap-7">
@@ -207,7 +208,7 @@ export default function RolesForm({
                   clipRule="evenodd"
                 ></path>
               </svg>
-              {editData ? "Edit" : "Add"}
+              {editData ? t("tableForms.edit") : t("tableForms.add")}
             </button>
           </>
         </div>

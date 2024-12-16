@@ -1,8 +1,70 @@
 {
     "auth":{
-        "resetPassword":{
-            "confirmPass": "كلمة المرور غير مطابقة"
-        }
+       
+        "login": {
+          "title": "تسجيل الدخول",
+          "labels": {
+            "email": "أدخل عنوان بريدك الإلكتروني*",
+            "password": "كلمة المرور*"
+          },
+          "placeholders": {
+            "email": "أدخل البريد الإلكتروني",
+            "password": "*** ***"
+          },
+          "buttons": {
+            "submit": "تسجيل الدخول"
+          },
+          "links": {
+            "forgotPassword": "نسيت كلمة المرور؟"
+          }
+        },
+        "forgotPassword": {
+          "title": "نسيت كلمة المرور",
+          "labels": {
+            "email": "أدخل عنوان بريدك الإلكتروني*"
+          },
+          "placeholders": {
+            "email": "أدخل البريد الإلكتروني"
+          },
+          "buttons": {
+            "submit": "إرسال"
+          },
+          "links": {
+            "rememberPassword": "تذكرت كلمة المرور؟"
+          }
+        },
+        "codeConfirmation": {
+      "title": "تأكيد الرمز",
+      "description": "لقد أرسلنا 6 أرقام إلى بريدك الإلكتروني. يرجى إدخالها للتأكيد.",
+      "buttons": {
+        "submit": "إرسال"
+      },
+      "links": {
+        "back": "عودة؟"
+      }
+    },
+    "resetPassword": {
+      "confirmPass": "كلمة المرور غير مطابقة"
+,
+      "title": "إعادة تعيين كلمة المرور",
+      "labels": {
+        "password": "كلمة المرور*",
+        "confirmPassword": "تأكيد كلمة المرور*"
+      },
+      "placeholders": {
+        "password": "*** ***",
+        "confirmPassword": "*** ***"
+      },
+      "buttons": {
+        "reset": "إعادة تعيين"
+      },
+      "links": {
+        "back": "عودة؟"
+      },
+      "errors": {
+        "confirmPassword": "كلمات المرور غير متطابقة"
+      }
+    }
     },
     "tableForms":{
         "yes": "نعم",
@@ -13,18 +75,54 @@
         "areaTitle":"منطقة",
         "developersTitle":"المطورين",
         "developerTitle":"مطور",
+        "adminsTitle":"المتحكمون",
+        "adminTitle":"متحكم",
+        "citiesTitle": "المدن",
+        "amenitiesTitle": "المرافق",
+  "amenityTitle": "مرفق",
+  "cityTitle": "مدينة",
+   "rolesTitle": "الأدوار",
+  "roleTitle": "دور",
+   "dashboardTitle": "لوحة التحكم",
+
          
         "labels": {
+          "search" : "البحث...",
            "nameEn": "الاسم بالإنجليزية",
             "nameAr": "الاسم بالعربية", 
            "descEn": "الوصف بالإنجليزية",
             "descAr": "الوصف بالعربية", 
+              "titleEn": "العنوان بالإنجليزية",
+  "titleAr": "العنوان بالعربية",
+    "title": "العنوان",
+      "roleTitlePlaceholder": "الرجاء إدخال عنوان الدور",
+      "name": "الاسم",
+      "username": "اسم المستخدم",
+      "email": "البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "confirmPassword": "تأكيد كلمة المرور",
+      "role": "الدور",
             "city": "المدينة",
-            "upload":"ارفق صورة"
+            "upload":"ارفق صورة",
+            "btnAdd": "اضافة",
+            "columns": "الاعمدة",
+             "logout": "تسجيل الخروج"
+
+          },
+          "pagination":{
+            "display": "عرض",
+            "to": "إلى",
+            "of": "من",
+            "rows": "من الصفوف"
+            
           },
           "placeholders": {
             "name": "يرجى إدخال الاسم",
-            "desc": "يرجى إدخال الوصف"
+            "desc": "يرجى إدخال الوصف",
+            "username": "الرجاء إدخال اسم المستخدم",
+            "email": "الرجاء إدخال البريد الإلكتروني",
+            "password": "الرجاء إدخال كلمة المرور",
+            "confirmPassword": "الرجاء إدخال تأكيد كلمة المرور"
           },
           "confirmationDialog": {
             "title": "هل أنت متأكد أنك تريد حذف هذا العنصر؟",

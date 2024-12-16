@@ -1,41 +1,142 @@
 {
-    "auth":{
-        "ResetPassword":{
-            "confirmPass": "Password miss match"
+  "auth": {
+    
+    
+      "login": {
+        "title": "Log In",
+        "labels": {
+          "email": "Enter your email address*",
+          "password": "Password*"
+        },
+        "placeholders": {
+          "email": "Type email",
+          "password": "*** ***"
+        },
+        "buttons": {
+          "submit": "Log In"
+        },
+        "links": {
+          "forgotPassword": "Forget Password?"
         }
+        
+      
     },
-    "tableForms":{
-        "yes": "yes",
-        "no":"No",
-        "add": "Add",
-        "edit": "Edit",
-        "areasTitle":"Areas",
-        "areaTitle":"Area",
-       
-      "developersTitle":"Developers",
-        "developerTitle":"developer",
-    "labels": {
-            "descEn": "discreption En",
-            "descAr": "discreption Ar",
-            "nameEn": "Name En",
-    "nameAr": "Name Ar",
-            "city": "City",
-            "upload":" Upload image"
-
-          },
-          "placeholders": {
-            "name": "please enter name",
-            "desc": "please enter discreption"
-
-          },
-          "confirmationDialog": {
-            "title": "Are you sure you want to delete this Item?",
-            "fail":"Not deleted",
-
-            "buttons": {
-              "cancel": "Cancel",
-              "delete": "Delete"
-            }
-          }
+    "forgotPassword": {
+      "title": "Forget Password",
+      "labels": {
+        "email": "Enter your email address*"
+      },
+      "placeholders": {
+        "email": "Type email"
+      },
+      "buttons": {
+        "submit": "Send"
+      },
+      "links": {
+        "rememberPassword": "Remember Password?"
+      }
+    },
+    "codeConfirmation": {
+      "title": "Code Confirmation",
+      "description": "We sent 6 digits to your email. Please enter it to confirm.",
+      "buttons": {
+        "submit": "Send"
+      },
+      "links": {
+        "back": "Back?"
+      }
+    },
+    "resetPassword": {
+      "confirmPass": "Password does not match"
+,
+      "title": "Reset your password",
+      "labels": {
+        "password": "Password*",
+        "confirmPassword": "Confirm Password*"
+      },
+      "placeholders": {
+        "password": "*** ***",
+        "confirmPassword": "*** ***"
+      },
+      "buttons": {
+        "reset": "Reset"
+      },
+      "links": {
+        "back": "Back?"
+      },
+      "errors": {
+        "confirmPassword": "Passwords do not match"
+      }
     }
+  
+    
+  },
+  "tableForms": {
+    "yes": "yes",
+    "no": "No",
+    "add": "Add",
+    "edit": "Edit",
+    "areasTitle": "Areas",
+    "areaTitle": "Area",
+
+    "developersTitle": "Developers",
+    "developerTitle": "developer",
+    "adminsTitle": "Admins",
+    "adminTitle": "Admin",
+    
+      "citiesTitle": "Cities",
+      "cityTitle": "City"
+    ,
+    "amenitiesTitle": "Amenities",
+  "amenityTitle": "Amenity",
+   "rolesTitle": "Roles",
+  "roleTitle": "Role",
+   "dashboardTitle": "Dashboard",
+    
+    "labels": {
+      "search" : "Search...",
+      "descEn": "discreption En",
+      "descAr": "discreption Ar",
+       "titleEn": "Title (English)",
+  "titleAr": "Title (Arabic)",
+    "title": "Title",
+     "roleTitlePlaceholder": "Please enter role title",
+      "nameEn": "Name En",
+      "nameAr": "Name Ar",
+      "city": "City",
+      "upload": " Upload image",
+      "btnAdd": "Add new",
+      "columns": "Columns",
+      "name": "Name",
+      "username": "Username",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "role": "Role",
+        "logout": "Log Out"
+    },
+    "pagination": {
+      "display": "Display",
+      "to": "To",
+      "of": "Of",
+      "rows": "Rows"
+    },
+    "placeholders": {
+      "name": "please enter name",
+      "desc": "please enter discreption",
+      "username": "Please enter username",
+      "email": "Please enter email",
+      "password": "Please enter password",
+      "confirmPassword": "Please enter confirm password"
+    },
+    "confirmationDialog": {
+      "title": "Are you sure you want to delete this Item?",
+      "fail": "Not deleted",
+
+      "buttons": {
+        "cancel": "Cancel",
+        "delete": "Delete"
+      }
+    }
+  }
 }

@@ -13,7 +13,9 @@ import { showAlert } from "../../components/Error";
 
 import AreaForm from "./AreaForm";
 import { useTranslation } from "react-i18next";
-
+type amrro = {
+  data: {amr: string}
+}
 export default function Areas() {
   const [page, setPage] = useState(1);
 
@@ -30,6 +32,9 @@ export default function Areas() {
     inValid:['areas']
   });
 
+
+  const tyedData = data as amrro
+  console.log(tyedData?.data)
   const [deleteRecord] = useDeleteRecordMutation();
 
 

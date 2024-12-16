@@ -5,6 +5,7 @@ import "./login.css";
 
 import { useAdminloginMutation } from "../../../apis/authSlice";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 type loginFormData = {
   email: string;
@@ -17,7 +18,7 @@ const initalData = {
 const Login = () => {
   const [formData, setFormData ] = useState<loginFormData>(initalData);
   const [passwordVisible, setPasswordVisible] = useState(false);
-
+const {t} = useTranslation()
   const navigate = useNavigate()
   const [toastData, setToastData] = useState<any>({});
   const togglePasswordVisibility = () => {
@@ -101,80 +102,70 @@ console.log(data)
   };
   return (
     <div className="login-container">
-      <div className="overlay"> </div>
-
-      <div className="login-wrapper">
-        <div className="login-page">
-          {/* <div className="login-img">
-              <img src={loginImage} alt="" />
-              <div className="logo">
-                <Link to="/"><a><img src={logo} alt="" /></a></Link>
-              </div>
-            </div> */}
-           
-          <div className="login-content">
-            <div className="login-header">
-              <h4 className="modal-title" id="logInModal01Label">
-                Log In
-              </h4>
-            </div>
-            <form  onSubmit={handleSubmit}>
-              <div className="grid grid-cols-1 md:grid-col-12 gap-4">
-                <div className="">
-                  <div className="form-inner">
-                    <label>Enter your email address*</label>
-                    <input type="email" name="email" required onChange={handleChange} placeholder="Type email" />
-                  </div>
-                </div>
-                <div className="">
-                  <div className="form-inner">
-                    <label>Password*</label>
-                    <input
-                      id="password6"
-                      type={passwordVisible ? "text" : "password"}
-                      value={formData.password}
-                      name="password"
-                      required
-                      onChange={handleChange}
-                      placeholder="*** ***"
-                    />
-                    <i
-                      className={`bi bi-${
-                        passwordVisible ? "eye" : "eye-slash"
-                      }`}
-                      onClick={togglePasswordVisibility}
-                      id="togglePassword"
-                    />
-                  </div>
-                </div>
-                <div className="">
-                  <div className="form-agreement form-inner d-flex justify-content-between flex-wrap">
-                    <Link to="/forgetPass" className="forgot-pass">
-                      Forget Password?
-                    </Link>
-                  </div>
-                </div>
-                <div className="">
-                  <div className="form-inner">
-                    <button className="primary-btn2" type="submit">
-                      Log In
-                    </button>
-                  </div>
-                </div>
-              </div>
-              {/* <div className="terms-conditon">
-                  <p>By sign up,you agree to the <a href="#">‘terms &amp; conditons’</a></p>
-                </div>
-                <ul className="social-icon">
-                  <li><a href="#"><img src={googleIcon} alt="" /></a></li>
-                  <li><a href="#"><img src={faceIcon} alt="" /></a></li>
-                  <li><a href="#"><img src={twitterIcon} alt="" /></a></li>
-                </ul> */}
-            </form>
+    <div className="overlay"> </div>
+  
+    <div className="login-wrapper">
+      <div className="login-page">
+        <div className="login-content">
+          <div className="login-header">
+            <h4 className="modal-title" id="logInModal01Label">
+              {t("auth.login.title")}
+            </h4>
           </div>
+          <form onSubmit={handleSubmit}>
+            <div className="grid grid-cols-1 md:grid-col-12 gap-4">
+              <div className="">
+                <div className="form-inner">
+                  <label>{t("auth.login.labels.email")}</label>
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    onChange={handleChange}
+                    placeholder={t("auth.login.placeholders.email")}
+                  />
+                </div>
+              </div>
+              <div className="">
+                <div className="form-inner">
+                  <label>{t("auth.login.labels.password")}</label>
+                  <input
+                    id="password6"
+                    type={passwordVisible ? "text" : "password"}
+                    value={formData.password}
+                    name="password"
+                    required
+                    onChange={handleChange}
+                    placeholder={t("auth.login.placeholders.password")}
+                  />
+                  <i
+                    className={`bi bi-${passwordVisible ? "eye" : "eye-slash"}`}
+                    onClick={togglePasswordVisibility}
+                    id="togglePassword"
+                  />
+                </div>
+              </div>
+              <div className="">
+                <div className="form-agreement form-inner d-flex justify-content-between flex-wrap">
+                  <Link to="/forgetPass" className="forgot-pass">
+                    {t("auth.login.links.forgotPassword")}
+                  </Link>
+                </div>
+              </div>
+              <div className="">
+                <div className="form-inner">
+                  <button className="primary-btn2" type="submit">
+                    {t("auth.login.buttons.submit")}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
+  </div>
+  
   );
 };
 

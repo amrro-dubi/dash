@@ -11,10 +11,11 @@ import ColumnChooser from "../../components/reusableComponents/tabels";
 
 import { showAlert } from "../../components/Error";
 import RolesForm from "./RolesForm";
+import { useTranslation } from "react-i18next";
 
 export default function Roles() {
   const [page, setPage] = useState(1);
-
+const {t} = useTranslation()
   const [open, setOpen] = useState(false);
   const [editData, setEditData] = useState<any>([]);
 
@@ -94,16 +95,16 @@ export default function Roles() {
   }
   console.log(finslColsKeys);
   return (
-    <Main_list title="Admins">
+    <Main_list title={t("tableForms.rolesTitle")}>
       {open && (
-        <CustomModal openCloseModal={setOpen} title="Add Admin">
+        <CustomModal openCloseModal={setOpen} title={`${t("tableForms.add")} ${t("tableForms.roleTitle")}`}>
           <RolesForm openCloseModal={setOpen} />
         </CustomModal>
       )}
       {open && editData?.id && (
         <CustomModal
           openCloseModal={setOpen}
-          title="Edit Admin"
+          title={`${t("tableForms.edit")} ${t("tableForms.roleTitle")}`}
           resetEditData={setEditData}
         >
           <RolesForm

@@ -77,6 +77,8 @@ export default function Areas() {
   const colss: { accessor: string; title: string }[] = [];
   useEffect(() => {
     colKeys?.map((key: any, i: number) => {
+              //@ts-ignore
+
       colss?.push({ accessor: key, title: data?.data?.head[i] });
     });
     if (colss?.length > 0) {
@@ -155,6 +157,8 @@ export default function Areas() {
       <ColumnChooser
         setPage={setPage}
         page={page}
+                //@ts-ignore
+
         pagination={data?.data?.pagination}
         Enabel_edit={true}
        

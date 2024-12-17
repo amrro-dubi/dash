@@ -8543,7 +8543,7 @@ header.style-6 .main-menu .hotline-area .content h6 a {
 }
 
 .sidebar-menu {
-  position: fixed;
+  /* position: fixed; */
   top: 0;
   left: 0;
   width: 280px;

@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import modal from './modelSlice'
+import modalSlice from './modelSlice'
 
 import { authApi } from "../apis/authSlice";
 import servicesApi from "../apis/serveces";
@@ -10,7 +10,7 @@ import servicesApi from "../apis/serveces";
 const store = configureStore({
     reducer: {
          
-        Model: modal,
+        Model: modalSlice,
       
       
         // [amaduesApi.reducerPath]: amaduesApi.reducer,

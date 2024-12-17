@@ -57,8 +57,8 @@ const DashboardProfile = () => {
   const {openSidebar} = useSelector((state:RootState)=> state.Model)
   return (
     <div className={`main-content ${openSidebar?"slide":""}`}>
-      <div className="row">
-        <div className="col-lg-12">
+      <div className="grid grid-cols-12">
+        <div className="col-span-12">
           <div className="main-content-title-profile mb-50">
             <div className="main-content-title">
               <h3>Personal Information</h3>

@@ -26,7 +26,7 @@ const handleLogOut = async ()=>{
 
 console.log(openSidebar)
   return (
-    <div className={`dashboard-sidebar-wrapper   ${ openSidebar ? "sidebar-menu" : ""}`}>
+    <div className={`dashboard-sidebar-wrapper !max-w-full `}>
       {/* Render this only if openSidebar is true */}
     
 

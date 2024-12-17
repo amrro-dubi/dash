@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 
 const CanvasComponent = () => {
   // Create a reference for the canvas element

@@ -67,6 +67,8 @@ export default function CitesForm({
 
   console.log(data)
   useEffect(() => {
+            //@ts-ignore
+
     const optionss = data?.data?.data?.map((item: any) => {
       return { value: item?.id, label: item?.name };
     });

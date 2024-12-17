@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import  { useEffect } from "react";
 import i18n from "../../i18n";
 import { modelActions } from "../../store/modelSlice";
+import { useDispatch } from "react-redux";
 
 const Navbar = () => {
   useEffect(() => {
@@ -19,6 +20,10 @@ const Navbar = () => {
     document.documentElement.dir = lng === "ar" ? "rtl" : "ltr";
   };
 
+  const dispatch = useDispatch()
+  const toggoleSideBar = ()=>{
+    dispatch(modelActions.setOpenSidebar())
+  }
   return (
     <div>
       <header className="antialiased">
@@ -26,7 +31,7 @@ const Navbar = () => {
           <div className="flex flex-wrap justify-between items-center">
             <div className="flex justify-start items-center">
               <button
-           onClick={()=> modelActions.setOpenSidebar()}
+           onClick={toggoleSideBar}
                 id="toggleSidebar"
                 aria-expanded="true"
                 aria-controls="sidebar"

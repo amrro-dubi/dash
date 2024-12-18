@@ -33,32 +33,18 @@ export default function Areas() {
   });
 
 
+
+
+
+
   const tyedData = data as amrro
+
+  
   console.log(tyedData?.data)
   const [deleteRecord] = useDeleteRecordMutation();
 
 
-  // const {refetch,data:recordUpdateData, isSuccess:recordIsSuccess} = useFindRecordQuery({id:editData.id, url:"admin/city"},{skip:!skipedId})
 
-
-// useEffect(()=>{
-//   if(skipedId === true){
-
-//     refetch()
-//   }
-
-// },[skipedId])
-
-// useEffect(()=>{
-//   if(recordIsSuccess){
-// setSkipedId(false)
-    
-//   }
-
-// },[recordIsSuccess])
-
-
-// console.log(recordUpdateData)
 
   const [colKeys, setColKeys] = useState<string[]>([]);
   const [finslColsKeys, setFinalKeys] = useState<
@@ -72,8 +58,8 @@ export default function Areas() {
       keys = Object?.keys(data?.data?.data[0]);
       setColKeys(keys);
     }
-  }, [isSuccess]);
-  console.log(colKeys);
+  }, [isSuccess, data]);
+
   const colss: { accessor: string; title: string }[] = [];
   useEffect(() => {
     colKeys?.map((key: any, i: number) => {
@@ -86,6 +72,11 @@ export default function Areas() {
     }
     setFinalKeys(colss);
   }, [colKeys, isSuccess]);
+
+
+
+
+
 
   const deleteSubmitHandler = async (id: string) => {
     console.log(id);

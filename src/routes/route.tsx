@@ -16,6 +16,9 @@ import Areas from "../Pages/Area/Area";
 import Developers from "../Pages/Developers/Developers";
 import Amenites from "../Pages/Amenites/Amenites";
 import CanvasComponent from "../Pages/Canvas";
+import Types from "../Pages/PropertyTypes/Types";
+import Categories from "../Pages/Categories/Categories";
+import Properties from "../Pages/property/Properties";
 
 
 
@@ -63,6 +66,21 @@ const routes = [
             {
             path: "/home/amenites",
             element: <Amenites />,
+            children: [],
+        },
+            {
+            path: "/home/types",
+            element: <Types />,
+            children: [],
+        },
+            {
+            path: "/home/categories",
+            element: <Categories />,
+            children: [],
+        },
+            {
+            path: "/home/properties",
+            element: <Properties />,
             children: [],
         },
             {

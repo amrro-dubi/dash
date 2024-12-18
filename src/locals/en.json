@@ -82,7 +82,13 @@
     "developersTitle": "Developers",
     "developerTitle": "developer",
     "adminsTitle": "Admins",
-    "adminTitle": "Admin",
+    "Title": "Admin",
+    "typesTitle": "Types",
+    "typeTitle": "Type",
+    "categoriesTitle": "Categories",
+    "categoryTitle": "Category",
+    "propertiesTitle": "Properties",
+    "propertyTitle": "Property",
     
       "citiesTitle": "Cities",
       "cityTitle": "City"
@@ -113,7 +119,20 @@
       "password": "Password",
       "confirmPassword": "Confirm Password",
       "role": "Role",
-        "logout": "Log Out"
+        "logout": "Log Out",
+    
+    
+      "sub_titleEn": "Subtitle (English)",
+      "descriptionEn": "Description (English)",
+      "addressEn": "Address (English)",
+      "payment_planEn": "Payment Plan (English)",
+      "max_size": "Maximum Size",
+      "min_size": "Minimum Size",
+      "max_bathrooms_count": "Maximum Bathrooms Count",
+      "min_bathrooms_count": "Minimum Bathrooms Count",
+      "price": "Price"
+   
+        
     },
     "pagination": {
       "display": "Display",
@@ -127,7 +146,22 @@
       "username": "Please enter username",
       "email": "Please enter email",
       "password": "Please enter password",
-      "confirmPassword": "Please enter confirm password"
+      "confirmPassword": "Please enter confirm password",
+      "title": "Enter title",
+      "sub_title": "Enter subtitle",
+      "description": "Enter description",
+      "address": "Enter address",
+      "payment_plan": "Enter payment plan",
+      "titleAr": "Title (in Arabic)",
+  "sub_titleAr": "Subtitle (in Arabic)",
+  "descriptionAr": "Description (in Arabic)",
+  "addressAr": "Address (in Arabic)",
+  "payment_planAr": "Payment Plan (in Arabic)",
+  "max_size": "Enter maximum size",
+  "min_size": "Enter minimum size",
+  "max_bathrooms_count": "Enter maximum bathrooms count",
+  "min_bathrooms_count": "Enter minimum bathrooms count",
+  "price": "Enter price"
     },
     "confirmationDialog": {
       "title": "Are you sure you want to delete this Item?",

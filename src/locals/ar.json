@@ -79,6 +79,12 @@
         "adminTitle":"متحكم",
         "citiesTitle": "المدن",
         "amenitiesTitle": "المرافق",
+        "typesTitle": "الانواع",
+        "typeTitle": "نوع",
+        "categoriesTitle": "الفئات",
+        "categoryTitle": "فئة",
+        "propertiesTitle": "الخصائص",
+        "propertyTitle": "خاصية",
   "amenityTitle": "مرفق",
   "cityTitle": "مدينة",
    "rolesTitle": "الأدوار",
@@ -106,7 +112,20 @@
             "upload":"ارفق صورة",
             "btnAdd": "اضافة",
             "columns": "الاعمدة",
-             "logout": "تسجيل الخروج"
+             "logout": "تسجيل الخروج",
+             "sub_titleEn": "العنوان الفرعي (بالإنجليزية)",
+             "descriptionEn": "الوصف (بالإنجليزية)",
+             "addressEn": "العنوان (بالإنجليزية)",
+             "payment_planEn": "خطة الدفع (بالإنجليزية)",
+             "sub_titleAr": "العنوان الفرعي (بالعربية)",
+             "descriptionAr": "الوصف (بالعربية)",
+             "addressAr": "العنوان (بالعربية)",
+             "payment_planAr": "خطة الدفع (بالعربية)",
+             "max_size": "الحجم الأقصى",
+      "min_size": "الحجم الأدنى",
+      "max_bathrooms_count": "عدد الحمامات الأقصى",
+      "min_bathrooms_count": "عدد الحمامات الأدنى",
+      "price": "السعر"
 
           },
           "pagination":{
@@ -122,7 +141,17 @@
             "username": "الرجاء إدخال اسم المستخدم",
             "email": "الرجاء إدخال البريد الإلكتروني",
             "password": "الرجاء إدخال كلمة المرور",
-            "confirmPassword": "الرجاء إدخال تأكيد كلمة المرور"
+            "confirmPassword": "الرجاء إدخال تأكيد كلمة المرور",
+            "title": "أدخل العنوان",
+            "sub_title": "أدخل العنوان الفرعي",
+            "description": "أدخل الوصف",
+            "address": "أدخل العنوان",
+            "payment_plan": "أدخل خطة الدفع",
+            "max_size": "أدخل الحجم الأقصى",
+            "min_size": "أدخل الحجم الأدنى",
+            "max_bathrooms_count": "أدخل عدد الحمامات الأقصى",
+            "min_bathrooms_count": "أدخل عدد الحمامات الأدنى",
+            "price": "أدخل السعر"
           },
           "confirmationDialog": {
             "title": "هل أنت متأكد أنك تريد حذف هذا العنصر؟",

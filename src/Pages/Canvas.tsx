@@ -1,30 +1,42 @@
-import { useRef, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 
-const CanvasComponent = () => {
-  // Create a reference for the canvas element
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+interface Location {
+  lat: number | null;
+  lng: number | null;
+}
 
-  // Use useEffect to run code once the component is mounted
+function LocationTracker() {
+  const [location, setLocation] = useState<Location>({ lat: null, lng: null });
+  const [error, setError] = useState<string | null>(null);
+
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (canvas) {
-      const context = canvas.getContext('2d');
-      if (context) {
-        // Draw a red circle on the canvas
-        context.beginPath();
-        context.arc(150, 150, 50, 0, Math.PI * 2, true); // x, y, radius, start angle, end angle
-        context.fillStyle = 'green';
-        context.fill();
-      }
+    if (navigator.geolocation) {
+      // Get the current position
+      navigator.geolocation.getCurrentPosition(
+        (position: GeolocationPosition) => {
+          setLocation({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          });
+        },
+        (err: GeolocationPositionError) => {
+          setError(err.message);
+        }
+      );
+    } else {
+      setError("Geolocation is not supported by this browser.");
     }
-  }, []); // Empty dependency array ensures this runs only once after initial render
+  }, []);
 
   return (
     <div>
-      <h1>Canvas in React</h1>
-      <canvas ref={canvasRef} width={300} height={300} style={{ border: '1px solid black' }} />
+      {error ? (
+        <p>Error: {error}</p>
+      ) : (
+        <p>Latitude: {location.lat}, Longitude: {location.lng}</p>
+      )}
     </div>
   );
-};
+}
 
-export default CanvasComponent;
+export default LocationTracker;

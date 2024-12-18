@@ -1,32 +1,25 @@
 import React, { useEffect, useState } from "react";
 
-
 import { toast } from "react-toastify";
 import { showAlert } from "../../components/Error";
-
 
 import InputComponent from "../../components/reusableComponents/InputComponent";
 
 import {
- 
-  useCreateRoleMutation,
- 
+  useCreatRecordMutation,
   useEditRecordMutation,
   useFindRecordQuery,
-  useGetPermissionsQuery,
-
 } from "../../apis/serveces";
+
+
 import { useTranslation } from "react-i18next";
 
-
-
-interface RolesFormData {
-  title: string;
-
-  permissions: string[];
+interface formDataTyps {
+  nameEn: string;
+  nameAr: string;
 }
 
-export default function RolesForm({
+export default function TypesForm({
   editData,
   resetEditData,
   openCloseModal,
@@ -35,60 +28,46 @@ export default function RolesForm({
   resetEditData?: React.Dispatch<any>;
   openCloseModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
- const {t} = useTranslation()
-  const [formData, setFormData] = useState<RolesFormData>({
-    title: "",
 
-    permissions: [],
+  const {t} = useTranslation()
+  const { data: recordUpdateData, isSuccess: recordIsSuccess } =
+    useFindRecordQuery(
+      { id: editData?.id, url: "admin/type" },
+      { skip: editData === null }
+    );
+
+  const [formData, setFormData] = useState<formDataTyps>({
+    nameEn: "",
+    nameAr: "",
   });
 
+ 
+  
   const closeModal = () => {
     openCloseModal((prevState) => !prevState);
     if (resetEditData) {
       resetEditData([]);
     }
   };
-  const [editRecord, {isLoading:editIsLoading}] = useEditRecordMutation();
-  const { data: recordUpdateData, isSuccess: recordIsSuccess } =
-      useFindRecordQuery(
-        { id: editData?.id, url: "admin/role" },
-        { skip: editData === null }
-      );
-  
-      console.log(recordUpdateData)
-  const permissionHandler = (id:string)=>{
-
-    const index = formData?.permissions?.findIndex(item=> item === id)
-    if(index === -1){
-      const newPermissions = [...formData.permissions,id];
-      setFormData({...formData, permissions:newPermissions})
-    } else{
-      const newPermiss = [...formData.permissions]
-      newPermiss.splice(index, 1)
-      setFormData({...formData, permissions:newPermiss})
-    }
-    
-  }
+  console.log(editData);
   useEffect(() => {
     if (recordIsSuccess) {
       setFormData({
         ...formData,
-        title: recordUpdateData?.data?.title,
-        permissions: recordUpdateData?.data?.permissions,
+        nameEn: recordUpdateData?.data?.locales?.en?.name,
+        nameAr: recordUpdateData?.data?.locales?.ar?.name,
       });
+      
     }
   }, [recordIsSuccess]);
-  
+  // const [options, setOptions] = useState<{ value: any; label: string }[]>([]);
 
   const [toastData, setToastData] = useState<any>({});
 
-  
+  const [createRecord, { isLoading }] = useCreatRecordMutation();
 
-  const [createRole, { isLoading }] = useCreateRoleMutation();
-
-  const { data } = useGetPermissionsQuery({});
-
-  
+  // const [editCity ] = useEditCityMutation()
+  const [editRecord] = useEditRecordMutation();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -113,7 +92,7 @@ export default function RolesForm({
       setToastData({});
     }
 
-    if (isLoading|| editIsLoading) {
+    if (isLoading) {
       toast.loading("Loading...", {
         toastId: "loginLoadingToast",
         autoClose: false,
@@ -121,81 +100,77 @@ export default function RolesForm({
     } else {
       toast.dismiss("loginLoadingToast");
     }
-  }, [toastData, isLoading.valueOf,editIsLoading]);
+  }, [toastData, isLoading]);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formDataRequest = new FormData();
+    // const formDataRequest = new FormData();
 
-    formDataRequest.append("title", formData.title);
-    for(let i=0; i < formData.permissions.length; i++){
-
-      formDataRequest.append(`permissions[${i}]`, formData.permissions[i])
-    }
-
-  if(formData.permissions.length === 0){
-    showAlert('error', 'you must select one role')
-    return
-  }
-
+    // formDataRequest.append("locales[ar][name]", formData.nameAr);
+    // formDataRequest.append("locales[en][name]", formData.nameEn);
+    
+  const payload = {locales:{
+    ar:{
+      name:formData.nameAr },
+    en:{
+      name:formData.nameEn }
+  
+  }}
     try {
       if (editData?.id) {
-        formDataRequest.append("_method", "patch");
+        // formDataRequest.append("_method", 'patch');
         const response = await editRecord({
           id: editData?.id,
-          formData: formDataRequest,
-          url: "admin/role",
-          inValid: ["roles",],
+          formData: payload,
+          url: "admin/type",
+          method:"PATCH",
+          inValid: ["types"],
         });
         console.log(response);
         setToastData(response);
-       
       } else {
-        const response = await createRole(formDataRequest);
+        const response = await createRecord({
+          formData: payload,
+          url: "admin/type",
+          inValid: ["types"],
+        });
 
         setToastData(response);
-      
       }
     } catch (err) {
       setToastData(err);
-    
     }
   };
-  console.log(formData.permissions)
   return (
     <>
-      <form onSubmit={handleSubmit} className="p-4 md:p-5 ">
-        <div className="grid gap-4  mb-4 grid-cols-12">
-          <div className=" flex flex-col gap-8 col-span-12">
+      <form onSubmit={handleSubmit} className="p-4 md:p-5">
+        <div className="grid gap-6  mb-4 grid-cols-12">
+          <div className="lg:col-span-6 col-span-12">
             <InputComponent
-              label={t('tableForms.labels.title')}
+            label={t("tableForms.labels.nameEn")}
               onChange={handleChange}
               required
               type="text"
-              name="title"
-              placeholder={t("tableForms.labels.roleTitlePlaceholder")}
-              value={formData.title}
+              name="nameEn"
+              placeholder={t("tableForms.placeholders.name")}
+              value={formData.nameEn}
             />
-            <div className="flex flex-col justify-between w-full gap-7">
-              {data?.data?.map((item:any) => {
-                for (const [key, value] of Object.entries(item)) {
-                  return (
-                    <div className="flex justify-between  w-full">
-                      {" "}
-                      <div className="flex">{key} </div>{" "}
-                      <div className="flex justify-between items-center gap-3">
-                        {/* @ts-ignore */}
-                        {value?.permissions?.map((per:any) => (
-                          <span>{per?.title}  <input type="checkbox" checked={formData?.permissions?.includes(per?.id)} onChange={()=>permissionHandler(per?.id)} className="form-checkbox" /></span>
-                        ))}
-                      </div>
-                    </div>
-                  );
-                }
-              })}
-            </div>
           </div>
+          <div className="lg:col-span-6 col-span-12">
+            <InputComponent
+               label={t("tableForms.labels.nameAr")}
+              onChange={handleChange}
+              required
+              type="text"
+              name="nameAr"
+              placeholder={t("tableForms.placeholders.name")}
+              value={formData.nameAr}
+            />
+          </div>
+
+          
         </div>
+
         <div className="w-full  flex justify-end">
           {/* {isLoading ||editIsLoading ? (
                         <>

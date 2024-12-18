@@ -3,37 +3,53 @@ import { useEffect, useState } from "react";
 import swal from "sweetalert";
 
 import { Loader } from "@mantine/core";
-import { useDeleteRoleMutation, useGetRolesQuery } from "../../apis/serveces";
+import {  useDeleteRecordMutation, useGetRecordsQuery } from "../../apis/serveces";
 import Main_list from "../../components/reusableComponents/Main_list";
 
 import CustomModal from "../../components/reusableComponents/CustomModal";
 import ColumnChooser from "../../components/reusableComponents/tabels";
 
 import { showAlert } from "../../components/Error";
-import RolesForm from "./RolesForm";
+
+import AreaForm from "./PropertyForm";
 import { useTranslation } from "react-i18next";
-
-export default function Roles() {
+type amrro = {
+  data: {amr: string}
+}
+export default function Properties() {
   const [page, setPage] = useState(1);
-const {t} = useTranslation()
+
+  const {t} = useTranslation()
+
   const [open, setOpen] = useState(false);
-  const [editData, setEditData] = useState<any>([]);
-
-
-  
-
-  const { data, isLoading, isSuccess } = useGetRolesQuery({
-    page: page,
+  const [editData, setEditData] = useState<any>(null);
+  // const [skipedId, setSkipedId]  = useState(false)
+// const [location, setLocaiton]  = useState()
+  const { data, isLoading, isSuccess } = useGetRecordsQuery({
+    page: Number(page),
     per_page: 10,
+    url:'admin/product',
+    inValid:['products']
   });
 
-  const [deleteRole] = useDeleteRoleMutation();
+
+// console.log(location)
+
+
+
+  const tyedData = data as amrro
+
+  
+  console.log(tyedData?.data)
+  const [deleteRecord] = useDeleteRecordMutation();
+
+
+
 
   const [colKeys, setColKeys] = useState<string[]>([]);
   const [finslColsKeys, setFinalKeys] = useState<
     { accessor: string; title: string }[]
   >([]);
-
   let keys: string[] = [];
   useEffect(() => {
     //@ts-ignore
@@ -42,11 +58,13 @@ const {t} = useTranslation()
       keys = Object?.keys(data?.data?.data[0]);
       setColKeys(keys);
     }
-  }, [isSuccess]);
-  console.log(colKeys);
+  }, [isSuccess, data]);
+
   const colss: { accessor: string; title: string }[] = [];
   useEffect(() => {
     colKeys?.map((key: any, i: number) => {
+              //@ts-ignore
+
       colss?.push({ accessor: key, title: data?.data?.head[i] });
     });
     if (colss?.length > 0) {
@@ -55,35 +73,43 @@ const {t} = useTranslation()
     setFinalKeys(colss);
   }, [colKeys, isSuccess]);
 
+
+
+
+
+
   const deleteSubmitHandler = async (id: string) => {
     console.log(id);
     swal({
-      title: "Are you sure you want to delete this Role?",
+      title: t('tableForms.confirmationDialog.title'),
       icon: "error",
-      buttons: ["Cancel", "Delete"],
+      buttons: [t('tableForms.confirmationDialog.buttons.cancel'), t('tableForms.confirmationDialog.buttons.delete')],
       dangerMode: true,
     }).then(async (willDelete: any) => {
       if (willDelete) {
-        const data = await deleteRole(id);
+        const data = await deleteRecord({id, url:'admin/product', inValid:['products']});
         console.log(data);
         //@ts-ignore
         if (data?.error?.data?.status === 400) {
           //@ts-ignore
           toast.error(data?.error?.data?.message, {});
-          
         }
         //@ts-ignore
         if (data?.data.status === 200) {
           //@ts-ignore
           showAlert("Added", data?.data.response?.message);
         }
+        // setToastData(data);
       } else {
-        swal("Not deleted");
+        swal(t('tableForms.confirmationDialog.fail'));
       }
     });
   };
-
+  const viewHander = (id: string) => {
+    console.log(id);
+  };
   const EditHandelr = (data: any) => {
+    // setSkipedId(true)
     setEditData(data);
     console.log(data);
   };
@@ -96,21 +122,24 @@ const {t} = useTranslation()
       </div>
     );
   }
+  //  console.log( navigator.geolocation.getCurrentPosition((position)=> setLocaiton(position)))
+  
   console.log(finslColsKeys);
   return (
-    <Main_list title={t("tableForms.rolesTitle")}>
+    <Main_list title={`${t("tableForms.propertiesTitle")}`}>
+      {/* <MainPageCard> */}
       {open && (
-        <CustomModal openCloseModal={setOpen} title={`${t("tableForms.add")} ${t("tableForms.roleTitle")}`}>
-          <RolesForm openCloseModal={setOpen} />
+        <CustomModal openCloseModal={setOpen} title={`${t("tableForms.add")} ${t("tableForms.propertyTitle")}`}>
+          <AreaForm openCloseModal={setOpen} editData={null} />
         </CustomModal>
       )}
       {open && editData?.id && (
         <CustomModal
           openCloseModal={setOpen}
-          title={`${t("tableForms.edit")} ${t("tableForms.roleTitle")}`}
+          title={`${t("tableForms.edit")} ${t("tableForms.propertyTitle")}`}
           resetEditData={setEditData}
         >
-          <RolesForm
+          <AreaForm
             editData={editData}
             resetEditData={setEditData}
             openCloseModal={setOpen}
@@ -121,8 +150,11 @@ const {t} = useTranslation()
       <ColumnChooser
         setPage={setPage}
         page={page}
+                //@ts-ignore
+
         pagination={data?.data?.pagination}
         Enabel_edit={true}
+       
         //@ts-ignore
         TableBody={data?.data?.data?.length > 0 ? data?.data?.data : []}
         //@ts-ignore
@@ -131,10 +163,12 @@ const {t} = useTranslation()
         Page_Add={false}
         showAddButton={true}
         onDelete={deleteSubmitHandler}
+        onView={viewHander}
         onEdit={EditHandelr}
         openCloseModal={setOpen}
         Enabel_delete={true}
       />
+   
     </Main_list>
   );
 }

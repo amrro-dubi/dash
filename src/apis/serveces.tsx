@@ -3,14 +3,16 @@ import i18n from "../i18n";
 
 
 // Define the base URL
-const baseUrl = "https://real-estate.luxurylivinghomes.ae/";
+const baseUrl = "https://realestate-api.tetane.com/";
 
 const servicesApi = createApi({
   reducerPath: "servicesApi",
-  tagTypes: ["admins", "roles",'cites', "food-basket", 'areas', 'developers','amenites'],
+  tagTypes: ["admins", "roles",'cites', "food-basket", 'areas', 'developers','amenites', 'types'],
   baseQuery: fetchBaseQuery({
     baseUrl,
     prepareHeaders: (headers) => {
+
+
       const token = localStorage.getItem("auth_data")
       if(token){
         const parsedToken = JSON.parse(token)
@@ -23,6 +25,7 @@ const servicesApi = createApi({
       headers.set("lang", i18n.language);
       
   
+
 
       return headers;
     },
@@ -42,6 +45,7 @@ const servicesApi = createApi({
         url: `admin/admin/${id}`,
         method: "DELETE",
       }),
+
       invalidatesTags: ["admins"],
       transformResponse: (response, meta) => {
         console.log(meta?.response?.status);
@@ -129,7 +133,7 @@ const servicesApi = createApi({
     }),
 
 
-    gitCity: builder.query<any,{page?:number, per_page?:number}>({
+    gitCity: builder.query<unknown,{page?:number, per_page?:number}>({
       query: ({page, per_page}) => `admin/city?page=${page}&per_page${per_page}`,
       providesTags: ["cites"],
     }),
@@ -191,10 +195,10 @@ const servicesApi = createApi({
     
   }),
 
-  editRecord: builder.mutation<any, { url: string; id: string; formData: any; inValid: string[] }>({
-    query: ({ formData, id, url }) => ({
+  editRecord: builder.mutation<any, { url: string; id: string; formData: any; inValid: string[], method?:string }>({
+    query: ({ formData, id, url , method}) => ({
       url: `${url}/${id}`,
-      method: 'POST',
+      method: `${method? method: "POST"}`,
       body: formData,
     }),
     

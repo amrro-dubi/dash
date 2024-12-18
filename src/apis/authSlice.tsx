@@ -4,7 +4,7 @@ import i18n from "../i18n";
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://real-estate.luxurylivinghomes.ae/",
+    baseUrl: "https://realestate-api.tetane.com/",
     prepareHeaders: (headers) => {
       // const token = localStorage.getItem("token");
 

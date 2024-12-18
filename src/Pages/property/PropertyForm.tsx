@@ -110,7 +110,7 @@ export default function PropertyForm({
         // nameAr: recordUpdateData?.data?.locales?.ar?.name,
         city_id: recordUpdateData?.data?.city?.id,
       });
-      setFile(recordUpdateData?.data?.image);s
+      setFile(recordUpdateData?.data?.image)
 
 
       // const editOpitonn = options?.find((option:{ value: any; label: string }) => option.value === recordUpdateData?.data?.city?.id ) 

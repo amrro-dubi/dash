@@ -6,6 +6,8 @@ type UploadImageProps = {
   user?: boolean;
   setFile: React.Dispatch<React.SetStateAction<File | null>>;
   editImgUrl?: string | null;
+  cover?:boolean
+  multi?:boolean
 };
 const Upload_cover = (props: UploadImageProps) => {
 
@@ -36,6 +38,7 @@ const Upload_cover = (props: UploadImageProps) => {
     <div className="flex flex-col items-center gap-[10px] w-full">
       <input
         type="file"
+        multiple={props.multi? true: false}
         ref={fileInputRef}
         onChange={handleFileChange}
         style={{ display: "none" }}
@@ -70,7 +73,9 @@ const Upload_cover = (props: UploadImageProps) => {
         <div className="flex flex-col">
           
           <div className="flex items-center gap-1  ">
-            <h5>{t("tableForms.labels.upload")} </h5>
+
+            {props.cover? (  <h5>{t("tableForms.labels.cover")} </h5>):(  <h5>{t("tableForms.labels.upload")} </h5>)}
+          
           
           </div>
         </div>

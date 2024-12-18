@@ -28,12 +28,14 @@ interface formDataTyps {
   max_bathrooms_count:string;
   min_bathrooms_count:string;
   price:string;
-
+  has_studio: string;
   addressEn: string;
   addressAr: string;
   payment_planEn: string;
   payment_planAr: string;
-  city_id: string;
+  area_id:string;
+    developer_id :string
+    category_id :string
 }
 
 export default function PropertyForm({
@@ -68,17 +70,32 @@ export default function PropertyForm({
     max_bathrooms_count:'',
     min_bathrooms_count:'',
     price:'',
-    city_id:""
+    area_id:"",
+    developer_id :"",
+    category_id :"",
+    has_studio: '0'
   });
   const [options, setOptions] = useState<{ value: any; label: string }[]>([]);
+  const [devOptions, setDevOptions] = useState<{ value: any; label: string }[]>([]);
+  const [catOptions, setCatOptions] = useState<{ value: any; label: string }[]>([]);
   const [editOptionId, setEditOptionId] = useState<{ value: any; label: string } |null>(null);
   const handleSelectChange = (value: { value: any; label: string }) => {
     console.log(value)
-    setFormData({ ...formData, city_id: value.value });
+    setFormData({ ...formData, area_id: value.value });
+  };
+  const handleSelectDevChange = (value: { value: any; label: string }) => {
+    console.log(value)
+    setFormData({ ...formData, developer_id: value.value });
+  };
+  
+  const handleSelectCatChange = (value: { value: any; label: string }) => {
+    console.log(value)
+    setFormData({ ...formData, category_id: value.value });
   };
   
   const [file, setFile] = useState<File | null>(null);
-  console.log(file);
+  const [cover, setCover] = useState<File | null>(null);
+
   const closeModal = () => {
     openCloseModal((prevState) => !prevState);
     if (resetEditData) {
@@ -88,8 +105,20 @@ export default function PropertyForm({
   const { data, isLoading, isSuccess } = useGetRecordsQuery({
    
   
-    url:'admin/city',
-    inValid:['cites']
+    url:'admin/area',
+    inValid:['areas']
+  });
+  const { data : developersRecordes , isSuccess:developerIsSuccess } = useGetRecordsQuery({
+   
+  
+    url:'admin/developer',
+    inValid:['developers']
+  });
+  const { data : categoriesRecordes, isSuccess:categoriesIsSuccess } = useGetRecordsQuery({
+   
+  
+    url:'admin/category',
+    inValid:['categories']
   });
 
   console.log(data)
@@ -103,12 +132,30 @@ export default function PropertyForm({
     setOptions(optionss);
   }, [isSuccess]);
   useEffect(() => {
+            //@ts-ignore
+
+    const optionss = developersRecordes?.data?.data?.map((item: any) => {
+      return { value: item?.id, label: item?.name };
+    });
+    
+    setDevOptions(optionss);
+  }, [developerIsSuccess]);
+  useEffect(() => {
+            //@ts-ignore
+
+    const optionss = categoriesRecordes?.data?.data?.map((item: any) => {
+      return { value: item?.id, label: item?.name };
+    });
+    
+    setCatOptions(optionss);
+  }, [categoriesIsSuccess]);
+  useEffect(() => {
     if (recordIsSuccess) {
       setFormData({
         ...formData,
         // nameEn: recordUpdateData?.data?.locales?.en?.name,
         // nameAr: recordUpdateData?.data?.locales?.ar?.name,
-        city_id: recordUpdateData?.data?.city?.id,
+        // city_id: recordUpdateData?.data?.city?.id,
       });
       setFile(recordUpdateData?.data?.image)
 
@@ -169,7 +216,7 @@ console.log(editOptionId)
 
     // formDataRequest.append("locales[ar][name]", formData.nameAr);
     // formDataRequest.append("locales[en][name]", formData.nameEn);
-    formDataRequest.append("city_id", formData.city_id);
+    // formDataRequest.append("city_id", formData.city_id);
     if (file) {
       formDataRequest.append("image", file);
     }
@@ -318,7 +365,7 @@ console.log(editOptionId)
     label={t("tableForms.labels.max_size")}
     onChange={handleChange}
     required
-    type="number"
+    type="text"
     name="max_size"
     placeholder={t("tableForms.placeholders.max_size")}
     value={formData.max_size}
@@ -329,7 +376,7 @@ console.log(editOptionId)
     label={t("tableForms.labels.min_size")}
     onChange={handleChange}
     required
-    type="number"
+    type="text"
     name="min_size"
     placeholder={t("tableForms.placeholders.min_size")}
     value={formData.min_size}
@@ -340,7 +387,7 @@ console.log(editOptionId)
     label={t("tableForms.labels.max_bathrooms_count")}
     onChange={handleChange}
     required
-    type="number"
+    type="text"
     name="max_bathrooms_count"
     placeholder={t("tableForms.placeholders.max_bathrooms_count")}
     value={formData.max_bathrooms_count}
@@ -351,7 +398,7 @@ console.log(editOptionId)
     label={t("tableForms.labels.min_bathrooms_count")}
     onChange={handleChange}
     required
-    type="number"
+    type="text"
     name="min_bathrooms_count"
     placeholder={t("tableForms.placeholders.min_bathrooms_count")}
     value={formData.min_bathrooms_count}
@@ -362,7 +409,7 @@ console.log(editOptionId)
     label={t("tableForms.labels.price")}
     onChange={handleChange}
     required
-    type="number"
+    type="text"
     name="price"
     placeholder={t("tableForms.placeholders.price")}
     value={formData.price}
@@ -377,10 +424,39 @@ console.log(editOptionId)
               onChange={handleSelectChange}
             />{" "}
           </div>
-          <div className=" col-span-12 mt-7">
-            {/* @ts-ignore */}
-            <Upload_cover setFile={setFile} editImgUrl={file?.original_url} />
+          <div className="lg:col-span-6 col-span-12">
+            <CustomSelect
+            editOptionId={editOptionId}
+              options={devOptions}
+              label={t("tableForms.labels.developersTitels")}
+              onChange={handleSelectDevChange}
+            />{" "}
           </div>
+          <div className="lg:col-span-6 col-span-12">
+            <CustomSelect
+            editOptionId={editOptionId}
+              options={catOptions}
+              label={t("tableForms.labels.categoriesTitle")}
+              onChange={handleSelectCatChange}
+            />{" "}
+          </div>
+          <div className=" col-span-12  mt-7">
+
+         <div className="flex gap-4"><span className="font-bold">has studio </span> <label className="inline-flex items-center me-5 cursor-pointer">
+                                  <input type="checkbox" className="sr-only peer" onChange={(e) => setFormData({...formData, has_studio: e.target.checked ? "1" : "0" })} checked={formData.has_studio === "1"} />
+                                  <div className="relative w-11 h-6 bg-gray-200 rounded-full  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-gradient-to-r from-[#af7a3d] to-[#ecb022]"></div>
+                              </label></div>
+
+          </div>
+          <div className=" col-span-12 md:col-span-6 mt-7">
+            {/* @ts-ignore */}
+            <Upload_cover multi setFile={setFile} editImgUrl={file?.original_url} />
+          </div>
+          <div className=" col-span-12 md:col-span-6 mt-7">
+            {/* @ts-ignore */}
+            <Upload_cover setFile={setCover} cover editImgUrl={cover?.original_url} />
+          </div>
+          
         </div>
 
         <div className="w-full  flex justify-end">

@@ -4,10 +4,11 @@ import uploadUser from "../../assets/img/dashboard/upload-user.png";
 import { useTranslation } from "react-i18next";
 type UploadImageProps = {
   user?: boolean;
-  setFile: React.Dispatch<React.SetStateAction<File | null>>;
+  setFile: React.Dispatch<React.SetStateAction<File | File[] |null>>;
   editImgUrl?: string | null;
   cover?:boolean
   multi?:boolean
+  label?:string
 };
 const Upload_cover = (props: UploadImageProps) => {
 
@@ -26,7 +27,13 @@ const Upload_cover = (props: UploadImageProps) => {
     const files = event?.target?.files;
     if (files && files?.length > 0) {
       const file = files[0];
-      props.setFile(file);
+      if (props.multi) {
+        props.setFile(Array.from(files));
+      } else {
+       
+        props.setFile(file);
+       
+      }
       const fileReader = new FileReader();
       fileReader.onload = () => {
         setImageSrc(fileReader.result as string);
@@ -74,7 +81,7 @@ const Upload_cover = (props: UploadImageProps) => {
           
           <div className="flex items-center gap-1  ">
 
-            {props.cover? (  <h5>{t("tableForms.labels.cover")} </h5>):(  <h5>{t("tableForms.labels.upload")} </h5>)}
+            {props.label? (  <h5>{t(`${props.label}`)} </h5>):(  <h5>{t("tableForms.labels.upload")} </h5>)}
           
           
           </div>

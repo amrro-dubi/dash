@@ -13,6 +13,7 @@ import { showAlert } from "../../components/Error";
 
 import AreaForm from "./PropertyForm";
 import { useTranslation } from "react-i18next";
+import GoogleMapComponent from "./Map";
 type amrro = {
   data: {amr: string}
 }
@@ -169,6 +170,10 @@ export default function Properties() {
         Enabel_delete={true}
       />
    
+{/* <div key={new Date()} className="flex">
+<GoogleMapComponent   />
+</div> */}
+  
     </Main_list>
   );
 }

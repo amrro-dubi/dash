@@ -15,6 +15,8 @@ import {
 import Upload_cover from "../../components/reusableComponents/Upload_Cover";
 import CustomSelect from "../../components/reusableComponents/CustomSelect";
 import { useTranslation } from "react-i18next";
+import CustomDataInput from "../../components/reusableComponents/DateInput";
+import GoogleMapComponent from "./Map";
 
 interface formDataTyps {
   titleEn: string;
@@ -33,11 +35,18 @@ interface formDataTyps {
   addressAr: string;
   payment_planEn: string;
   payment_planAr: string;
+  handover_date: Date | null;
+  lat: string,
+    long: string,
   area_id:string;
     developer_id :string
     category_id :string
 }
 
+
+type typesRecordesType = {
+  data: { head: string[], data: { id: string, name: string }[] }
+}
 export default function PropertyForm({
   editData,
   resetEditData,
@@ -73,9 +82,13 @@ export default function PropertyForm({
     area_id:"",
     developer_id :"",
     category_id :"",
-    has_studio: '0'
+    has_studio: '0',
+    handover_date: new Date(),
+    lat: '',
+    long: ''
   });
   const [options, setOptions] = useState<{ value: any; label: string }[]>([]);
+  const [arrTypes, setArrTypes] = useState< string []>([]);
   const [devOptions, setDevOptions] = useState<{ value: any; label: string }[]>([]);
   const [catOptions, setCatOptions] = useState<{ value: any; label: string }[]>([]);
   const [editOptionId, setEditOptionId] = useState<{ value: any; label: string } |null>(null);
@@ -92,15 +105,18 @@ export default function PropertyForm({
     console.log(value)
     setFormData({ ...formData, category_id: value.value });
   };
-  
-  const [file, setFile] = useState<File | null>(null);
+  console.log('formData', formData)
+  const [files, setFile] = useState<File[] | null>([]);
   const [cover, setCover] = useState<File | null>(null);
-
+  const [layout, setLayout] = useState<File | null>(null);
+  const [brochure, setBrochure] = useState<File | null>(null);
+  const [mapKey, setMapKey] = useState(0);
   const closeModal = () => {
     openCloseModal((prevState) => !prevState);
     if (resetEditData) {
       resetEditData([]);
     }
+    setMapKey(prevKey => prevKey + 1);
   };
   const { data, isLoading, isSuccess } = useGetRecordsQuery({
    
@@ -120,8 +136,14 @@ export default function PropertyForm({
     url:'admin/category',
     inValid:['categories']
   });
-
-  console.log(data)
+  const { data : typesRecordes, isSuccess:typesIsSuccess } = useGetRecordsQuery({
+   
+  
+    url:'admin/type',
+    inValid:['types']
+  });
+   const types = typesRecordes as typesRecordesType
+ 
   useEffect(() => {
             //@ts-ignore
 
@@ -181,8 +203,24 @@ console.log(editOptionId)
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+  const typesHandler = (id:string)=>{
 
-  console.log(formData);
+    const index = arrTypes?.findIndex(item=> item === id)
+    if(index === -1){
+      const newTypes = [...arrTypes,id];
+      setArrTypes(newTypes)
+    } else{
+      const newTypes = arrTypes
+      newTypes.splice(index, 1)
+      setArrTypes(newTypes)
+    }
+    
+  }
+  console.log(arrTypes);
+
+  console.log(cover , layout , brochure, files)
+  console.log(formData)
+
   useEffect(() => {
     if (toastData?.data?.status === 200) {
       showAlert("Added", toastData?.data?.response?.message);
@@ -214,12 +252,57 @@ console.log(editOptionId)
 
     const formDataRequest = new FormData();
 
-    // formDataRequest.append("locales[ar][name]", formData.nameAr);
-    // formDataRequest.append("locales[en][name]", formData.nameEn);
+
+  // Append Arabic fields
+  formDataRequest.append("locales[ar][title]", formData.titleAr);
+  formDataRequest.append("locales[ar][sub_title]", formData.sub_titleAr);
+  formDataRequest.append("locales[ar][description]", formData.descriptionAr);
+  formDataRequest.append("locales[ar][address]", formData.addressAr);
+  formDataRequest.append("locales[ar][payment_plan]", formData.payment_planAr);
+
+  // Append English fields
+  formDataRequest.append("locales[en][title]", formData.titleEn);
+  formDataRequest.append("locales[en][sub_title]", formData.sub_titleEn);
+  formDataRequest.append("locales[en][description]", formData.descriptionEn);
+  formDataRequest.append("locales[en][address]", formData.addressEn);
+  formDataRequest.append("locales[en][payment_plan]", formData.payment_planEn);
+
+  // Append other fields
+  formDataRequest.append("max_size", formData.max_size);
+  formDataRequest.append("min_size", formData.min_size);
+  formDataRequest.append("max_bathrooms_count", formData.max_bathrooms_count);
+  formDataRequest.append("min_bathrooms_count", formData.min_bathrooms_count);
+  formDataRequest.append("price", formData.price);
+  formDataRequest.append("area_id", formData.area_id);
+  formDataRequest.append("developer_id", formData.developer_id);
+  formDataRequest.append("category_id", formData.category_id);
+  formDataRequest.append("has_studio", formData.has_studio);
+  formDataRequest.append("category_id", formData.category_id);
+  formDataRequest.append("location[lat]", formData.lat);
+  formDataRequest.append("location[long]", formData.long);
+  arrTypes?.forEach((arrtype, index) => {
+    formDataRequest.append(`types[${index}]`, arrtype);
+  });
+  // Append files if they exist
+  if (files) {
+    files.forEach((file, index) => {
+      formDataRequest.append(`images[${index}]`, file);
+    });
+  }
+  if (cover) {
+    formDataRequest.append("cover", cover);
+  }
+  if (layout) {
+    formDataRequest.append("layout", layout);
+  }
+  if (brochure) {
+    formDataRequest.append("brochure", brochure);
+  }
+
     // formDataRequest.append("city_id", formData.city_id);
-    if (file) {
-      formDataRequest.append("image", file);
-    }
+    // if (file) {
+    //   formDataRequest.append("image", file);
+    // }
     
     try {
       if (editData?.id) {
@@ -235,7 +318,7 @@ console.log(editOptionId)
       } else {
         const response = await createRecord({
           formData: formDataRequest,
-          url: "admin/area",
+          url: "admin/product",
           inValid: ["areas"],
         });
 
@@ -440,22 +523,84 @@ console.log(editOptionId)
               onChange={handleSelectCatChange}
             />{" "}
           </div>
-          <div className=" col-span-12  mt-7">
+          <div className="lg:col-span-6 col-span-12">
+            <CustomDataInput
+             label="HandOverDate"
+             value={formData.handover_date}
+             onChange={(date) => setFormData({ ...formData, handover_date: date as Date | null })}
+            />
+          </div>
+          <div className=" lg:col-span-6 col-span-12   mt-7">
 
-         <div className="flex gap-4"><span className="font-bold">has studio </span> <label className="inline-flex items-center me-5 cursor-pointer">
+         <div className="flex gap-4 justify-end  "><span className="font-bold">has studio </span> <label className="inline-flex items-center me-5 cursor-pointer">
                                   <input type="checkbox" className="sr-only peer" onChange={(e) => setFormData({...formData, has_studio: e.target.checked ? "1" : "0" })} checked={formData.has_studio === "1"} />
                                   <div className="relative w-11 h-6 bg-gray-200 rounded-full  peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-gradient-to-r from-[#af7a3d] to-[#ecb022]"></div>
                               </label></div>
 
           </div>
-          <div className=" col-span-12 md:col-span-6 mt-7">
-            {/* @ts-ignore */}
-            <Upload_cover multi setFile={setFile} editImgUrl={file?.original_url} />
+          <div className=" col-span-12  mt-7">
+
+       <div className="flex gap-4"> <span className="font-bold">Types :  </span>   
+       {types?.data?.data?.map((type : {id:string, name:string}) => {
+        return (                       
+            
+
+          <span>{type?.name}  <input type="checkbox" checked={arrTypes.includes(type?.id)} onChange={()=>typesHandler(type?.id)} className="form-checkbox" /></span>
+
+          
+        
+       
+
+      )
+       })}
+       </div> 
           </div>
-          <div className=" col-span-12 md:col-span-6 mt-7">
+          <div className=" col-span-12 md:col-span-3 mt-7">
             {/* @ts-ignore */}
-            <Upload_cover setFile={setCover} cover editImgUrl={cover?.original_url} />
+            <Upload_cover multi label="tableForms.labels.images" setFile={setFile} editImgUrl={files[0]?.original_url} />
           </div>
+          <div className=" col-span-12 md:col-span-3 mt-7">
+            {/* @ts-ignore */}
+            <Upload_cover label="tableForms.labels.cover" setFile={setCover} cover editImgUrl={cover?.original_url} />
+          </div>
+          <div className=" col-span-12 md:col-span-3 mt-7">
+            {/* @ts-ignore */}
+            <Upload_cover label="tableForms.labels.brochure"  setFile={setBrochure} editImgUrl={brochure?.original_url} />
+          </div>
+          <div className=" col-span-12 md:col-span-3 mt-7">
+            {/* @ts-ignore */}
+            <Upload_cover label="tableForms.labels.layout" setFile={setLayout}  editImgUrl={layout?.original_url} />
+          </div>
+          
+
+          <div className="lg:col-span-6 col-span-12">
+  <InputComponent
+    label="long"
+    onChange={handleChange}
+    required
+    type="text"
+    name="long"
+    placeholder="enter long"
+    value={formData.long}
+  />
+</div>
+<div className="lg:col-span-6 col-span-12">
+  <InputComponent
+    label="lat"
+    onChange={handleChange}
+    required
+    type="text"
+    name="lat"
+    placeholder="enter lat"
+    value={formData.lat}
+  />
+</div>
+          {/* <div className=" col-span-12 md:col-span-6  mt-7 "> */}
+
+ {/* <div key={mapKey} className="flex w-full"> 
+ <GoogleMapComponent   />
+ </div> */}
+          {/* </div> */}
           
         </div>
 

@@ -104,7 +104,11 @@
       "descEn": "discreption En",
       "descAr": "discreption Ar",
        "titleEn": "Title (English)",
+       "brochure": "Upload brochure", 
+       "layout": "Upload layout" ,
   "titleAr": "Title (Arabic)",
+
+ "images": "Upload images", 
     "title": "Title",
      "roleTitlePlaceholder": "Please enter role title",
       "nameEn": "Name En",

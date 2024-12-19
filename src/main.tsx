@@ -12,9 +12,9 @@ import "./globals.css";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import "./assets/css/swiper-bundle.min.css";
 import "./assets/css/nice-select.css";
-import "./assets/css/style.css";
 import './tailwind.css'
 import './i18n';
+import "./assets/css/style.css";
 // import './assets/css/style.css'
 import { Provider } from 'react-redux';
 import store from './store';

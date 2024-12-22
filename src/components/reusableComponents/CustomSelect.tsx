@@ -55,7 +55,7 @@ const CustomSelect = (props: customSelectProps) => {
         <label
           htmlFor=""
           className="text-[16px] font-[500]"
-          style={{ marginBottom: "4px" }}
+          style={{ marginBottom: "0px" }}
         >
           {props.label}
         </label>

@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 //components / reusableComponents/ formLayout
 export type formLayoutProps = {
     children: React.ReactNode;
@@ -31,6 +33,17 @@ export type tabelProps = {
     showAddButton?: boolean;
     Enabel_edit?: boolean;
     Enabel_delete?: boolean;
+    enable_search?: boolean;
+    searchValue?:string;
+    resetFilters?: () => void
+    handleSelect? :  (value: {
+        value: any;
+        label: string;
+    }, stateName: string) => void
+    developerOptions?: { value: any; label: string }[]
+    cityOptions?: { value: any; label: string }[]
+    areaOptions?: { value: any; label: string }[]
+     setSearch?: Dispatch<SetStateAction<string>>
     onEdit: (id: string) => void;
     onDelete: (id: string) => void;
     onView?: (id: string) => void;

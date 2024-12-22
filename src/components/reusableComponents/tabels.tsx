@@ -13,6 +13,7 @@ import IconPencil from '../Icon/IconPencil';
 
 import IconTrashLines from '../Icon/IconTrashLines';
 import { useTranslation } from 'react-i18next';
+import CustomSelect from './CustomSelect';
 
 const ColumnChooser = (props: tabelProps) => {
     const {t}= useTranslation()
@@ -44,7 +45,7 @@ const isRtl = true
     // const handleClick = (props: any) => {
     //     setSelectedId(props);
     // };
-    const [search, setSearch] = useState('');
+   
 
     const [sortStatus, setSortStatus] = useState<DataTableSortStatus>({
         columnAccessor: 'id',
@@ -124,6 +125,18 @@ const isRtl = true
                                                                 <img src={image?.original_url} alt="" className="w-[50px] text-left h-[50px] rounded-full" />
                                                             </div>
                                                         )
+                                                    : accessor === 'brochure'
+                                                        ? ({ brochure }: any) => (
+                                                            <div className="flex  justify-between w-max  gap-3">
+                                                                <img src={brochure?.original_url} alt="" className="w-[50px] text-left h-[50px] rounded-full" />
+                                                            </div>
+                                                        )
+                                                    : accessor === 'layout'
+                                                        ? ({ layout }: any) => (
+                                                            <div className="flex  justify-between w-max  gap-3">
+                                                                <img src={layout?.original_url} alt="" className="w-[50px] text-left h-[50px] rounded-full" />
+                                                            </div>
+                                                        )
                                                         : accessor === 'highlighted_in_apartment'
                                                             ? ({ highlighted_in_apartment }: any) => {
                                                                 return (
@@ -153,32 +166,32 @@ const isRtl = true
         props.openCloseModal((prevState) => !prevState);
         // props.resetEditData([]);
     };
-    useEffect(() => {
-        setRecordsData(() => {
+    // useEffect(() => {
+    //     setRecordsData(() => {
 
-            if (search === "") {
-                return props.TableBody
-            }
-            return props?.TableBody?.filter((item) => {
+    //         if (props.searchValue === "") {
+    //             return props.TableBody
+    //         }
+    //         return props?.TableBody?.filter((item) => {
 
-                // if (props?.allCols) {
-                //     return props?.allCols.some((key) => {
-                // const itemValue = item[key]?.toString().toLowerCase();
-
-
-
-                return item.id.toString() === search.toString();
+    //             // if (props?.allCols) {
+    //             //     return props?.allCols.some((key) => {
+    //             // const itemValue = item[key]?.toString().toLowerCase();
 
 
 
-                // });
-                // }
+    //             return item.id.toString() === props.searchValue.toString();
 
 
-            });
-        });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [search, props.TableBody]);
+
+    //             // });
+    //             // }
+
+
+    //         });
+    //     });
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [props.searchValue, props.TableBody]);
 
     useEffect(() => {
         const data = sortBy(initialRecords, sortStatus.columnAccessor);
@@ -192,9 +205,69 @@ const isRtl = true
     return (
         <div>
             <div className="flex md:items-center md:flex-row flex-col mb-5 gap-5">
-                <div className="text-left">
-                    <input type="text" className="form-input" placeholder={t('tableForms.labels.search')}value={search} onChange={(e) => setSearch(e.target.value)} />
-                </div>
+
+                {props.enable_search && (<div className="text-left">
+                    <input type="text" className="form-input p-[14.5px] !rounded-[8px]" placeholder={t('tableForms.labels.search')}value={props.searchValue} onChange={(e) =>{
+                            if(props.setSearch){
+
+                                props.setSearch(e.target.value)
+                            }
+                    }
+                        
+                        
+                        
+                        
+                        } />
+                </div>)}
+               <div className=" min-w-[200px]">
+               <CustomSelect
+            // editOptionId={editOptionId}
+              options={props.cityOptions !== undefined ? props.cityOptions:[]}
+            //   label={t("tableForms.labels.categoriesTitle")}
+              onChange={(value)=>{
+                if(props.handleSelect){
+
+                    props.handleSelect(value, 'city')
+                }
+              } }
+            />
+               </div>
+               <div className=" min-w-[200px]">
+               <CustomSelect
+            // editOptionId={editOptionId}
+              options={props.areaOptions !== undefined ? props.areaOptions:[]}
+            //   label={t("tableForms.labels.categoriesTitle")}
+              onChange={(value)=>{
+                if(props.handleSelect){
+
+                    props.handleSelect(value, 'area')
+                }
+              } }
+            />
+               </div>
+               <div className=" min-w-[200px]">
+               <CustomSelect
+            // editOptionId={editOptionId}
+              options={props.developerOptions !== undefined ? props.developerOptions:[]}
+            //   label={t("tableForms.labels.categoriesTitle")}
+              onChange={(value)=>{
+                if(props.handleSelect){
+
+                    props.handleSelect(value, 'developer')
+                }
+              } }
+            />
+               </div>
+               <div className=" min-w-[200px]">
+               <button onClick={props.resetFilters} className="btn p-4 bg-[#EFB93F] rounded-xl shadow-none text-white">
+                                    
+                                    Reset filters
+                                </button>
+               </div>
+              
+              
+              
+              
                 <div className="flex items-center gap-5 ltr:ml-auto rtl:mr-auto">
                     {/* <Dropdown
                         placement={`${isRtl ? 'bottom-end' : 'bottom-start'}`}

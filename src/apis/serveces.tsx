@@ -175,8 +175,8 @@ const servicesApi = createApi({
   }),
    
 
-  getRecords: builder.query<unknown, { page?:number, per_page?:number,url:string, inValid: string[]  }>({
-    query: ({ page, per_page , url}) => `${url}${page? `?per_page=${per_page}&page=${page}` : ''}`,
+  getRecords: builder.query<unknown, { page?:number, per_page?:number,url:string, searchKeyword?: string,city_id?:string,developer_id?:string, area_id?:string, inValid: string[]  }>({
+    query: ({ page, per_page , url, searchKeyword, city_id, area_id, developer_id}) => `${url}?${searchKeyword? `query=${searchKeyword}` :''}&${city_id? `city_id=${city_id}` :''}&${area_id? `area_id=${area_id}` :''}&${developer_id? `developer_id=${developer_id}` :''}&${per_page? `per_page=${per_page}&page=${page}` : ''}`,
     //@ts-ignore
     providesTags: (result, error, { inValid }:{inValid:string[]}) => {
       // Map the `inValid` array to a format expected by `invalidatesTags`

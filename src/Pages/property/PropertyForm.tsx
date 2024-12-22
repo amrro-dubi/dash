@@ -142,6 +142,7 @@ export default function PropertyForm({
     url:'admin/type',
     inValid:['types']
   });
+
    const types = typesRecordes as typesRecordesType
  
   useEffect(() => {
@@ -171,6 +172,8 @@ export default function PropertyForm({
     
     setCatOptions(optionss);
   }, [categoriesIsSuccess]);
+
+
   useEffect(() => {
     if (recordIsSuccess) {
       setFormData({
@@ -505,7 +508,7 @@ console.log(editOptionId)
               options={options}
               label={t("tableForms.labels.city")}
               onChange={handleSelectChange}
-            />{" "}
+            />
           </div>
           <div className="lg:col-span-6 col-span-12">
             <CustomSelect

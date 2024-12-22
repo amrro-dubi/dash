@@ -14,34 +14,147 @@ import { showAlert } from "../../components/Error";
 import AreaForm from "./PropertyForm";
 import { useTranslation } from "react-i18next";
 
-type amrro = {
-  data: {amr: string}
-}
+// type amrro = {
+//   data: {amr: string}
+// }
 export default function Properties() {
   const [page, setPage] = useState(1);
 
   const {t} = useTranslation()
-
+  const [options, setOptions] = useState<{ value: any; label: string }[]>([]);
+  // const [arrTypes, setArrTypes] = useState< string []>([]);
+  const [devOptions, setDevOptions] = useState<{ value: any; label: string }[]>([]);
+  const [cityId, setCityId] = useState('')
+  const [areaId, setAreaId] = useState('')
+  const [developerId, setDeveloperId] = useState('')
+  const [cityOptions, setCityOptions] = useState<{ value: any; label: string }[]>([]);
   const [open, setOpen] = useState(false);
   const [editData, setEditData] = useState<any>(null);
-  // const [skipedId, setSkipedId]  = useState(false)
-// const [location, setLocaiton]  = useState()
-  const { data, isLoading, isSuccess } = useGetRecordsQuery({
+  const [data, setData] = useState<any>([]);
+  const [search, setSearch] = useState('');
+  
+
+  console.log(cityId, developerId, areaId)
+ const resetFilters = ()=>{
+  setCityId('')
+  setDeveloperId('')
+  setAreaId('')
+  refetch()
+ }
+  const { data: allData, isLoading, isSuccess,refetch } = useGetRecordsQuery({
     page: Number(page),
     per_page: 10,
+    city_id:cityId,
+    developer_id: developerId,
+    area_id: areaId,
     url:'admin/product',
     inValid:['products']
   });
+ 
 
 
-// console.log(location)
+  const { data:searchData , isSuccess: searchIsSuccess} = useGetRecordsQuery({
+   
+    searchKeyword: search,
+    url:'admin/filterproducts/search',
+    inValid:['products']
+  }, {skip: search.length === 0} );
 
+  const { data: areaData, isSuccess:areaIsSucces } = useGetRecordsQuery({
+   
+    city_id:cityId,
+    url:'admin/area',
+    inValid:['areas']
+  });
 
-
-  const tyedData = data as amrro
-
+  console.log(areaData)
+  const { data : developersRecordes , isSuccess:developerIsSuccess } = useGetRecordsQuery({
+   
   
-  console.log(tyedData?.data)
+    url:'admin/developer',
+    inValid:['developers']
+  });
+  const { data : cityRecordes, isSuccess:cityIsSuccess } = useGetRecordsQuery({
+   
+  
+    url:'admin/city',
+    inValid:['areas']
+  });
+  // const { data : typesRecordes } = useGetRecordsQuery({
+   
+  
+  //   url:'admin/type',
+  //   inValid:['types']
+  // });
+
+
+  const handleSelectChange = (value: { value: any; label: string }, stateName:string) => {
+    console.log(value)
+
+    if(stateName ===  'city'){
+           setCityId(value.value)
+    }
+    if(stateName ===  'area'){
+           setAreaId(value.value)
+    }
+    if(stateName ===  'developer'){
+           setDeveloperId(value.value)
+    }
+    
+  };
+
+  useEffect(()=>{
+    if(search.length === 0){
+    
+      refetch()
+      setData(allData)
+    }
+    },[search, refetch])
+
+
+
+useEffect(()=>{
+if(searchIsSuccess){
+
+ setData(searchData)
+}
+},[searchIsSuccess,searchData])
+
+useEffect(()=>{
+  if(isSuccess){
+  
+   setData(allData)
+  }
+  },[isSuccess, allData])
+ 
+
+  useEffect(() => {
+    //@ts-ignore
+
+const optionss = areaData?.data?.data?.map((item: any) => {
+return { value: item?.id, label: item?.name };
+});
+
+setOptions(optionss);
+}, [areaIsSucces, areaData]);
+useEffect(() => {
+    //@ts-ignore
+
+const optionss = developersRecordes?.data?.data?.map((item: any) => {
+return { value: item?.id, label: item?.name };
+});
+
+setDevOptions(optionss);
+}, [developerIsSuccess]);
+useEffect(() => {
+    //@ts-ignore
+
+const optionss = cityRecordes?.data?.data?.map((item: any) => {
+return { value: item?.id, label: item?.name };
+});
+
+setCityOptions(optionss);
+}, [cityIsSuccess]);
   const [deleteRecord] = useDeleteRecordMutation();
 
 
@@ -166,8 +279,16 @@ export default function Properties() {
         onDelete={deleteSubmitHandler}
         onView={viewHander}
         onEdit={EditHandelr}
+        enable_search={true}
         openCloseModal={setOpen}
         Enabel_delete={true}
+        setSearch ={setSearch}
+        searchValue={search}
+        cityOptions={cityOptions}
+        areaOptions={options}
+        developerOptions={devOptions}
+        handleSelect={handleSelectChange}
+        resetFilters={resetFilters}
       />
    
 {/* <div key={new Date()} className="flex">

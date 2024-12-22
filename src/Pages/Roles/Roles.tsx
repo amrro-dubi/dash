@@ -12,6 +12,7 @@ import ColumnChooser from "../../components/reusableComponents/tabels";
 import { showAlert } from "../../components/Error";
 import RolesForm from "./RolesForm";
 import { useTranslation } from "react-i18next";
+import usePermissionGurd from "../../hooks/permession/usePermissionGurd";
 
 export default function Roles() {
   const [page, setPage] = useState(1);
@@ -88,6 +89,10 @@ const {t} = useTranslation()
     console.log(data);
   };
 
+
+  const canDelete = usePermissionGurd('role', 'delete')
+  const canedit = usePermissionGurd('role', 'edit')
+  const canAdd = usePermissionGurd('role', 'create')
   if (isLoading) {
     return (
       <div>
@@ -122,18 +127,20 @@ const {t} = useTranslation()
         setPage={setPage}
         page={page}
         pagination={data?.data?.pagination}
-        Enabel_edit={true}
+       
         //@ts-ignore
         TableBody={data?.data?.data?.length > 0 ? data?.data?.data : []}
         //@ts-ignore
         tabelHead={finslColsKeys ? finslColsKeys : []}
         Chcekbox={true}
         Page_Add={false}
-        showAddButton={true}
+       
         onDelete={deleteSubmitHandler}
         onEdit={EditHandelr}
         openCloseModal={setOpen}
-        Enabel_delete={true}
+        showAddButton={canAdd}
+        Enabel_edit={canedit}
+        Enabel_delete={canDelete}
       />
     </Main_list>
   );

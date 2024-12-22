@@ -13,6 +13,7 @@ import { showAlert } from "../../components/Error";
 
 import AreaForm from "./AreaForm";
 import { useTranslation } from "react-i18next";
+import usePermissionGurd from "../../hooks/permession/usePermissionGurd";
 type amrro = {
   data: {amr: string}
 }
@@ -113,7 +114,9 @@ export default function Areas() {
     setEditData(data);
     console.log(data);
   };
-
+  const canDelete = usePermissionGurd('area', 'delete')
+  const canedit = usePermissionGurd('area', 'edit')
+  const canAdd = usePermissionGurd('area', 'create')
   if (isLoading) {
     return (
       <div>
@@ -151,7 +154,7 @@ export default function Areas() {
                 //@ts-ignore
 
         pagination={data?.data?.pagination}
-        Enabel_edit={true}
+        
        
         //@ts-ignore
         TableBody={data?.data?.data?.length > 0 ? data?.data?.data : []}
@@ -159,12 +162,14 @@ export default function Areas() {
         tabelHead={finslColsKeys ? finslColsKeys : []}
         Chcekbox={true}
         Page_Add={false}
-        showAddButton={true}
+      
         onDelete={deleteSubmitHandler}
         onView={viewHander}
         onEdit={EditHandelr}
         openCloseModal={setOpen}
-        Enabel_delete={true}
+        showAddButton={canAdd}
+        Enabel_edit={canedit}
+        Enabel_delete={canDelete}
       />
    
     </Main_list>

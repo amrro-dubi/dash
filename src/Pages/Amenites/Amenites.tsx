@@ -14,6 +14,7 @@ import { showAlert } from "../../components/Error";
 
 import { useTranslation } from "react-i18next";
 import AmenitesForm from "./AmenitesForm";
+import usePermissionGurd from "../../hooks/permession/usePermissionGurd";
 
 export default function Amenites() {
   const [page, setPage] = useState(1);
@@ -118,7 +119,9 @@ export default function Amenites() {
     setEditData(data);
     console.log(data);
   };
-
+  const canDelete = usePermissionGurd('amenities', 'delete')
+  const canedit = usePermissionGurd('amenities', 'edit')
+  const canAdd = usePermissionGurd('amenities', 'create')
   if (isLoading) {
     return (
       <div>
@@ -156,7 +159,7 @@ export default function Amenites() {
                 //@ts-ignore
 
         pagination={data?.data?.pagination}
-        Enabel_edit={true}
+        
        
         //@ts-ignore
         TableBody={data?.data?.data?.length > 0 ? data?.data?.data : []}
@@ -164,12 +167,14 @@ export default function Amenites() {
         tabelHead={finslColsKeys ? finslColsKeys : []}
         Chcekbox={true}
         Page_Add={false}
-        showAddButton={true}
+        
         onDelete={deleteSubmitHandler}
         onView={viewHander}
         onEdit={EditHandelr}
         openCloseModal={setOpen}
-        Enabel_delete={true}
+        showAddButton={canAdd}
+        Enabel_edit={canedit}
+        Enabel_delete={canDelete}
       />
    
     </Main_list>

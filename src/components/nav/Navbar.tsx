@@ -24,6 +24,8 @@ const Navbar = () => {
   const toggoleSideBar = ()=>{
     dispatch(modelActions.setOpenSidebar())
   }
+
+  
   return (
     <div>
       <header className="antialiased">

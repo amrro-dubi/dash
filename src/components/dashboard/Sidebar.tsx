@@ -5,6 +5,8 @@ import sideBarImg from '../../assets/img/dashboard/icon/dashboard-sidebar-logo.s
 import { useLogoutMutation } from '../../apis/authSlice';
 import { useTranslation } from 'react-i18next';
 
+import usePermissionGurd from '../../hooks/permession/usePermissionGurd';
+
 const Sidebar = () => {
   const { openSidebar } = useSelector((state: RootState) => state.Model);
   const {t} = useTranslation()
@@ -69,7 +71,7 @@ console.log(openSidebar)
               <h6>My Profile</h6>
             </Link>
           </li> */}
-          <li className={isActive("/home/admins")}>
+          {usePermissionGurd('admin', 'view') && (    <li className={isActive("/home/admins")}>
             <Link to="/home/admins">
             <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox="0 0 18 18">
                         <mask id="mask0_920_506" style={{maskType: 'alpha'}} maskUnits="userSpaceOnUse" x={0} y={0} width={18} height={18}>
@@ -86,8 +88,8 @@ console.log(openSidebar)
                         </svg>
               <h6>{t("tableForms.adminsTitle")}</h6>
             </Link>
-          </li>
-          <li className={isActive("/home/roles")}>
+          </li>)} 
+          {usePermissionGurd('role', 'view') && (      <li className={isActive("/home/roles")}>
             <Link to="/home/roles">
             <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox="0 0 18 18">
                         <mask id="mask0_920_506" style={{maskType: 'alpha'}} maskUnits="userSpaceOnUse" x={0} y={0} width={18} height={18}>
@@ -104,8 +106,9 @@ console.log(openSidebar)
                         </svg>
                         <h6>{t("tableForms.rolesTitle")}</h6>
             </Link>
-          </li>
-          <li className={isActive("/home/cites")}>
+          </li>)} 
+    
+          {usePermissionGurd('city', 'view') && (  <li className={isActive("/home/cites")}>
             <Link to="/home/cites">
             <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox="0 0 18 18">
                         <mask id="mask0_920_506" style={{maskType: 'alpha'}} maskUnits="userSpaceOnUse" x={0} y={0} width={18} height={18}>
@@ -122,8 +125,9 @@ console.log(openSidebar)
                         </svg>
                         <h6>{t("tableForms.citiesTitle")}</h6>
             </Link>
-          </li>
-          <li className={isActive("/home/areas")}>
+          </li>)} 
+        
+          {usePermissionGurd('area', 'view') && (      <li className={isActive("/home/areas")}>
             <Link to="/home/areas">
             <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox="0 0 18 18">
                         <mask id="mask0_920_506" style={{maskType: 'alpha'}} maskUnits="userSpaceOnUse" x={0} y={0} width={18} height={18}>
@@ -138,10 +142,11 @@ console.log(openSidebar)
                             <path d="M16.8214 12.6172H5.68684C5.03685 12.6172 4.50977 13.1571 4.50977 13.823C4.50977 14.4888 5.03681 15.0287 5.68684 15.0287H16.8214C17.4714 15.0287 17.9985 14.4888 17.9985 13.823C17.9985 13.1571 17.4714 12.6172 16.8214 12.6172Z" />
                         </g>
                         </svg>
+                       
                         <h6>{t("tableForms.areasTitle")}</h6>
             </Link>
-          </li>
-          <li className={isActive("/home/developers")}>
+          </li>)}
+          {usePermissionGurd('developer', 'view') && (      <li className={isActive("/home/developers")}>
             <Link to="/home/developers">
             <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox="0 0 18 18">
                         <mask id="mask0_920_506" style={{maskType: 'alpha'}} maskUnits="userSpaceOnUse" x={0} y={0} width={18} height={18}>
@@ -158,8 +163,8 @@ console.log(openSidebar)
                         </svg>
                         <h6>{t("tableForms.developersTitle")}</h6>
             </Link>
-          </li>
-          <li className={isActive("/home/amenites")}>
+          </li>)} 
+          {usePermissionGurd('amenities', 'view') && (        <li className={isActive("/home/amenites")}>
             <Link to="/home/amenites">
             <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox="0 0 18 18">
                         <mask id="mask0_920_506" style={{maskType: 'alpha'}} maskUnits="userSpaceOnUse" x={0} y={0} width={18} height={18}>
@@ -176,8 +181,8 @@ console.log(openSidebar)
                         </svg>
                         <h6>{t("tableForms.amenitiesTitle")}</h6>
             </Link>
-          </li>
-          <li className={isActive("/home/types")}>
+          </li>)} 
+          {usePermissionGurd('type', 'view') && (  <li className={isActive("/home/types")}>
             <Link to="/home/types">
             <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox="0 0 18 18">
                         <mask id="mask0_920_506" style={{maskType: 'alpha'}} maskUnits="userSpaceOnUse" x={0} y={0} width={18} height={18}>
@@ -194,8 +199,8 @@ console.log(openSidebar)
                         </svg>
                         <h6>{t("tableForms.typesTitle")}</h6>
             </Link>
-          </li>
-          <li className={isActive("/home/categories")}>
+          </li>)} 
+          {usePermissionGurd('category', 'view') && (   <li className={isActive("/home/categories")}>
             <Link to="/home/categories">
             <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox="0 0 18 18">
                         <mask id="mask0_920_506" style={{maskType: 'alpha'}} maskUnits="userSpaceOnUse" x={0} y={0} width={18} height={18}>
@@ -212,8 +217,8 @@ console.log(openSidebar)
                         </svg>
                         <h6>{t("tableForms.categoriesTitle")}</h6>
             </Link>
-          </li>
-          <li className={isActive("/home/properties")}>
+          </li>)} 
+          {usePermissionGurd('product', 'view') && (  <li className={isActive("/home/properties")}>
             <Link to="/home/properties">
             <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox="0 0 18 18">
                         <mask id="mask0_920_506" style={{maskType: 'alpha'}} maskUnits="userSpaceOnUse" x={0} y={0} width={18} height={18}>
@@ -230,7 +235,8 @@ console.log(openSidebar)
                         </svg>
                         <h6>{t("tableForms.propertiesTitle")}</h6>
             </Link>
-          </li>
+          </li>)} 
+        
           <li className={isActive("/home/canvas")}>
             <Link to="/home/canvas">
             <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox="0 0 18 18">
@@ -246,6 +252,7 @@ console.log(openSidebar)
                             <path d="M16.8214 12.6172H5.68684C5.03685 12.6172 4.50977 13.1571 4.50977 13.823C4.50977 14.4888 5.03681 15.0287 5.68684 15.0287H16.8214C17.4714 15.0287 17.9985 14.4888 17.9985 13.823C17.9985 13.1571 17.4714 12.6172 16.8214 12.6172Z" />
                         </g>
                         </svg>
+                        
                         <h6>canvas</h6>
             </Link>
           </li>

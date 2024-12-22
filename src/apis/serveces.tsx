@@ -7,7 +7,7 @@ const baseUrl = "https://realestate-api.tetane.com/";
 
 const servicesApi = createApi({
   reducerPath: "servicesApi",
-  tagTypes: ["admins", "roles",'cites', "food-basket", 'areas', 'developers','amenites', 'types'],
+  tagTypes: ["admins", "roles",'cites', "food-basket", 'areas', 'developers','amenites', 'types','permisions'],
   baseQuery: fetchBaseQuery({
     baseUrl,
     prepareHeaders: (headers) => {

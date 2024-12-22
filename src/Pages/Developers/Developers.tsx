@@ -14,6 +14,7 @@ import { showAlert } from "../../components/Error";
 
 import { useTranslation } from "react-i18next";
 import DeveloperForm from "./DeveloperForm";
+import usePermissionGurd from "../../hooks/permession/usePermissionGurd";
 
 export default function Developers() {
   const [page, setPage] = useState(1);
@@ -121,7 +122,9 @@ export default function Developers() {
     setEditData(data);
     console.log(data);
   };
-
+  const canDelete = usePermissionGurd('developer', 'delete')
+  const canedit = usePermissionGurd('developer', 'edit')
+  const canAdd = usePermissionGurd('developer', 'create')
   if (isLoading) {
     return (
       <div>
@@ -157,7 +160,7 @@ export default function Developers() {
         setPage={setPage}
         page={page}
         pagination={data?.data?.pagination}
-        Enabel_edit={true}
+       
        
         //@ts-ignore
         TableBody={data?.data?.data?.length > 0 ? data?.data?.data : []}
@@ -165,12 +168,14 @@ export default function Developers() {
         tabelHead={finslColsKeys ? finslColsKeys : []}
         Chcekbox={true}
         Page_Add={false}
-        showAddButton={true}
+       
         onDelete={deleteSubmitHandler}
         onView={viewHander}
         onEdit={EditHandelr}
         openCloseModal={setOpen}
-        Enabel_delete={true}
+        showAddButton={canAdd}
+        Enabel_edit={canedit}
+        Enabel_delete={canDelete}
       />
    
     </Main_list>

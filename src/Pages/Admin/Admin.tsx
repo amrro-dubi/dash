@@ -11,6 +11,7 @@ import ColumnChooser from "../../components/reusableComponents/tabels";
 import AdminForm from "./AdminForm";
 import { showAlert } from "../../components/Error";
 import { useTranslation } from "react-i18next";
+import usePermissionGurd from "../../hooks/permession/usePermissionGurd";
 
 export default function Admins() {
   const [page, setPage] = useState(1);
@@ -85,6 +86,9 @@ export default function Admins() {
     console.log(data);
   };
 
+  const canDelete = usePermissionGurd('admin', 'delete')
+  const canedit = usePermissionGurd('admin', 'edit')
+  const canAdd = usePermissionGurd('admin', 'create')
   if (isLoading) {
     return (
       <div>
@@ -93,7 +97,7 @@ export default function Admins() {
       </div>
     );
   }
-  console.log(finslColsKeys);
+
   return (
     <Main_list title={t("tableForms.adminsTitle")}>
       {/* <MainPageCard> */}
@@ -120,20 +124,20 @@ export default function Admins() {
         setPage={setPage}
         page={page}
         pagination={data?.data?.pagination}
-        Enabel_edit={true}
-       
+        
         //@ts-ignore
         TableBody={data?.data?.data?.length > 0 ? data?.data?.data : []}
         //@ts-ignore
         tabelHead={finslColsKeys ? finslColsKeys : []}
         Chcekbox={true}
         Page_Add={false}
-        showAddButton={true}
         onDelete={deleteSubmitHandler}
         onView={viewHander}
         onEdit={EditHandelr}
         openCloseModal={setOpen}
-        Enabel_delete={true}
+        showAddButton={canAdd}
+        Enabel_edit={canedit}
+        Enabel_delete={canDelete}
       />
    
     </Main_list>

@@ -13,7 +13,7 @@ import { showAlert } from "../../components/Error";
 
 import AreaForm from "./PropertyForm";
 import { useTranslation } from "react-i18next";
-import GoogleMapComponent from "./Map";
+
 type amrro = {
   data: {amr: string}
 }

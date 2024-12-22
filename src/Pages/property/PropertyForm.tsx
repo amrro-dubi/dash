@@ -16,7 +16,7 @@ import Upload_cover from "../../components/reusableComponents/Upload_Cover";
 import CustomSelect from "../../components/reusableComponents/CustomSelect";
 import { useTranslation } from "react-i18next";
 import CustomDataInput from "../../components/reusableComponents/DateInput";
-import GoogleMapComponent from "./Map";
+
 
 interface formDataTyps {
   titleEn: string;
@@ -110,13 +110,13 @@ export default function PropertyForm({
   const [cover, setCover] = useState<File | null>(null);
   const [layout, setLayout] = useState<File | null>(null);
   const [brochure, setBrochure] = useState<File | null>(null);
-  const [mapKey, setMapKey] = useState(0);
+  // const [mapKey, setMapKey] = useState(0);
   const closeModal = () => {
     openCloseModal((prevState) => !prevState);
     if (resetEditData) {
       resetEditData([]);
     }
-    setMapKey(prevKey => prevKey + 1);
+    // setMapKey(prevKey => prevKey + 1);
   };
   const { data, isLoading, isSuccess } = useGetRecordsQuery({
    
@@ -136,7 +136,7 @@ export default function PropertyForm({
     url:'admin/category',
     inValid:['categories']
   });
-  const { data : typesRecordes, isSuccess:typesIsSuccess } = useGetRecordsQuery({
+  const { data : typesRecordes } = useGetRecordsQuery({
    
   
     url:'admin/type',

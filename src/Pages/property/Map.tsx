@@ -1,5 +1,5 @@
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 
 
@@ -12,7 +12,7 @@ type mapProps = {
 };
 
 const GoogleMapComponent = (props: mapProps) => {
-    const mapRef = useRef(null);
+    // const mapRef = useRef(null);
   const [center, setCenter] = useState({
     lat: -3.745,
     lng: -38.523,
@@ -36,15 +36,15 @@ const GoogleMapComponent = (props: mapProps) => {
   useEffect(() => {
     // Clean up Google Map instance when component unmounts or modal closes
     return () => {
-      if (mapRef.current && mapRef.current.map) {
-        mapRef.current.map = null; // Explicitly destroy the map instance
-      }
+      // if (mapRef.current && mapRef.current.map) {
+      //   // mapRef.current.map = null; // Explicitly destroy the map instance
+      // }
     };
   }, []);
   return (
     <LoadScript googleMapsApiKey="AIzaSyAU62hceWz3iPyR_5Ado1UtLUV3i_4n6So">
-      <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={10}  onLoad={(map) => {
-          mapRef.current = map;
+      <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={10}  onLoad={() => {
+          // mapRef.current = map;
         }}>
       
         <Marker position={center} />

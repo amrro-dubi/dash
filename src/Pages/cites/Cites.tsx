@@ -12,6 +12,7 @@ import ColumnChooser from "../../components/reusableComponents/tabels";
 import { showAlert } from "../../components/Error";
 import CitesForm from "./CitesForm";
 import { useTranslation } from "react-i18next";
+import usePermissionGurd from "../../hooks/permession/usePermissionGurd";
 
 export default function Cites() {
   const [page, setPage] = useState(1);
@@ -116,6 +117,9 @@ const {t}= useTranslation()
     setEditData(data);
     console.log(data);
   };
+  const canDelete = usePermissionGurd('city', 'delete')
+  const canedit = usePermissionGurd('city', 'edit')
+  const canAdd = usePermissionGurd('city', 'create')
 
   if (isLoading) {
     return (
@@ -153,7 +157,7 @@ const {t}= useTranslation()
         page={page}
         //@ts-ignore
         pagination={data?.data?.pagination}
-        Enabel_edit={true}
+       
        
         //@ts-ignore
         TableBody={data?.data?.data?.length > 0 ? data?.data?.data : []}
@@ -161,12 +165,14 @@ const {t}= useTranslation()
         tabelHead={finslColsKeys ? finslColsKeys : []}
         Chcekbox={true}
         Page_Add={false}
-        showAddButton={true}
+      
         onDelete={deleteSubmitHandler}
         onView={viewHander}
         onEdit={EditHandelr}
         openCloseModal={setOpen}
-        Enabel_delete={true}
+        showAddButton={canAdd}
+        Enabel_edit={canedit}
+        Enabel_delete={canDelete}
       />
    
     </Main_list>

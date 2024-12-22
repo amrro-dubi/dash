@@ -12,6 +12,7 @@ import ColumnChooser from "../../components/reusableComponents/tabels";
 import { showAlert } from "../../components/Error";
 import CitesForm from "./TypesForm";
 import { useTranslation } from "react-i18next";
+import usePermissionGurd from "../../hooks/permession/usePermissionGurd";
 
 export default function Types() {
   const [page, setPage] = useState(1);
@@ -27,7 +28,9 @@ const {t}= useTranslation()
     inValid:['types']
   });
 
-  
+  const canDelete = usePermissionGurd('type', 'delete')
+  const canedit = usePermissionGurd('type', 'edit')
+  const canAdd = usePermissionGurd('type', 'create')
 
   const [deleteRecord] = useDeleteRecordMutation();
 
@@ -153,7 +156,7 @@ const {t}= useTranslation()
         page={page}
         //@ts-ignore
         pagination={data?.data?.pagination}
-        Enabel_edit={true}
+       
        
         //@ts-ignore
         TableBody={data?.data?.data?.length > 0 ? data?.data?.data : []}
@@ -161,12 +164,14 @@ const {t}= useTranslation()
         tabelHead={finslColsKeys ? finslColsKeys : []}
         Chcekbox={true}
         Page_Add={false}
-        showAddButton={true}
+       
         onDelete={deleteSubmitHandler}
         onView={viewHander}
         onEdit={EditHandelr}
         openCloseModal={setOpen}
-        Enabel_delete={true}
+        showAddButton={canAdd}
+        Enabel_edit={canedit}
+        Enabel_delete={canDelete}
       />
    
     </Main_list>

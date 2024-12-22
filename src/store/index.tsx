@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import modalSlice from './modelSlice'
+import permisionsReducer from './permisions'
 
 import { authApi } from "../apis/authSlice";
 import servicesApi from "../apis/serveces";
@@ -11,6 +12,7 @@ const store = configureStore({
     reducer: {
          
         Model: modalSlice,
+        permissions: permisionsReducer,
       
       
         // [amaduesApi.reducerPath]: amaduesApi.reducer,

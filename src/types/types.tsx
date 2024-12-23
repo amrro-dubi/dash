@@ -35,6 +35,7 @@ export type tabelProps = {
     Enabel_edit?: boolean;
     Enabel_delete?: boolean;
     enable_search?: boolean;
+    enable_filter?: boolean;
     searchValue?:string;
     resetFilters?: () => void
     typesHandler?: (id: string) => void;

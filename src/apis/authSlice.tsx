@@ -115,7 +115,32 @@ export const authApi = createApi({
         },
     }),
 
-    
+    changePassword: builder.mutation<any, any>({
+      query: (formData) =>{
+        const token = localStorage.getItem("auth_data");
+return {
+url: `admin/auth/update`,
+method: 'POST',
+body: formData,
+headers: {
+  //@ts-ignore
+  Authorization: `Bearer ${JSON.parse(token).token}`,
+},
+}
+
+      } ,
+
+      transformResponse: (response, meta) => {
+          console.log(meta?.response?.status);
+        
+          return { status: meta?.response?.status, response };
+      },
+      transformErrorResponse: (response, meta) => {
+ 
+          return { status: meta?.response?.status, response };
+      },
+  }),
+
     logout: builder.mutation<any, void>({
         query: () => {
           const token = localStorage.getItem("auth_data");
@@ -145,24 +170,7 @@ export const authApi = createApi({
     
    
   
-    changePassword: builder.mutation<any, any>({
-      query: (formData) => {
-        // Retrieve auth_data from localStorage and parse it
-        const authData = JSON.parse(localStorage.getItem("auth_data") || "{}");
-
-        // Get the access token from the parsed auth_data
-        const accessToken = authData.access;
-
-        return {
-          url: "user/change-password/",
-          method: "POST",
-          body: formData,
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        };
-      },
-    }),
+  
     deleteAccount: builder.mutation<any, any>({
       query: (formData) => {
         // Retrieve auth_data from localStorage and parse it

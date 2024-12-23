@@ -21,6 +21,7 @@ import Categories from "../Pages/Categories/Categories";
 import Properties from "../Pages/property/Properties";
 import PropertyForm from "../Pages/property/PropertyForm";
 import EditPropertyForm from "../Pages/property/EditPropertyForm";
+import ChangePassword from "../Pages/ChangePassword";
 
 
 
@@ -98,6 +99,11 @@ const routes = [
             {
             path: "/home/canvas",
             element: <CanvasComponent />,
+            children: [],
+        },
+            {
+            path: "/home/changePassword",
+            element: <ChangePassword />,
             children: [],
         },
     

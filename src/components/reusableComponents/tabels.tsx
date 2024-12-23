@@ -118,7 +118,7 @@ const ColumnChooser = (props: tabelProps) => {
                   type="button"
                   onClick={() => {
                     props.onEdit(data);
-                    if (props.Link_Navigation) {
+                    if (!props.Link_Navigation) {
                       openModal();
                     }
                   }}
@@ -248,6 +248,8 @@ const ColumnChooser = (props: tabelProps) => {
             />
           </div>
         )}
+       {props.enable_filter && (<>
+       
         <div className=" min-w-[200px]">
           <CustomSelect
             // editOptionId={editOptionId}
@@ -344,7 +346,7 @@ const ColumnChooser = (props: tabelProps) => {
             Reset filters
           </button>
         </div>
-
+</>)}
         <div className="flex items-center gap-5 ltr:ml-auto rtl:mr-auto">
           {/* <Dropdown
                         placement={`${isRtl ? 'bottom-end' : 'bottom-start'}`}

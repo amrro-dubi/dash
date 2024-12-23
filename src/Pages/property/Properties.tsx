@@ -319,6 +319,7 @@ navigate(`/home/ediPropertiesForm/${data.id}`)  ;
         resetFilters={resetFilters}
         types={types?.data?.data}
         typesHandler={typesHandler}
+        enable_filter={true}
       />
    
 {/* <div key={new Date()} className="flex">

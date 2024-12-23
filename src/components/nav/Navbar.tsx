@@ -1,9 +1,15 @@
-import  { useEffect } from "react";
+import  { useEffect, useRef, useState } from "react";
 import i18n from "../../i18n";
 import { modelActions } from "../../store/modelSlice";
 import { useDispatch } from "react-redux";
 
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
 const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const {t} = useTranslation()
   useEffect(() => {
     const savedLanguage = window.localStorage.getItem("language");
 
@@ -12,6 +18,18 @@ const Navbar = () => {
         ? "rtl"
         : "ltr"
       : "rtl";
+  }, []);
+  const handleClickOutside = (event: MouseEvent) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
@@ -99,13 +117,14 @@ const Navbar = () => {
                   En
                 </a>
               )}
-
-              <button
+           <div className="relative">
+           <button
                 type="button"
                 className="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                 id="user-menu-button"
                 aria-expanded="false"
                 data-dropdown-toggle="dropdown"
+                onClick={() => setIsOpen(!isOpen)}
               >
                 <span className="sr-only">Open user menu</span>
                 <img
@@ -114,6 +133,12 @@ const Navbar = () => {
                   alt="user photo"
                 />
               </button>
+
+              <div ref={dropdownRef} className={`  bg-white ${isOpen? "flex": "hidden"} transition-all ease-out duration-1000 absolute top-[50px] text-[#efb93f] ltr:right-0 rtl:left-0 px-2 py-4 w-[170px] shadow-lg`}>
+                <Link to="/home/changePassword">  {t("auth.resetPassword.changeTitle")}</Link>
+          </div>
+           </div>
+        
             </div>
           </div>
         </nav>

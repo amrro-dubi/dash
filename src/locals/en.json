@@ -50,16 +50,19 @@
       "confirmPass": "Password does not match"
 ,
       "title": "Reset your password",
+      "changeTitle": "Change Password",
       "labels": {
         "password": "Password*",
-        "confirmPassword": "Confirm Password*"
+        "confirmPassword": "Confirm Password*",
+        "current": "Current Password*"
       },
       "placeholders": {
         "password": "*** ***",
         "confirmPassword": "*** ***"
       },
       "buttons": {
-        "reset": "Reset"
+        "reset": "Reset",
+        "change": "Change Password"
       },
       "links": {
         "back": "Back?"

@@ -21,7 +21,7 @@ const {t}= useTranslation()
   const [editData, setEditData] = useState<any>(null);
   // const [skipedId, setSkipedId]  = useState(false)
 
-  const { data, isLoading, isSuccess } = useGetRectordsQuery({
+  const { data, isLoading, isSuccess } = useGetRecordsQuery({
     page: Number(page),
     per_page: 10,
     url:'admin/type',

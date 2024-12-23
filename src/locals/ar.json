@@ -47,16 +47,19 @@
       "confirmPass": "كلمة المرور غير مطابقة"
 ,
       "title": "إعادة تعيين كلمة المرور",
+      "changeTitle": "تغيير كلمة المرور",
       "labels": {
         "password": "كلمة المرور*",
-        "confirmPassword": "تأكيد كلمة المرور*"
+        "confirmPassword": "تأكيد كلمة المرور*",
+        "current": "كلمة المرور الحالية*"
       },
       "placeholders": {
         "password": "*** ***",
         "confirmPassword": "*** ***"
       },
       "buttons": {
-        "reset": "إعادة تعيين"
+        "reset": "إعادة تعيين",
+        "change": "تغيير كلمة المرور"
       },
       "links": {
         "back": "عودة؟"

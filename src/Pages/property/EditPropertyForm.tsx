@@ -335,6 +335,7 @@ console.log(formData)
           formData: formDataRequest,
           url: "admin/area",
           inValid: ["areas",],
+          method: "PATCH",
         });
         console.log(response);
         setToastData(response);

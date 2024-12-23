@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 
 
@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { z } from "zod";
 import { useTranslation } from "react-i18next";
 import { useValidationMessages } from "../components/Auth/authValidation";
-import { useChangePasswordMutation, useResetPasswordMutation } from "../apis/authSlice";
+import { useChangePasswordMutation } from "../apis/authSlice";
 const formSchema = (message: any) =>
   z
     .object({
@@ -30,9 +30,9 @@ const formSchema = (message: any) =>
 type loginFormData = {
   
   password: string;
-   confirmPassword:string
+   confirmPassword:string;
  
-     current_password:strnig
+     current_password:string
 };
 const initalData = {
   
@@ -44,7 +44,7 @@ const ChangePassword = () => {
   const {t} = useTranslation()
   const [formData, setFormData ] = useState<loginFormData>(initalData);
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const locatoin = useLocation()
+ 
 //   const {token} = locatoin.state
   const validationMessages = useValidationMessages();
 console.log(validationMessages)

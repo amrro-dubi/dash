@@ -110,8 +110,12 @@
        "brochure": "Upload brochure", 
        "layout": "Upload layout" ,
        "types": "Filter by type",
+       "titleAr": "Title (in Arabic)",
+       "sub_titleAr": "Subtitle (in Arabic)",
+       "descriptionAr": "Description (in Arabic)",
+       "addressAr": "Address (in Arabic)",
+       "payment_planAr": "Payment Plan (in Arabic)",
 
-  "titleAr": "Title (Arabic)",
 
  "images": "Upload images", 
     "title": "Title",
@@ -162,11 +166,7 @@
       "description": "Enter description",
       "address": "Enter address",
       "payment_plan": "Enter payment plan",
-      "titleAr": "Title (in Arabic)",
-  "sub_titleAr": "Subtitle (in Arabic)",
-  "descriptionAr": "Description (in Arabic)",
-  "addressAr": "Address (in Arabic)",
-  "payment_planAr": "Payment Plan (in Arabic)",
+     
   "max_size": "Enter maximum size",
   "min_size": "Enter minimum size",
   "max_bathrooms_count": "Enter maximum bathrooms count",

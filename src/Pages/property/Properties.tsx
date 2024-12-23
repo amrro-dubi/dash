@@ -11,7 +11,7 @@ import ColumnChooser from "../../components/reusableComponents/tabels";
 
 import { showAlert } from "../../components/Error";
 
-import AreaForm, { typesRecordesType } from "./PropertyForm";
+import  { typesRecordesType } from "./PropertyForm";
 import { useTranslation } from "react-i18next";
 import PropertyForm from "./PropertyForm";
 import { useNavigate } from "react-router-dom";

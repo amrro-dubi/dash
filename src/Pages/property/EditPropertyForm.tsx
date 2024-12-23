@@ -16,7 +16,7 @@ import Upload_cover from "../../components/reusableComponents/Upload_Cover";
 import CustomSelect from "../../components/reusableComponents/CustomSelect";
 import { useTranslation } from "react-i18next";
 import CustomDataInput from "../../components/reusableComponents/DateInput";
-import GoogleMapComponent from "./Map";
+
 import { useNavigate, useParams } from "react-router-dom";
 
 
@@ -90,6 +90,7 @@ export default function EditPropertyForm() {
   const [arrTypes, setArrTypes] = useState< string []>([]);
   const [devOptions, setDevOptions] = useState<{ value: any; label: string }[]>([]);
   const [catOptions, setCatOptions] = useState<{ value: any; label: string }[]>([]);
+   {/* @ts-ignore */}
   const [editOptionId, setEditOptionId] = useState<{ value: any; label: string } |null>(null);
   const [isOffPlan, setIsOffPlan] = useState(false);
   const handleSelectChange = (value: { value: any; label: string }) => {
@@ -219,7 +220,7 @@ if(recordIsSuccess){
 
 console.log(formData)
   const [toastData, setToastData] = useState<any>({});
-
+//@ts-ignore
   const [createRecord, { isLoading:createIsLoading }] = useCreatRecordMutation();
 
   // const [editCity ] = useEditCityMutation()
@@ -331,6 +332,7 @@ console.log(formData)
     
         // formDataRequest.append("_method", 'patch');
         const response = await editRecord({
+          //@ts-ignore
           id: propertyId,
           formData: formDataRequest,
           url: "admin/area",
@@ -573,19 +575,19 @@ console.log(formData)
        </div> 
           </div>
           <div className=" col-span-12 md:col-span-3 mt-7">
-           
+           {/* @ts-ignore */}
             <Upload_cover multi label="tableForms.labels.images" setFile={setFile} editImgUrl={files[0]? files[0]?.original_url :""} />
           </div>
           <div className=" col-span-12 md:col-span-3 mt-7">
-           
+            {/* @ts-ignore */}
             <Upload_cover label="tableForms.labels.cover" setFile={setCover} cover editImgUrl={cover?.original_url} />
           </div>
           <div className=" col-span-12 md:col-span-3 mt-7">
-           
+            {/* @ts-ignore */}
             <Upload_cover label="tableForms.labels.brochure"  setFile={setBrochure} editImgUrl={brochure?.original_url} />
           </div>
           <div className=" col-span-12 md:col-span-3 mt-7">
-           
+            {/* @ts-ignore */}
             <Upload_cover label="tableForms.labels.layout" setFile={setLayout}  editImgUrl={layout?.original_url} />
           </div>
 

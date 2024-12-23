@@ -1,9 +1,9 @@
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api"
-import { useCallback, useEffect, useRef, useMemo } from "react"
+import { useCallback, useEffect, useRef, useMemo, useState } from "react"
 
 type Map = google.maps.Map
 
-const GoogleMapComponent = () => {
+const GoogleMapComponent = ({handleLocagtion} :{handleLocagtion: (lat: string, long: string) => void}) => {
     const mapRef = useRef<Map | null>(null)
 
     const onLoad = useCallback((map: Map) => {
@@ -16,8 +16,10 @@ const GoogleMapComponent = () => {
         googleMapsApiKey: import.meta.env.VITE_APP_GOOGLE_MAPS_API_KEY || "",
         libraries: ["places"],
     })
-
+    const [markerPosition, setMarkerPosition] = useState({ lat: -3.745, lng: -38.523 });
     const center = useMemo(() => ({ lat: -3.745, lng: -38.523 }), [])
+
+
     const containerStyle = useMemo(() => ({ width: "100%", height: "580px" }), [])
 
     useEffect(() => {
@@ -32,11 +34,20 @@ const GoogleMapComponent = () => {
     if (loadError) {
         return <p>Error loading Google Maps</p>
     }
+    const handleMapClick = (event: google.maps.MapMouseEvent) => {
+        if (event.latLng) {
+          const lat = event.latLng.lat();
+          const lng = event.latLng.lng();
+          //@ts-ignore
+          handleLocagtion(lat, lng);
+          setMarkerPosition({ lat, lng });
+        }
+      };
 
     return isLoaded ? (
         <div className="w-full h-full col-span-full">
-            <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={10} onLoad={onLoad}>
-                <Marker position={center} />
+            <GoogleMap onClick={handleMapClick}  mapContainerStyle={containerStyle} center={center} zoom={10} onLoad={onLoad}>
+                <Marker position={markerPosition} />
             </GoogleMap>
         </div>
     ) : (

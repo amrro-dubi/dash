@@ -232,7 +232,7 @@ const ColumnChooser = (props: tabelProps) => {
 
   return (
     <div>
-      <div className="flex md:items-center md:flex-row flex-col mb-5 gap-5">
+      <div className="flex md:items-center md:flex-row flex-col mb-5 gap-5 w-fll">
         {props.enable_search && (
           <div className="text-left">
             <input

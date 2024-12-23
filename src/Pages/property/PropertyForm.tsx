@@ -49,8 +49,7 @@ export type typesRecordesType = {
 }
 export default function PropertyForm({
     editData,
-    resetEditData,
-    openCloseModal,
+   
 }: {
     editData?: any
     resetEditData?: React.Dispatch<any>
@@ -113,20 +112,24 @@ export default function PropertyForm({
         }
         setFormData({ ...formData, category_id: value.value })
     }
+
+    const handleLocation = (lat: string, long: string) => {
+        setFormData({ ...formData, lat: lat, long: long })
+    }
     console.log("formData", formData)
-    const [files, setFile] = useState<File[] | null>([])
-    const [cover, setCover] = useState<File | null>(null)
-    const [layout, setLayout] = useState<File | null>(null)
-    const [brochure, setBrochure] = useState<File | null>(null)
+    const [files, setFile] = useState<File  |File[] |null>([])
+    const [cover, setCover] = useState<File  |null>(null)
+    const [layout, setLayout] = useState<File  |null>(null)
+    const [brochure, setBrochure] = useState<File  |null>(null)
     const navigate = useNavigate()
     // const [mapKey, setMapKey] = useState(0);
-    const closeModal = () => {
-        // openCloseModal((prevState) => !prevState);
-        if (resetEditData) {
-            resetEditData([])
-        }
-        // setMapKey(prevKey => prevKey + 1);
-    }
+    // const closeModal = () => {
+    //     // openCloseModal((prevState) => !prevState);
+    //     if (resetEditData) {
+    //         resetEditData([])
+    //     }
+    //     // setMapKey(prevKey => prevKey + 1);
+    // }
     const { data, isLoading, isSuccess } = useGetRecordsQuery({
         url: "admin/area",
         inValid: ["areas"],
@@ -300,6 +303,7 @@ export default function PropertyForm({
         })
         // Append files if they exist
         if (files) {
+            //@ts-ignore
             files.forEach((file, index) => {
                 formDataRequest.append(`images[${index}]`, file)
             })
@@ -526,7 +530,7 @@ export default function PropertyForm({
                         <CustomSelect
                             editOptionId={editOptionId}
                             options={devOptions}
-                            label={t("tableForms.labels.developersTitels")}
+                            label={t("tableForms.developersTitle")}
                             onChange={handleSelectDevChange}
                         />{" "}
                     </div>
@@ -534,7 +538,7 @@ export default function PropertyForm({
                         <CustomSelect
                             editOptionId={editOptionId}
                             options={catOptions}
-                            label={t("tableForms.labels.categoriesTitle")}
+                            label={t("tableForms.categoriesTitle")}
                             onChange={handleSelectCatChange}
                         />{" "}
                     </div>
@@ -584,11 +588,13 @@ export default function PropertyForm({
                         </div>
                     </div>
                     <div className=" col-span-12 md:col-span-3 mt-7">
-                        {/* @ts-ignore */}
+                      
                         <Upload_cover
                             multi
                             label="tableForms.labels.images"
-                            setFile={setFile}
+                             // @ts-ignore
+                            setFile={setFile}  
+                    // @ts-ignore
                             editImgUrl={files[0]?.original_url}
                         />
                     </div>
@@ -596,24 +602,30 @@ export default function PropertyForm({
                         {/* @ts-ignore */}
                         <Upload_cover
                             label="tableForms.labels.cover"
+                             // @ts-ignore
                             setFile={setCover}
                             cover
+                             // @ts-ignore
                             editImgUrl={cover?.original_url}
                         />
                     </div>
                     <div className=" col-span-12 md:col-span-3 mt-7">
-                        {/* @ts-ignore */}
+                       
                         <Upload_cover
                             label="tableForms.labels.brochure"
+                             // @ts-ignore
                             setFile={setBrochure}
+                            // @ts-ignore
                             editImgUrl={brochure?.original_url}
                         />
                     </div>
                     <div className=" col-span-12 md:col-span-3 mt-7">
-                        {/* @ts-ignore */}
+                       
                         <Upload_cover
                             label="tableForms.labels.layout"
+                             // @ts-ignore
                             setFile={setLayout}
+                              // @ts-ignore
                             editImgUrl={layout?.original_url}
                         />
                     </div>
@@ -643,7 +655,7 @@ export default function PropertyForm({
 
                     <div className=" col-span-12 mt-7 ">
                         <div className="flex w-full">
-                            <GoogleMapComponent />
+                            <GoogleMapComponent handleLocagtion={handleLocation} />
                         </div>
                     </div>
                 </div>

@@ -22,6 +22,7 @@ interface Pagination {
     current_page: number;
 }
 export type tabelProps = {
+
     tabelHead: any[];
     TableBody: any[];
     allCols?: string[];
@@ -36,6 +37,7 @@ export type tabelProps = {
     enable_search?: boolean;
     searchValue?:string;
     resetFilters?: () => void
+    typesHandler?: (id: string) => void;
     handleSelect? :  (value: {
         value: any;
         label: string;
@@ -43,6 +45,7 @@ export type tabelProps = {
     developerOptions?: { value: any; label: string }[]
     cityOptions?: { value: any; label: string }[]
     areaOptions?: { value: any; label: string }[]
+    types?: {id:string, name:string} [] 
      setSearch?: Dispatch<SetStateAction<string>>
     onEdit: (id: string) => void;
     onDelete: (id: string) => void;

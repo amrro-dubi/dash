@@ -11,7 +11,7 @@ import ColumnChooser from "../../components/reusableComponents/tabels";
 
 import { showAlert } from "../../components/Error";
 
-import AreaForm from "./PropertyForm";
+import AreaForm, { typesRecordesType } from "./PropertyForm";
 import { useTranslation } from "react-i18next";
 import PropertyForm from "./PropertyForm";
 import { useNavigate } from "react-router-dom";
@@ -24,19 +24,20 @@ export default function Properties() {
 
   const {t} = useTranslation()
   const [options, setOptions] = useState<{ value: any; label: string }[]>([]);
-  // const [arrTypes, setArrTypes] = useState< string []>([]);
+  const [arrTypes, setArrTypes] = useState< string []>([]);
   const [devOptions, setDevOptions] = useState<{ value: any; label: string }[]>([]);
   const [cityId, setCityId] = useState('')
   const [areaId, setAreaId] = useState('')
   const [developerId, setDeveloperId] = useState('')
   const [cityOptions, setCityOptions] = useState<{ value: any; label: string }[]>([]);
+  const [types, setTypes] = useState <typesRecordesType |null>(null);
   const [open, setOpen] = useState(false);
   const [editData, setEditData] = useState<any>(null);
   const [data, setData] = useState<any>([]);
   const [search, setSearch] = useState('');
   const navigate = useNavigate()
 
-  console.log(cityId, developerId, areaId)
+  // console.log(cityId, developerId, areaId)
  const resetFilters = ()=>{
   setCityId('')
   setDeveloperId('')
@@ -82,14 +83,40 @@ export default function Properties() {
     url:'admin/city',
     inValid:['areas']
   });
-  // const { data : typesRecordes } = useGetRecordsQuery({
+  const { data : typesRecordes } = useGetRecordsQuery({
    
   
-  //   url:'admin/type',
-  //   inValid:['types']
-  // });
-
-
+    url:'admin/type',
+    inValid:['types']
+  });
+  useEffect(() => {
+    setTypes(typesRecordes as typesRecordesType)
+  }, [typesRecordes]);
+ console.log(types)
+  const typesHandler = (id:string)=>{
+    console.log(id)
+    
+    
+    
+        const index = arrTypes?.findIndex(item=> item === id)
+    
+    
+       
+        if(index === -1){
+    
+          const newTypes = [...arrTypes]
+          newTypes.push(id)
+    
+          setArrTypes(newTypes)
+    
+        } else{
+          const newTypes = [...arrTypes]
+          newTypes.splice(index, 1)
+          setArrTypes(newTypes)
+        }
+        
+      }
+    
   const handleSelectChange = (value: { value: any; label: string }, stateName:string) => {
     console.log(value)
 
@@ -290,6 +317,8 @@ navigate(`/home/ediPropertiesForm/${data.id}`)  ;
         developerOptions={devOptions}
         handleSelect={handleSelectChange}
         resetFilters={resetFilters}
+        types={types?.data?.data}
+        typesHandler={typesHandler}
       />
    
 {/* <div key={new Date()} className="flex">

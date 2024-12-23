@@ -46,7 +46,7 @@ interface formDataTyps {
 }
 
 
-type typesRecordesType = {
+export type typesRecordesType = {
   data: { head: string[], data: { id: string, name: string }[] }
 }
 export default function PropertyForm({
@@ -95,6 +95,15 @@ export default function PropertyForm({
   const [catOptions, setCatOptions] = useState<{ value: any; label: string }[]>([]);
   const [editOptionId, setEditOptionId] = useState<{ value: any; label: string } |null>(null);
   const [isOffPlan, setIsOffPlan] = useState(false);
+
+
+
+
+  const [types, setTypes] = useState <typesRecordesType |null>(null);
+
+
+
+
   const handleSelectChange = (value: { value: any; label: string }) => {
     console.log(value)
     setFormData({ ...formData, area_id: value.value });
@@ -151,8 +160,9 @@ export default function PropertyForm({
     url:'admin/type',
     inValid:['types']
   });
-
-   const types = typesRecordes as typesRecordesType
+  useEffect(() => {
+    setTypes(typesRecordes as typesRecordesType)
+  }, [typesRecordes]);
  
   useEffect(() => {
             //@ts-ignore
@@ -224,19 +234,33 @@ console.log(formData)
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
+
   const typesHandler = (id:string)=>{
+// console.log(id)
+
+
 
     const index = arrTypes?.findIndex(item=> item === id)
+
+
+   
     if(index === -1){
-      const newTypes = [...arrTypes,id];
+
+      const newTypes = [...arrTypes]
+      newTypes.push(id)
+
       setArrTypes(newTypes)
+
     } else{
-      const newTypes = arrTypes
+      const newTypes = [...arrTypes]
       newTypes.splice(index, 1)
       setArrTypes(newTypes)
     }
     
   }
+
+
   console.log(arrTypes);
 
   console.log(cover , layout , brochure, files)

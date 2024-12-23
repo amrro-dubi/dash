@@ -59,6 +59,7 @@ export default function EditPropertyForm() {
       { id: propertyId, url: "admin/product" },
       
     );
+    
     const {t} = useTranslation()
     
   const [formData, setFormData] = useState<formDataTyps>({
@@ -92,7 +93,7 @@ export default function EditPropertyForm() {
   const [editOptionId, setEditOptionId] = useState<{ value: any; label: string } |null>(null);
   const [isOffPlan, setIsOffPlan] = useState(false);
   const handleSelectChange = (value: { value: any; label: string }) => {
-    console.log(value)
+    // console.log(value)
     setFormData({ ...formData, area_id: value.value });
   };
   const handleSelectDevChange = (value: { value: any; label: string }) => {
@@ -141,6 +142,42 @@ export default function EditPropertyForm() {
 
    const types = typesRecordes as typesRecordesType
  
+
+   useEffect(() => {
+if(recordIsSuccess){
+  setFormData({
+    ...formData,
+    titleEn: recordUpdateData?.data?.locales?.en?.title,
+    titleAr: recordUpdateData?.data?.locales?.ar?.title,
+    sub_titleEn: recordUpdateData?.data?.locales?.en?.sub_title,
+    sub_titleAr: recordUpdateData?.data?.locales?.ar?.sub_title,
+    descriptionEn: recordUpdateData?.data?.locales?.en?.description,
+    descriptionAr: recordUpdateData?.data?.locales?.ar?.description,
+    addressEn: recordUpdateData?.data?.locales?.en?.address,
+    addressAr: recordUpdateData?.data?.locales?.ar?.address,
+    payment_planEn: recordUpdateData?.data?.locales?.en?.payment_plan,
+    payment_planAr: recordUpdateData?.data?.locales?.ar?.payment_plan,
+    max_size: recordUpdateData?.data?.details?.max_size,
+    min_size: recordUpdateData?.data?.details?.min_size,
+    max_bathrooms_count: recordUpdateData?.data?.details?.max_bathrooms_count,
+    min_bathrooms_count: recordUpdateData?.data?.details?.min_bathrooms_count,
+    price: recordUpdateData?.data?.details?.price,
+    lat: recordUpdateData?.data?.location?.lat,
+    long: recordUpdateData?.data?.location?.long,
+    has_studio: recordUpdateData?.data?.has_studio === true ? "1" : "0",
+    category_id: recordUpdateData?.data?.category?.id,
+    developer_id: recordUpdateData?.data?.developer?.id,
+    area_id: recordUpdateData?.data?.area?.id,
+    handover_date: recordUpdateData?.data?.handover_date
+  });
+  setFile(recordUpdateData?.data?.images)
+  setCover(recordUpdateData?.data?.cover)
+  setLayout(recordUpdateData?.data?.layout)
+  setBrochure(recordUpdateData?.data?.brochure)
+  
+}
+    // recordUpdateData
+   },[recordIsSuccess])
   useEffect(() => {
             //@ts-ignore
 
@@ -179,26 +216,7 @@ export default function EditPropertyForm() {
   }, [categoriesIsSuccess]);
 
 
-  useEffect(() => {
-    if (recordIsSuccess) {
-      setFormData({
-        ...formData,
-        // nameEn: recordUpdateData?.data?.locales?.en?.name,
-        // nameAr: recordUpdateData?.data?.locales?.ar?.name,
-        // city_id: recordUpdateData?.data?.city?.id,
-      });
-      setFile(recordUpdateData?.data?.image)
 
-
-      // const editOpitonn = options?.find((option:{ value: any; label: string }) => option.value === recordUpdateData?.data?.city?.id ) 
-      // console.log('defult opton', editOpitonn)
-      if(recordUpdateData?.data?.city?.id){
-
-        setEditOptionId(recordUpdateData?.data?.city?.id)
-      }
-    }
-  }, [recordIsSuccess]);
-  // const [options, setOptions] = useState<{ value: any; label: string }[]>([]);
 console.log(formData)
   const [toastData, setToastData] = useState<any>({});
 
@@ -224,10 +242,6 @@ console.log(formData)
     }
     
   }
-  console.log(arrTypes);
-
-  console.log(cover , layout , brochure, files)
-  console.log(formData)
 
   useEffect(() => {
     if (toastData?.data?.status === 200) {
@@ -558,22 +572,21 @@ console.log(formData)
        </div> 
           </div>
           <div className=" col-span-12 md:col-span-3 mt-7">
-            {/* @ts-ignore */}
-            <Upload_cover multi label="tableForms.labels.images" setFile={setFile} editImgUrl={files[0]?.original_url} />
+           
+            <Upload_cover multi label="tableForms.labels.images" setFile={setFile} editImgUrl={files[0]? files[0]?.original_url :""} />
           </div>
           <div className=" col-span-12 md:col-span-3 mt-7">
-            {/* @ts-ignore */}
+           
             <Upload_cover label="tableForms.labels.cover" setFile={setCover} cover editImgUrl={cover?.original_url} />
           </div>
           <div className=" col-span-12 md:col-span-3 mt-7">
-            {/* @ts-ignore */}
+           
             <Upload_cover label="tableForms.labels.brochure"  setFile={setBrochure} editImgUrl={brochure?.original_url} />
           </div>
           <div className=" col-span-12 md:col-span-3 mt-7">
-            {/* @ts-ignore */}
+           
             <Upload_cover label="tableForms.labels.layout" setFile={setLayout}  editImgUrl={layout?.original_url} />
           </div>
-          
 
           <div className="lg:col-span-6 col-span-12">
 

@@ -3,15 +3,9 @@ import { useEffect, useState } from "react";
 
 
 
-type mapProps = {
-  center: {
-    lat: number;
-    lng: number;
-  };
-  customHeight?:string
-};
 
-const GoogleMapComponent = (props: mapProps) => {
+
+const GoogleMapComponent = () => {
     // const mapRef = useRef(null);
   const [center, setCenter] = useState({
     lat: -3.745,
@@ -19,20 +13,10 @@ const GoogleMapComponent = (props: mapProps) => {
   });
   const containerStyle = {
     width: "100%",
-    height: props.customHeight|| "580px",
+    height: "580px",
   };
 
-  useEffect(() => {
-    if (
-      //@ts-ignore
-      props?.center?.latitude !== undefined &&
-      //@ts-ignore
-      props?.center?.longitude !== undefined
-    ) {
-      //@ts-ignore
-      setCenter({ lat: props.center.latitude, lng: props.center.longitude });
-    }
-  }, [props?.center]);
+ 
   useEffect(() => {
     // Clean up Google Map instance when component unmounts or modal closes
     return () => {

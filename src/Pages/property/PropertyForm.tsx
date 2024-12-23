@@ -644,12 +644,12 @@ console.log(formData)
   />
 </div>
 
-          {/* <div className=" col-span-12 md:col-span-6  mt-7 ">  */}
+          <div className=" col-span-12 md:col-span-6  mt-7 "> 
 
-  {/* <div  className="flex w-full"> 
+  <div  className="flex w-full"> 
  <GoogleMapComponent   />
- </div>  */}
-           {/* </div> */}
+ </div> 
+          </div>
           
         </div>
 

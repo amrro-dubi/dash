@@ -19,6 +19,8 @@ import CanvasComponent from "../Pages/Canvas";
 import Types from "../Pages/PropertyTypes/Types";
 import Categories from "../Pages/Categories/Categories";
 import Properties from "../Pages/property/Properties";
+import PropertyForm from "../Pages/property/PropertyForm";
+import EditPropertyForm from "../Pages/property/EditPropertyForm";
 
 
 
@@ -81,6 +83,16 @@ const routes = [
             {
             path: "/home/properties",
             element: <Properties />,
+            children: [],
+        },
+            {
+            path: "/home/propertiesForm",
+            element: <PropertyForm />,
+            children: [],
+        },
+            {
+            path: "/home/ediPropertiesForm/:propertyId",
+            element: <EditPropertyForm />,
             children: [],
         },
             {

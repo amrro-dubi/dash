@@ -14,7 +14,7 @@ import "./globals.css";
 import "./assets/css/nice-select.css";
 import './tailwind.css'
 import './i18n';
-import "./assets/css/style.css";
+import "./assets/css/styles.css";
 // import './assets/css/style.css'
 import { Provider } from 'react-redux';
 import store from './store';

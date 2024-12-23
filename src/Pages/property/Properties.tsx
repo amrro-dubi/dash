@@ -13,6 +13,8 @@ import { showAlert } from "../../components/Error";
 
 import AreaForm from "./PropertyForm";
 import { useTranslation } from "react-i18next";
+import PropertyForm from "./PropertyForm";
+import { useNavigate } from "react-router-dom";
 
 // type amrro = {
 //   data: {amr: string}
@@ -32,7 +34,7 @@ export default function Properties() {
   const [editData, setEditData] = useState<any>(null);
   const [data, setData] = useState<any>([]);
   const [search, setSearch] = useState('');
-  
+  const navigate = useNavigate()
 
   console.log(cityId, developerId, areaId)
  const resetFilters = ()=>{
@@ -223,9 +225,8 @@ setCityOptions(optionss);
     console.log(id);
   };
   const EditHandelr = (data: any) => {
-    // setSkipedId(true)
-    setEditData(data);
-    console.log(data);
+navigate(`/home/ediPropertiesForm/${data.id}`)  ;
+    
   };
 
   if (isLoading) {
@@ -244,7 +245,7 @@ setCityOptions(optionss);
       {/* <MainPageCard> */}
       {open && (
         <CustomModal openCloseModal={setOpen} title={`${t("tableForms.add")} ${t("tableForms.propertyTitle")}`}>
-          <AreaForm openCloseModal={setOpen} editData={null} />
+          <PropertyForm openCloseModal={setOpen} editData={null} />
         </CustomModal>
       )}
       {open && editData?.id && (
@@ -253,7 +254,7 @@ setCityOptions(optionss);
           title={`${t("tableForms.edit")} ${t("tableForms.propertyTitle")}`}
           resetEditData={setEditData}
         >
-          <AreaForm
+          <PropertyForm
             editData={editData}
             resetEditData={setEditData}
             openCloseModal={setOpen}
@@ -265,7 +266,7 @@ setCityOptions(optionss);
         setPage={setPage}
         page={page}
                 //@ts-ignore
-
+        Link_Navigation="/home/propertiesForm"
         pagination={data?.data?.pagination}
         Enabel_edit={true}
        
@@ -274,7 +275,7 @@ setCityOptions(optionss);
         //@ts-ignore
         tabelHead={finslColsKeys ? finslColsKeys : []}
         Chcekbox={true}
-        Page_Add={false}
+        Page_Add={true}
         showAddButton={true}
         onDelete={deleteSubmitHandler}
         onView={viewHander}

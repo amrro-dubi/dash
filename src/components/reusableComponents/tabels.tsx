@@ -96,8 +96,10 @@ const isRtl = true
                                                                         type="button"
                                                                         onClick={() => {
                                                                             props.onEdit(data);
+                                                                             if(props.Link_Navigation){
 
-                                                                            openModal();
+                                                                                 openModal();
+                                                                             }
                                                                         }}
                                                                     >
                                                                         <IconPencil />
@@ -380,14 +382,14 @@ const isRtl = true
                         )}
                         {props.Page_Add ? (
                             <>
-                                <Link to={`${props.Link_Navigation}/Add`} className="btn bg-gradient-to-r from-[#EFB93F] to-[#EFB93F] rounded-full shadow-none text-white">
+                                <Link to={`${props.Link_Navigation}`} className="btn bg-gradient-to-r from-[#EFB93F] to-[#EFB93F] rounded-full shadow-none text-white">
                                     <span className="mr-2">
                                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M8 3.33331V12.6666" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                             <path d="M3.33325 8H12.6666" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
                                     </span>
-{t('tableForms.btnAdd')}                                </Link>
+{t('tableForms.add')}                                </Link>
                             </>
                         ) : (
                             <>

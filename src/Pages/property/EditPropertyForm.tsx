@@ -17,7 +17,7 @@ import CustomSelect from "../../components/reusableComponents/CustomSelect";
 import { useTranslation } from "react-i18next";
 import CustomDataInput from "../../components/reusableComponents/DateInput";
 import GoogleMapComponent from "./Map";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 interface formDataTyps {
@@ -49,19 +49,15 @@ interface formDataTyps {
 type typesRecordesType = {
   data: { head: string[], data: { id: string, name: string }[] }
 }
-export default function PropertyForm({
-  editData,
-  resetEditData,
-  openCloseModal,
-}: {
-  editData?: any;
-  resetEditData?: React.Dispatch<any>;
-  openCloseModal?: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
+export default function EditPropertyForm() {
+
+
+  const {propertyId} = useParams()
+  console.log(propertyId)
   const { data: recordUpdateData, isSuccess: recordIsSuccess } =
     useFindRecordQuery(
-      { id: editData?.id, url: "admin/area" },
-      { skip: editData === null }
+      { id: propertyId, url: "admin/product" },
+      
     );
     const {t} = useTranslation()
     
@@ -119,32 +115,23 @@ export default function PropertyForm({
   const [layout, setLayout] = useState<File | null>(null);
   const [brochure, setBrochure] = useState<File | null>(null);
   const navigate = useNavigate()
-  // const [mapKey, setMapKey] = useState(0);
-  const closeModal = () => {
-    // openCloseModal((prevState) => !prevState);
-    if (resetEditData) {
-      resetEditData([]);
-    }
-    // setMapKey(prevKey => prevKey + 1);
-  };
+ 
+ 
   const { data, isLoading, isSuccess } = useGetRecordsQuery({
-   
-  
     url:'admin/area',
     inValid:['areas']
   });
+
   const { data : developersRecordes , isSuccess:developerIsSuccess } = useGetRecordsQuery({
-   
-  
     url:'admin/developer',
     inValid:['developers']
   });
+
   const { data : categoriesRecordes, isSuccess:categoriesIsSuccess } = useGetRecordsQuery({
-   
-  
     url:'admin/category',
     inValid:['categories']
   });
+
   const { data : typesRecordes } = useGetRecordsQuery({
    
   
@@ -327,25 +314,17 @@ console.log(formData)
     // }
     
     try {
-      if (editData?.id) {
+    
         // formDataRequest.append("_method", 'patch');
         const response = await editRecord({
-          id: editData?.id,
+          id: propertyId,
           formData: formDataRequest,
           url: "admin/area",
           inValid: ["areas",],
         });
         console.log(response);
         setToastData(response);
-      } else {
-        const response = await createRecord({
-          formData: formDataRequest,
-          url: "admin/product",
-          inValid: ["areas"],
-        });
-
-        setToastData(response);
-      }
+      
     } catch (err) {
       setToastData(err);
     }
@@ -652,7 +631,7 @@ console.log(formData)
                   clipRule="evenodd"
                 ></path>
               </svg>
-              {editData ? t("tableForms.edit") : t("tableForms.add")}
+              { t("tableForms.edit") }
             </button>
           </>
         </div>

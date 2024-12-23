@@ -39,7 +39,7 @@ const {openSidebar} = useSelector((state:RootState)=> state.Model)
         {isSuccess && (  <div className="w-full flex">
 
 <div className={` ${openSidebar ? "w-0 !px-0  overflow-hidden": "!w-[350px]"} duration-700   `}><Sidebar /></div>
-<div  className={` flex flex-col   w-full  duration-700   `}>  
+<div  className={` flex flex-col   w-full  duration-700 !overflow-hidden   `}>  
 
   <Navbar/>
 <Outlet />

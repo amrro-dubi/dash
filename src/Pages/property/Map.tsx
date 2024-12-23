@@ -12,7 +12,7 @@ const GoogleMapComponent = () => {
 
     const { isLoaded, loadError } = useJsApiLoader({
         id: "google-map-script",
-        // @ts-ignore
+        // @ts-expect-error type error in import.meta.env
         googleMapsApiKey: import.meta.env.VITE_APP_GOOGLE_MAPS_API_KEY || "",
         libraries: ["places"],
     })

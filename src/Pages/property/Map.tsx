@@ -1,40 +1,47 @@
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
-import { useEffect, useState } from "react";
+import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api"
+import { useCallback, useEffect, useRef, useMemo } from "react"
 
-
-
-
+type Map = google.maps.Map
 
 const GoogleMapComponent = () => {
-    // const mapRef = useRef(null);
-  const [center, setCenter] = useState({
-    lat: -3.745,
-    lng: -38.523,
-  });
-  const containerStyle = {
-    width: "100%",
-    height: "580px",
-  };
+    const mapRef = useRef<Map | null>(null)
 
- 
-  useEffect(() => {
-    // Clean up Google Map instance when component unmounts or modal closes
-    return () => {
-      // if (mapRef.current && mapRef.current.map) {
-      //   // mapRef.current.map = null; // Explicitly destroy the map instance
-      // }
-    };
-  }, []);
-  return (
-    <LoadScript googleMapsApiKey="AIzaSyAU62hceWz3iPyR_5Ado1UtLUV3i_4n6So">
-      <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={10}  onLoad={() => {
-          // mapRef.current = map;
-        }}>
-      
-        <Marker position={center} />
-      </GoogleMap>
-    </LoadScript>
-  );
-};
+    const onLoad = useCallback((map: Map) => {
+        mapRef.current = map
+    }, [])
 
-export default GoogleMapComponent;
+    const { isLoaded, loadError } = useJsApiLoader({
+        id: "google-map-script",
+        // @ts-ignore
+        googleMapsApiKey: import.meta.env.VITE_APP_GOOGLE_MAPS_API_KEY || "",
+        libraries: ["places"],
+    })
+
+    const center = useMemo(() => ({ lat: -3.745, lng: -38.523 }), [])
+    const containerStyle = useMemo(() => ({ width: "100%", height: "580px" }), [])
+
+    useEffect(() => {
+        // Clean up Google Map instance when component unmounts
+        return () => {
+            if (mapRef.current) {
+                mapRef.current = null
+            }
+        }
+    }, [])
+
+    if (loadError) {
+        return <p>Error loading Google Maps</p>
+    }
+
+    return isLoaded ? (
+        <div className="w-full h-full col-span-full">
+            <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={10} onLoad={onLoad}>
+                <Marker position={center} />
+            </GoogleMap>
+        </div>
+    ) : (
+        <p>Loading...</p>
+    )
+}
+
+export default GoogleMapComponent

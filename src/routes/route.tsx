@@ -22,6 +22,7 @@ import Properties from "../Pages/property/Properties";
 import PropertyForm from "../Pages/property/PropertyForm";
 import EditPropertyForm from "../Pages/property/EditPropertyForm";
 import ChangePassword from "../Pages/ChangePassword";
+import Services from "../Pages/services/Services";
 
 
 
@@ -79,6 +80,11 @@ const routes = [
             {
             path: "/home/categories",
             element: <Categories />,
+            children: [],
+        },
+        {
+            path: "/home/services",
+            element: <Services />,
             children: [],
         },
             {

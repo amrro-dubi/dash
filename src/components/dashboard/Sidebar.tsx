@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { RootState } from "../../store"
-import sideBarImg from "../../assets/img/dashboard/1.png"
+import sideBarImg from "../../assets/img/dashboard/goldLogo.png"
 import { useLogoutMutation } from "../../apis/authSlice"
 import { useTranslation } from "react-i18next"
 import { RiAdminLine } from "react-icons/ri";
@@ -62,7 +62,7 @@ const Sidebar = () => {
   }
     return (
         <div
-            className={`dashboard-sidebar-wrapper fixed ${
+            className={`dashboard-sidebar-wrapper fixed  overflow-y-scroll scrollbar-hide ${
                 openSidebar ? "z-10" : "!w-[0px] !px-0 !overflow-hidden  -z-40 "
             }`}
         >
@@ -142,6 +142,14 @@ const Sidebar = () => {
                             <Link to="/home/developers">
                             <MdOutlineDeveloperMode className="size-5" />
                                 <h6>{t("tableForms.developersTitle")}</h6>
+                            </Link>
+                        </li>
+                    )}
+                    {usePermissionGurd("service", "view") && (
+                        <li onClick={toggoleSideBar}  className={isActive("/home/services")}>
+                            <Link to="/home/services">
+                            <MdOutlineDeveloperMode className="size-5" />
+                                <h6>services</h6>
                             </Link>
                         </li>
                     )}

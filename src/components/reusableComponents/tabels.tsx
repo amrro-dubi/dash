@@ -344,8 +344,9 @@ const ColumnChooser = (props: tabelProps) => {
                             })}
                         </ul>
                     </Dropdown> */}
-                    <div className="w-full flex items-center justify-between">
-                        <div className="flex md:items-center md:flex-row flex-col gap-5">
+                    
+                    <div className="w-full flex items-center justify-end">
+                    {props.enable_filter && (<div className="flex md:items-center md:flex-row flex-col gap-5">
                             <div className="dropdown">
                                 <Dropdown
                                     placement={`${isRtl ? "bottom-end" : "bottom-start"}`}
@@ -390,7 +391,7 @@ const ColumnChooser = (props: tabelProps) => {
                                     </ul>
                                 </Dropdown>
                             </div>
-                        </div>
+                        </div>)}
 
                         <div className="flex  md:items-center md:flex-row flex-col gap-5">
                             <div className="dropdown">

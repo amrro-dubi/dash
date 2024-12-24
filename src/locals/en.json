@@ -84,6 +84,8 @@
 
     "developersTitle": "Developers",
     "developerTitle": "developer",
+    "servicesTitle": "Services", 
+    "serviceTitle": "Service", 
     "adminsTitle": "Admins",
     "Title": "Admin",
     "typesTitle": "Types",

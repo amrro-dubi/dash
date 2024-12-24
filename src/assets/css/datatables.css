@@ -14,7 +14,7 @@
 /* Style table headers */
 .table-container th {
     background-color: #f8f9fa;
-    text-align: left;
+    /* text-align: left; */
     padding: 8px;
     border-bottom: 1px solid #dee2e6;
 }

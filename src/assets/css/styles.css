@@ -24741,6 +24741,16 @@ button {
   height: 100vh;
   
 }
+/* Hide scrollbar for WebKit browsers */
+.dashboard-sidebar-wrapper::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* Hide scrollbar for Firefox */
+.dashboard-sidebar-wrapper {
+  scrollbar-width: none; /* Firefox */
+}
 @media (max-width: 1699px) {
   .dashboard-wrapper .dashboard-sidebar-wrapper {
     max-width: 270px !important;
@@ -24786,7 +24796,7 @@ button {
   }
 }
 .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-logo {
-  padding-bottom: 100px;
+  padding-bottom: 0px;
 }
 .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu > ul {
   padding: 0;

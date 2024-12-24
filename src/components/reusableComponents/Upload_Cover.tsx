@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import uploadImg from "../../assets/img/dashboard/images.jpg";
+import uploadImg from "../../assets/img/dashboard/upload.png";
 import uploadUser from "../../assets/img/dashboard/upload-user.png";
 import { useTranslation } from "react-i18next";
 type UploadImageProps = {
@@ -53,7 +53,7 @@ const Upload_cover = (props: UploadImageProps) => {
       />
       <div
         onClick={handleButtonClick}
-        className="flex cursor-pointer  lg:w-[220px] h-[120px] rounded-2xl border-[1px] border-[#EFB93F] border-solid justify-center items-center "
+        className="flex cursor-pointer  lg:w-[220px] h-[120px] rounded-2xl border-[1px] border-black hover:border-[#EFB93F] border-solid justify-center items-center "
       >
         {props.editImgUrl? <img className="w-full h-full rounded-2xl object-cover" src={`${props?.editImgUrl}`}/> : <> {
           imageSrc ? (

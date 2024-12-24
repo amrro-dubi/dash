@@ -42,6 +42,30 @@ const ColumnChooser = (props: tabelProps) => {
         setIsRtl(savedLanguage === "ar" ? true : false)
 
     },[])
+
+
+    useEffect(() => {
+        const handleWheel = (event:any) => {
+          if (event.shiftKey) {
+            event.preventDefault();
+            const container = document.querySelector('.table-container');
+            if (container) {
+              container.scrollLeft += event.deltaY;
+            }
+          }
+        };
+    
+        const container = document.querySelector('.table-container');
+        if (container) {
+          container.addEventListener('wheel', handleWheel);
+        }
+    
+        return () => {
+          if (container) {
+            container.removeEventListener('wheel', handleWheel);
+          }
+        };
+      }, []);
     // show/hide
     // const [page, setPage] = useState(1);
     const PAGE_SIZES = [10, 20, 30, 50, 100]
@@ -221,7 +245,7 @@ const ColumnChooser = (props: tabelProps) => {
     }, [sortStatus])
 
     return (
-        <div>
+        <div className="table-container" style={{ overflowX: 'auto' }}>
             {/* search and reset */}
 
             <div className="mb-">

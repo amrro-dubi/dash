@@ -1,4 +1,43 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+/* Ensure the table container allows horizontal scrolling */
+.table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS */
+}
+
+/* Style the table to be responsive */
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Style table headers */
+.table-container th {
+    background-color: #f8f9fa;
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+/* Style table cells */
+.table-container td {
+    padding: 8px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+/* Add hover effect for table rows */
+.table-container tbody tr:hover {
+    background-color: #f1f3f5;
+}
+
+/* Ensure proper direction for RTL and LTR */
+[dir='rtl'] .table-container {
+    direction: rtl;
+}
+
+[dir='ltr'] .table-container {
+    direction: ltr;
+}
 table > thead > tr > th,
 table > tbody > tr > td {
     @apply !py-3 !px-4 text-sm;
@@ -44,6 +83,9 @@ table tr .mantine-Checkbox-root {
 }
 [dir='rtl'] .datatables .mantine-ScrollArea-root.mantine-lvjyp7 {
     direction: rtl;
+}
+[dir='ltr'] .datatables .mantine-ScrollArea-root.mantine-lvjyp7 {
+    direction: ltr;
 }
 
 

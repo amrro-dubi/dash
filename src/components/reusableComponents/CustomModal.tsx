@@ -15,7 +15,7 @@ const CustomModal = (props: ModalProps) => {
             aria-hidden="true"
             className="fixed top-0 right-0 left-0 z-50 flex justify-center items-center h-full bg-gray-800 bg-opacity-85"
         >
-            <div className="rounded-2xl shadow dark:bg-gray-700 bg-white w-[60%] max-h-[80%] flex flex-col">
+            <div className="rounded-2xl shadow dark:bg-gray-700 bg-white w-[90%] lg:w-[60%] max-h-[80%] flex flex-col">
            
                 <div className="flex items-center bg-gradient-to-r from-[#af7a3d] to-[#ecb022] justify-between p-4 md:p-5 rounded-t-xl">
                     <h3 className="text-lg font-semibold text-white">{props.title}</h3>
@@ -44,7 +44,7 @@ const CustomModal = (props: ModalProps) => {
                 </div>
 
                 
-                <div className="flex-1 overflow-auto p-4">
+                <div className="flex-1 overflow-auto lg:p-4">
                     {props.children}
                 </div>
             </div>

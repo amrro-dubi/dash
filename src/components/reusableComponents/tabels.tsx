@@ -26,7 +26,22 @@ const ColumnChooser = (props: tabelProps) => {
         setcols(props.tabelHead)
     })
     // const isRtl = useSelector((state: IRootState) => state.themeConfig.rtlClass) === 'rtl' ? true : false;
-    const isRtl = true
+    const [isRtl, setIsRtl] = useState(false)
+
+
+    useEffect(() => {
+
+
+        const savedLanguage = window.localStorage.getItem("language");
+
+        document.documentElement.dir = savedLanguage
+            ? savedLanguage === "ar"
+                ? "rtl"
+                : "ltr"
+            : "rtl";
+        setIsRtl(savedLanguage === "ar" ? true : false)
+
+    },[])
     // show/hide
     // const [page, setPage] = useState(1);
     const PAGE_SIZES = [10, 20, 30, 50, 100]
@@ -109,7 +124,7 @@ const ColumnChooser = (props: tabelProps) => {
                                   type="button"
                                   onClick={() => {
                                       props.onEdit(data)
-                                      if (props.Link_Navigation) {
+                                      if (!props.Link_Navigation) {
                                           openModal()
                                       }
                                   }}
@@ -364,7 +379,7 @@ const ColumnChooser = (props: tabelProps) => {
                             </div>
                         </div>
 
-                        <div className="flex md:items-center md:flex-row flex-col gap-5">
+                        <div className="flex  md:items-center md:flex-row flex-col gap-5">
                             <div className="dropdown">
                                 <Dropdown
                                     placement={`${isRtl ? "bottom-end" : "bottom-start"}`}
@@ -412,7 +427,7 @@ const ColumnChooser = (props: tabelProps) => {
                             </div>
                         </div>
 
-                        <div className="text-right flex gap-2">
+                        <div className=" flex gap-2">
                             {selectedRecords?.length > 0 && selectedRecords ? (
                                 <>
                                     <button className="btn bg-[#EFB93F] rounded-xl shadow-none text-white">

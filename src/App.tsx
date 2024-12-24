@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 
 import Sidebar from "./components/dashboard/Sidebar"
 import { Outlet } from "react-router-dom"
@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "./store"
 import { useGetRecordsQuery } from "./apis/serveces"
 import { permissionsActions } from "./store/permisions"
+import { modelActions } from "./store/modelSlice"
 
 const App: React.FC = () => {
     const dispatch = useDispatch()
@@ -19,15 +20,35 @@ const App: React.FC = () => {
         }
     }, [isSuccess, data, dispatch])
 
-    console.log("data feekll")
     const { openSidebar } = useSelector((state: RootState) => state.Model)
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+      const handleResize = () => {
+        setWindowWidth(window.innerWidth);
+      };
+  
+      window.addEventListener('resize', handleResize);
+  
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }, []);
+    
+    useEffect(() => {
+
+        if (windowWidth > 1024) {
+            dispatch(modelActions.setOpenSidebar())
+        }
+    }, [windowWidth, dispatch]);
     return (
         <>
             <div className="dashboard-wrapper">
-                {isSuccess && (
+                
                     <div className="w-full flex">
+                        
                         <div
-                            className={` ${openSidebar ? "w-0 !px-0  overflow-hidden" : "!w-[350px]"} duration-700   `}
+                            className={` ${openSidebar ? "lg:block !w-[100px] md:w-[220px] lg:!w-[350px] " : "w-0 !px-0  overflow-hidden  "} duration-700   `}
                         >
                             <Sidebar />
                         </div>
@@ -37,8 +58,9 @@ const App: React.FC = () => {
                             <Navbar />
                             <Outlet />
                         </div>
+
                     </div>
-                )}
+             
             </div>
         </>
     )

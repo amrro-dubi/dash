@@ -587,7 +587,7 @@ export default function PropertyForm({
                             })}
                         </div>
                     </div>
-                    <div className=" col-span-12 md:col-span-3 mt-7">
+                    <div className=" col-span-6 lg:col-span-3 mt-7">
                       
                         <Upload_cover
                             multi
@@ -598,7 +598,7 @@ export default function PropertyForm({
                             editImgUrl={files[0]?.original_url}
                         />
                     </div>
-                    <div className=" col-span-12 md:col-span-3 mt-7">
+                    <div className=" col-span-6 lg:col-span-3 mt-7">
                         {/* @ts-ignore */}
                         <Upload_cover
                             label="tableForms.labels.cover"
@@ -609,7 +609,7 @@ export default function PropertyForm({
                             editImgUrl={cover?.original_url}
                         />
                     </div>
-                    <div className=" col-span-12 md:col-span-3 mt-7">
+                    <div className=" col-span-6 lg:col-span-3 mt-7">
                        
                         <Upload_cover
                             label="tableForms.labels.brochure"
@@ -619,7 +619,7 @@ export default function PropertyForm({
                             editImgUrl={brochure?.original_url}
                         />
                     </div>
-                    <div className=" col-span-12 md:col-span-3 mt-7">
+                    <div className=" col-span-6 lg:col-span-3 mt-7">
                        
                         <Upload_cover
                             label="tableForms.labels.layout"

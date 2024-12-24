@@ -24743,7 +24743,7 @@ button {
 }
 @media (max-width: 1699px) {
   .dashboard-wrapper .dashboard-sidebar-wrapper {
-    max-width: 270px;
+    max-width: 270px !important;
   }
 }
 @media (min-width: 1400px) and (max-width: 1599px) {
@@ -24753,32 +24753,36 @@ button {
 }
 @media (min-width: 1200px) and (max-width: 1399px) {
   .dashboard-wrapper .dashboard-sidebar-wrapper {
-    max-width: 220px;
+    max-width: 220px !important;
     padding: 20px 15px;
   }
 }
 @media (max-width: 1199px) {
   .dashboard-wrapper .dashboard-sidebar-wrapper {
-    max-width: 200px;
+    max-width: 200px, !important;
+    /* position: absolute; */
     padding: 20px 15px;
+   
   }
 }
 @media (max-width: 991px) {
   .dashboard-wrapper .dashboard-sidebar-wrapper {
-    left: -100%;
+    /* left: -100%; */
+    max-width: 100px !important;
   }
   .dashboard-wrapper .dashboard-sidebar-wrapper.slide {
     left: 0;
   }
 }
+
 @media (max-width: 767px) {
   .dashboard-wrapper .dashboard-sidebar-wrapper {
-    max-width: 120px;
+    max-width: 120px !important;
   }
 }
 @media (max-width: 576px) {
   .dashboard-wrapper .dashboard-sidebar-wrapper {
-    max-width: 80px;
+    max-width: 80px !important;
   }
 }
 .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-logo {
@@ -24788,6 +24792,7 @@ button {
   padding: 0;
   margin: 0;
   list-style: none;
+  
 }
 .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu > ul li a {
   color: var(--white-color);
@@ -24796,6 +24801,7 @@ button {
   align-items: center;
   gap: 10px;
   padding: 20px 25px;
+  
 }
 @media (min-width: 1400px) and (max-width: 1599px) {
   .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu > ul li a {
@@ -24812,9 +24818,10 @@ button {
     font-size: 14px;
   }
 }
-@media (max-width: 1199px) {
+@media (max-width: 768px) {
   .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu > ul li a {
     flex-direction: column;
+   
   }
 }
 .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu > ul li a svg {

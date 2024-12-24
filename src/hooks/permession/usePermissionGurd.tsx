@@ -6,7 +6,7 @@ const usePermissionGurd = (permissionKey:string , permissionType : PermissionTyp
     const [permission, setPermission] = useState(false)
     const {permissions} = useSelector((state:RootState)=> state.permissions);
 
-   console.log(permissions)
+    
 
     useEffect(()=>{
           

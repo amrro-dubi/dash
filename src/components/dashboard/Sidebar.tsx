@@ -1,7 +1,7 @@
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { RootState } from "../../store"
-import sideBarImg from "../../assets/img/dashboard/icon/dashboard-sidebar-logo.svg"
+import sideBarImg from "../../assets/img/dashboard/1.png"
 import { useLogoutMutation } from "../../apis/authSlice"
 import { useTranslation } from "react-i18next"
 import { RiAdminLine } from "react-icons/ri";
@@ -16,8 +16,11 @@ import { MdProductionQuantityLimits } from "react-icons/md";
 
 
 import usePermissionGurd from "../../hooks/permession/usePermissionGurd"
+import { modelActions } from "../../store/modelSlice"
+import { useEffect, useState } from "react"
 
 const Sidebar = () => {
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth)
     const { openSidebar } = useSelector((state: RootState) => state.Model)
     const { t } = useTranslation()
     const [logout] = useLogoutMutation()
@@ -35,11 +38,32 @@ const Sidebar = () => {
         }
     }
 
-    console.log(openSidebar)
+   
+
+  useEffect(() => {
+    const handleResize = () => {
+        setWindowWidth(window.innerWidth);
+       
+      };
+
+      window.addEventListener('resize', handleResize);
+   
+      return ()=> {
+        window.removeEventListener('resize', handleResize);
+      }
+  },[])
+
+  const dispatch = useDispatch()
+  const toggoleSideBar = ()=>{
+    if(windowWidth < 1024){
+      dispatch(modelActions.setOpenSidebar())
+    }
+
+  }
     return (
         <div
             className={`dashboard-sidebar-wrapper fixed ${
-                openSidebar ? "!w-[0px] !px-0 !overflow-hidden -z-40" : "z-10 w-[350px]"
+                openSidebar ? "z-10" : "!w-[0px] !px-0 !overflow-hidden  -z-40 "
             }`}
         >
             {/* Render this only if openSidebar is true */}
@@ -59,7 +83,7 @@ const Sidebar = () => {
 
             <div className="dashboard-sidebar-menu">
                 <ul>
-                    <li className={isActive("/home")}>
+                    <li className={isActive("/home")}  onClick={toggoleSideBar}>
                         <Link to="/">
                             <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox="0 0 18 18">
                                 <g clipPath="url(#clip0_920_531)">
@@ -80,7 +104,7 @@ const Sidebar = () => {
             </Link>
           </li> */}
                     {usePermissionGurd("admin", "view") && (
-                        <li className={isActive("/home/admins")}>
+                        <li onClick={toggoleSideBar}  className={isActive("/home/admins")}  >
                             <Link to="/home/admins">
                             <RiAdminLine className="size-5" />
                                 <h6>{t("tableForms.adminsTitle")}</h6>
@@ -88,7 +112,7 @@ const Sidebar = () => {
                         </li>
                     )}
                     {usePermissionGurd("role", "view") && (
-                        <li className={isActive("/home/roles")}>
+                        <li onClick={toggoleSideBar} className={isActive("/home/roles")}>
                             <Link to="/home/roles">
                             <LiaCriticalRole className="size-5" />
                                 <h6>{t("tableForms.rolesTitle")}</h6>
@@ -97,7 +121,7 @@ const Sidebar = () => {
                     )}
 
                     {usePermissionGurd("city", "view") && (
-                        <li className={isActive("/home/cites")}>
+                        <li onClick={toggoleSideBar} className={isActive("/home/cites")}>
                             <Link to="/home/cites">
                             <LiaCitySolid  className="size-5"/>
                                 <h6>{t("tableForms.citiesTitle")}</h6>
@@ -106,7 +130,7 @@ const Sidebar = () => {
                     )}
 
                     {usePermissionGurd("area", "view") && (
-                        <li className={isActive("/home/areas")}>
+                        <li onClick={toggoleSideBar}  className={isActive("/home/areas")}>
                             <Link to="/home/areas">
                             <PiMapPinAreaFill className="size-5" />
                                 <h6>{t("tableForms.areasTitle")}</h6>
@@ -114,7 +138,7 @@ const Sidebar = () => {
                         </li>
                     )}
                     {usePermissionGurd("developer", "view") && (
-                        <li className={isActive("/home/developers")}>
+                        <li onClick={toggoleSideBar}  className={isActive("/home/developers")}>
                             <Link to="/home/developers">
                             <MdOutlineDeveloperMode className="size-5" />
                                 <h6>{t("tableForms.developersTitle")}</h6>
@@ -122,7 +146,7 @@ const Sidebar = () => {
                         </li>
                     )}
                     {usePermissionGurd("amenities", "view") && (
-                        <li className={isActive("/home/amenites")}>
+                        <li onClick={toggoleSideBar} className={isActive("/home/amenites")}>
                             <Link to="/home/amenites">
                             <PiLightbulbFilamentThin  className="size-5"/>
                                 <h6>{t("tableForms.amenitiesTitle")}</h6>
@@ -130,7 +154,7 @@ const Sidebar = () => {
                         </li>
                     )}
                     {usePermissionGurd("type", "view") && (
-                        <li className={isActive("/home/types")}>
+                        <li onClick={toggoleSideBar} className={isActive("/home/types")}>
                             <Link to="/home/types">
                             <LuTypeOutline />
 
@@ -139,7 +163,7 @@ const Sidebar = () => {
                         </li>
                     )}
                     {usePermissionGurd("category", "view") && (
-                        <li className={isActive("/home/categories")}>
+                        <li onClick={toggoleSideBar} className={isActive("/home/categories")}>
                             <Link to="/home/categories">
                             <BiCategoryAlt />
                                 <h6>{t("tableForms.categoriesTitle")}</h6>
@@ -147,7 +171,7 @@ const Sidebar = () => {
                         </li>
                     )}
                     {usePermissionGurd("product", "view") && (
-                        <li className={isActive("/home/properties")}>
+                        <li onClick={toggoleSideBar} className={isActive("/home/properties")}>
                             <Link to="/home/properties">
                             <MdProductionQuantityLimits />
 

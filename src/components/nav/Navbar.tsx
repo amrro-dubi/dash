@@ -5,20 +5,13 @@ import { useDispatch } from "react-redux";
 
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import useLanguage from "../../hooks/useLanguage";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const {t} = useTranslation()
-  useEffect(() => {
-    const savedLanguage = window.localStorage.getItem("language");
-
-    document.documentElement.dir = savedLanguage
-      ? savedLanguage === "ar"
-        ? "rtl"
-        : "ltr"
-      : "rtl";
-  }, []);
+   useLanguage()
   const handleClickOutside = (event: MouseEvent) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
       setIsOpen(false);

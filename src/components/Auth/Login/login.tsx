@@ -31,7 +31,7 @@ const {t} = useTranslation()
       ? savedLanguage === "ar"
         ? "rtl"
         : "ltr"
-      : "rtl";
+      : "ltr";
   }, []);
   const [Adminlogin, { isLoading }] = useAdminloginMutation();
   useEffect(()=>{

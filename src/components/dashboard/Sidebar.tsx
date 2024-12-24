@@ -180,7 +180,7 @@ const Sidebar = () => {
                         </li>
                     )}
 
-                    <button className="logout">
+                    <button onClick={handleLogOut} className="logout">
                         <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox="0 0 18 18">
                             <g clipPath="url(#clip0_998_2016)">
                                 <path
@@ -195,7 +195,7 @@ const Sidebar = () => {
                                 />
                             </g>
                         </svg>
-                        <h6 onClick={handleLogOut}>{t("tableForms.labels.logout")}</h6>
+                        <h6 >{t("tableForms.labels.logout")}</h6>
                     </button>
                 </ul>
             </div>

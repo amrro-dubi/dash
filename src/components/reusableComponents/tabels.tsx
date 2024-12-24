@@ -14,6 +14,7 @@ import IconPencil from "../Icon/IconPencil"
 import IconTrashLines from "../Icon/IconTrashLines"
 import { useTranslation } from "react-i18next"
 import CustomSelect from "./CustomSelect"
+import useLanguage from "../../hooks/useLanguage"
 
 const ColumnChooser = (props: tabelProps) => {
     const { t } = useTranslation()
@@ -26,22 +27,10 @@ const ColumnChooser = (props: tabelProps) => {
         setcols(props.tabelHead)
     })
     // const isRtl = useSelector((state: IRootState) => state.themeConfig.rtlClass) === 'rtl' ? true : false;
-    const [isRtl, setIsRtl] = useState(false)
 
 
-    useEffect(() => {
 
-
-        const savedLanguage = window.localStorage.getItem("language");
-
-        document.documentElement.dir = savedLanguage
-            ? savedLanguage === "ar"
-                ? "rtl"
-                : "ltr"
-            : "rtl";
-        setIsRtl(savedLanguage === "ar" ? true : false)
-
-    },[])
+    const isRtl = useLanguage()
 
 
     useEffect(() => {

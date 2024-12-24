@@ -24,7 +24,15 @@ const {t} = useTranslation()
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
+  useEffect(() => {
+    const savedLanguage = window.localStorage.getItem("language");
 
+    document.documentElement.dir = savedLanguage
+      ? savedLanguage === "ar"
+        ? "rtl"
+        : "ltr"
+      : "rtl";
+  }, []);
   const [Adminlogin, { isLoading }] = useAdminloginMutation();
   useEffect(()=>{
 

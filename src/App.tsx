@@ -41,6 +41,7 @@ const App: React.FC = () => {
             dispatch(modelActions.setOpenSidebar())
         }
     }, [windowWidth, dispatch]);
+    
     return (
         <>
             <div className="dashboard-wrapper">

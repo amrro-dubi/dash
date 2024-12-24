@@ -18,12 +18,12 @@ const resources = {
 const getLanguageFromLocalStorage = () => {
   const savedLanguage = window.localStorage.getItem("language");
   document.documentElement.dir = savedLanguage === "ar" ? "rtl" : "ltr";
-  return savedLanguage ? savedLanguage : "ar"; // Fallback to 'en' if not found
+  return savedLanguage ? savedLanguage : "en"; // Fallback to 'en' if not found
 };
 i18n.use(initReactI18next).init({
   resources,
   lng: getLanguageFromLocalStorage(),
-  fallbackLng: "ar",
+  fallbackLng: "en",
   interpolation: {
     escapeValue: false,
   },

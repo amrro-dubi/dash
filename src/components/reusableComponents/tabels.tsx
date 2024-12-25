@@ -15,8 +15,10 @@ import IconTrashLines from "../Icon/IconTrashLines"
 import { useTranslation } from "react-i18next"
 import CustomSelect from "./CustomSelect"
 import useLanguage from "../../hooks/useLanguage"
+import { formatDateTime } from "../../uitils/helpers"
 
 const ColumnChooser = (props: tabelProps) => {
+    console.log(props.pagination)
     const { t } = useTranslation()
     // const [props.TableBody, setprops.TableBody] = useState(props.TableBody);
     const [cols, setcols] = useState(props.tabelHead)
@@ -67,7 +69,7 @@ const ColumnChooser = (props: tabelProps) => {
     }, [initialRecords, props.TableBody, props.page])
 
     const [selectedRecords, setSelectedRecords] = useState<any>([])
-
+console.log(selectedRecords)
     // const [selectedId, setSelectedId] = useState(null);
 
     // const handleClick = (props: any) => {
@@ -161,6 +163,18 @@ const ColumnChooser = (props: tabelProps) => {
             ? ({ image }: any) => (
                   <div className="flex  justify-between w-max  gap-3">
                       <img src={image?.original_url} alt="" className="w-[50px] text-left h-[50px] rounded-full" />
+                  </div>
+              )
+            : accessor === "created_at"
+            ? ({ created_at }: any) => (
+                  <div className="flex  justify-between w-max  gap-3">
+                    {formatDateTime(new Date(created_at))}
+                  </div>
+              )
+            : accessor === "updated_at"
+            ? ({ updated_at }: any) => (
+                  <div className="flex  justify-between w-max  gap-3">
+                    {formatDateTime(new Date(updated_at))}
                   </div>
               )
             : accessor === "brochure"
@@ -345,12 +359,12 @@ const ColumnChooser = (props: tabelProps) => {
                         </ul>
                     </Dropdown> */}
                     
-                    <div className="w-full flex items-center justify-end">
+                    <div className="w-full flex items-center justify-end gap-3">
                     {props.enable_filter && (<div className="flex md:items-center md:flex-row flex-col gap-5">
                             <div className="dropdown">
                                 <Dropdown
                                     placement={`${isRtl ? "bottom-end" : "bottom-start"}`}
-                                    btnClassName="!flex items-center border font-semibold border-[#EFB93F] dark:border-[#253b5c] rounded-md py-2 text-sm dark:bg-[#1b2e4b] dark:text-white-dark"
+                                    btnClassName="!flex items-center border font-semibold px-2 border-[#EFB93F] border-solid dark:border-[#253b5c] rounded-md py-2 text-sm dark:bg-[#1b2e4b] dark:text-white-dark"
                                     button={
                                         <>
                                             <span className="ltr:mr-1 rtl:ml-1 text-[#EFB93F]">
@@ -397,7 +411,7 @@ const ColumnChooser = (props: tabelProps) => {
                             <div className="dropdown">
                                 <Dropdown
                                     placement={`${isRtl ? "bottom-end" : "bottom-start"}`}
-                                    btnClassName="!flex items-center border font-semibold border-[#EFB93F] dark:border-[#253b5c] rounded-md px-4 py-2 text-sm dark:bg-[#1b2e4b] dark:text-white-dark"
+                                    btnClassName="!flex items-center border  font-semibold border-[#EFB93F] border-solid dark:border-[#253b5c] rounded-md px-4 py-2 text-sm dark:bg-[#1b2e4b] dark:text-white-dark"
                                     button={
                                         <>
                                             <span className="ltr:mr-1 rtl:ml-1 text-[#EFB93F]">
@@ -571,7 +585,7 @@ const ColumnChooser = (props: tabelProps) => {
                         columns={columns}
                         highlightOnHover
                         totalRecords={props?.pagination?.total}
-                        recordsPerPage={10}
+                        recordsPerPage={props.pagination?.per_page}
                         page={props?.pagination?.current_page}
                         onPageChange={(p) => props.setPage(p)}
                         // recordsPerPageOptions={3}

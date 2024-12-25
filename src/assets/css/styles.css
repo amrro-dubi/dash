@@ -97,7 +97,14 @@ i.bx {
 img {
   max-width: 100%;
   height: auto;
+  /* margin: auto */
 }
+.m_26062bec  svg {
+  
+  margin: auto;
+  text-align: center;
+}
+
 
 a {
   text-decoration: none;

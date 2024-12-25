@@ -11,16 +11,18 @@ import ColumnChooser from "../../components/reusableComponents/tabels";
 
 import { showAlert } from "../../components/Error";
 
-import AreaForm from "./AreaForm";
-import { useTranslation } from "react-i18next";
-import usePermissionGurd from "../../hooks/permession/usePermissionGurd";
-import useDeleteConfirmation from "../../hooks/useDeleteConfirmation";
-type amrro = {
-  data: {amr: string}
-}
-export default function Areas() {
-  const [page, setPage] = useState(1);
 
+import { useTranslation } from "react-i18next";
+
+import usePermissionGurd from "../../hooks/permession/usePermissionGurd";
+
+
+import AgentsForm from "./AgentsForm";
+import useDeleteConfirmation from "../../hooks/useDeleteConfirmation";
+
+export default function Agents() {
+  const [page, setPage] = useState(1);
+  
   const {t} = useTranslation()
 
   const [open, setOpen] = useState(false);
@@ -29,24 +31,40 @@ export default function Areas() {
 
   const { data, isLoading, isSuccess } = useGetRecordsQuery({
     page: Number(page),
-    per_page: 10,
-    url:'admin/area',
-    inValid:['areas']
+    per_page: 6,
+    url:'admin/agent',
+    inValid:['agents']
   });
+  // const { data, isLoading, isSuccess } = useGitDeveloperQuery({
+  //   page: Number(page),
+  //   per_page: 10,
+ 
+  // });
 
-
-
-
-
-
-  const tyedData = data as amrro
-
-  
-  console.log(tyedData?.data)
   const [deleteRecord] = useDeleteRecordMutation();
 
 
+  // const {refetch,data:recordUpdateData, isSuccess:recordIsSuccess} = useFindRecordQuery({id:editData.id, url:"admin/city"},{skip:!skipedId})
 
+
+// useEffect(()=>{
+//   if(skipedId === true){
+
+//     refetch()
+//   }
+
+// },[skipedId])
+
+// useEffect(()=>{
+//   if(recordIsSuccess){
+// setSkipedId(false)
+    
+//   }
+
+// },[recordIsSuccess])
+
+
+// console.log(recordUpdateData)
 
   const [colKeys, setColKeys] = useState<string[]>([]);
   const [finslColsKeys, setFinalKeys] = useState<
@@ -60,13 +78,12 @@ export default function Areas() {
       keys = Object?.keys(data?.data?.data[0]);
       setColKeys(keys);
     }
-  }, [isSuccess, data]);
-
+  }, [isSuccess]);
+  console.log(colKeys);
   const colss: { accessor: string; title: string }[] = [];
   useEffect(() => {
     colKeys?.map((key: any, i: number) => {
-              //@ts-ignore
-
+      //@ts-ignore
       colss?.push({ accessor: key, title: data?.data?.head[i] });
     });
     if (colss?.length > 0) {
@@ -75,12 +92,7 @@ export default function Areas() {
     setFinalKeys(colss);
   }, [colKeys, isSuccess]);
 
-
-
-
-
-
-  const deleteSubmitHandler = useDeleteConfirmation({url:"admin/area", inValid:'areas'})
+ const deleteSubmitHandler = useDeleteConfirmation({url:"admin/agent", inValid:'agents'})
   const viewHander = (id: string) => {
     console.log(id);
   };
@@ -89,9 +101,9 @@ export default function Areas() {
     setEditData(data);
     console.log(data);
   };
-  const canDelete = usePermissionGurd('area', 'delete')
-  const canedit = usePermissionGurd('area', 'edit')
-  const canAdd = usePermissionGurd('area', 'create')
+  const canDelete = usePermissionGurd('developer', 'delete')
+  const canedit = usePermissionGurd('developer', 'edit')
+  const canAdd = usePermissionGurd('developer', 'create')
   if (isLoading) {
     return (
       <div>
@@ -102,34 +114,27 @@ export default function Areas() {
   }
   console.log(finslColsKeys);
   return (
-    <Main_list title={`${t("tableForms.areasTitle")}`}>
-      {/* <MainPageCard> */}
-      {open && (
-        <CustomModal openCloseModal={setOpen} title={`${t("tableForms.add")} ${t("tableForms.areaTitle")}`}>
-          <AreaForm openCloseModal={setOpen} editData={null} />
+    <Main_list title={`${t('tableForms.agentsTitle')}`}>
+       {open && (
+        <CustomModal openCloseModal={setOpen} title={`${t('tableForms.add')} ${t('tableForms.agentTitle')}`}>
+          <AgentsForm openCloseModal={setOpen} editData={null} />
         </CustomModal>
       )}
       {open && editData?.id && (
         <CustomModal
           openCloseModal={setOpen}
-          title={`${t("tableForms.edit")} ${t("tableForms.areaTitle")}`}
+          title={`${t('tableForms.edit')} ${t('tableForms.agentTitle')}`}
           resetEditData={setEditData}
         >
-          <AreaForm
-            editData={editData}
-            resetEditData={setEditData}
-            openCloseModal={setOpen}
-          />
+          <AgentsForm editData={editData} resetEditData={setEditData} openCloseModal={setOpen} />
         </CustomModal>
       )}
-
       <ColumnChooser
         setPage={setPage}
         page={page}
-                //@ts-ignore
-
+        //@ts-ignore
         pagination={data?.data?.pagination}
-        
+       
        
         //@ts-ignore
         TableBody={data?.data?.data?.length > 0 ? data?.data?.data : []}
@@ -137,7 +142,7 @@ export default function Areas() {
         tabelHead={finslColsKeys ? finslColsKeys : []}
         Chcekbox={true}
         Page_Add={false}
-      
+       
         onDelete={deleteSubmitHandler}
         onView={viewHander}
         onEdit={EditHandelr}

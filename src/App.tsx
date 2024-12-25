@@ -8,6 +8,7 @@ import { RootState } from "./store"
 import { useGetRecordsQuery } from "./apis/serveces"
 import { permissionsActions } from "./store/permisions"
 import { modelActions } from "./store/modelSlice"
+import { formatDateTime } from "./uitils/helpers"
 
 const App: React.FC = () => {
     const dispatch = useDispatch()
@@ -42,6 +43,10 @@ const App: React.FC = () => {
         }
     }, [windowWidth, dispatch]);
  
+    const date = new Date("2024-01-25T08:54:31.000000Z")
+
+   console.log( formatDateTime(date))
+    console.log(date.getHours(), date.getMinutes(), date.getSeconds())
       
     return (
         <>

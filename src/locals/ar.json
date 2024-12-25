@@ -90,6 +90,10 @@
         "propertyTitle": "خاصية",
         "servicesTitle": "الخدمات", 
     "serviceTitle": "خدمة", 
+    "blogsTitle": "المدونات",  
+    "agentsTitle": "الوكلاء",  
+    "agentTitle": "وكيل", 
+    "blogTitle": "مدونة", 
   "amenityTitle": "مرفق",
   "cityTitle": "مدينة",
    "rolesTitle": "الأدوار",
@@ -135,7 +139,16 @@
       "min_size": "الحجم الأدنى",
       "max_bathrooms_count": "عدد الحمامات الأقصى",
       "min_bathrooms_count": "عدد الحمامات الأدنى",
-      "price": "السعر"
+      "price": "السعر",
+      "firstNameEn": "الاسم الأول (بالإنجليزية)", 
+      "firstNameAr": "الاسم الأول (بالعربية)", 
+      "lastNameEn": "الاسم الأخير (بالإنجليزية)", 
+      "lastNameAr": "الاسم الأخير (بالعربية)", 
+      "positionEn": "المنصب (بالإنجليزية)", 
+      "positionAr": "المنصب (بالعربية)", 
+      "phone": "الهاتف", 
+      "whatsapp": "واتساب", 
+      "image": "صورة" 
 
           },
           "pagination":{
@@ -161,15 +174,20 @@
             "min_size": "أدخل الحجم الأدنى",
             "max_bathrooms_count": "أدخل عدد الحمامات الأقصى",
             "min_bathrooms_count": "أدخل عدد الحمامات الأدنى",
-            "price": "أدخل السعر"
+            "price": "أدخل السعر",
+            "phone": "أدخل رقم الهاتف", 
+            "whatsapp": "أدخل رقم واتساب" 
           },
           "confirmationDialog": {
-            "title": "هل أنت متأكد أنك تريد حذف هذا العنصر؟",
-            "fail":"لم يتم المسح",
-            "buttons": {
-              "cancel": "إلغاء",
-              "delete": "حذف"
-            }
-          }
+      "title": "هل أنت متأكد أنك تريد حذف هذا العنصر؟",
+      "text": "يرجى كتابة 'حذف' للتأكيد.",
+      "placeholder": "اكتب 'حذف' هنا...",
+      "confirmText": "حذف",
+      "fail": "تم إلغاء الحذف",
+      "buttons": {
+        "cancel": "إلغاء",
+        "delete": "حذف"
+      }
+    }
     }
 }

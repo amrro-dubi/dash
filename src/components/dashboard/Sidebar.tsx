@@ -149,7 +149,23 @@ const Sidebar = () => {
                         <li onClick={toggoleSideBar}  className={isActive("/home/services")}>
                             <Link to="/home/services">
                             <MdOutlineDeveloperMode className="size-5" />
-                                <h6>services</h6>
+                                <h6>{t('tableForms.servicesTitle')}</h6>
+                            </Link>
+                        </li>
+                    )}
+                    {usePermissionGurd("blog", "view") && (
+                        <li onClick={toggoleSideBar}  className={isActive("/home/blogs")}>
+                            <Link to="/home/blogs">
+                            <MdOutlineDeveloperMode className="size-5" />
+                                <h6>{t('tableForms.blogsTitle')}</h6>
+                            </Link>
+                        </li>
+                    )}
+                    {usePermissionGurd("agent", "view") && (
+                        <li onClick={toggoleSideBar}  className={isActive("/home/agents")}>
+                            <Link to="/home/agents">
+                            <MdOutlineDeveloperMode className="size-5" />
+                                <h6>{t('tableForms.agentsTitle')}</h6>
                             </Link>
                         </li>
                     )}

@@ -23,6 +23,8 @@ import PropertyForm from "../Pages/property/PropertyForm";
 import EditPropertyForm from "../Pages/property/EditPropertyForm";
 import ChangePassword from "../Pages/ChangePassword";
 import Services from "../Pages/services/Services";
+import Blogs from "../Pages/blogs/Blogs";
+import Agents from "../Pages/Agents/Agents";
 
 
 
@@ -85,6 +87,16 @@ const routes = [
         {
             path: "/home/services",
             element: <Services />,
+            children: [],
+        },
+        {
+            path: "/home/blogs",
+            element: <Blogs />,
+            children: [],
+        },
+        {
+            path: "/home/agents",
+            element: <Agents />,
             children: [],
         },
             {

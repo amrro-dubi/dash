@@ -13,6 +13,7 @@ import { showAlert } from "../../components/Error";
 import CitesForm from "./CategoriesForm";
 import { useTranslation } from "react-i18next";
 import usePermissionGurd from "../../hooks/permession/usePermissionGurd";
+import useDeleteConfirmation from "../../hooks/useDeleteConfirmation";
 
 export default function Categories() {
   const [page, setPage] = useState(1);
@@ -82,33 +83,7 @@ const {t}= useTranslation()
     setFinalKeys(colss);
   }, [colKeys, isSuccess]);
 
-  const deleteSubmitHandler = async (id: string) => {
-    console.log(id);
-    swal({
-      title: "Are you sure you want to delete this City?",
-      icon: "error",
-      buttons: ["Cancel", "Delete"],
-      dangerMode: true,
-    }).then(async (willDelete: any) => {
-      if (willDelete) {
-        const data = await deleteRecord({id, url:'admin/type', inValid:['types']});
-        console.log(data);
-        //@ts-ignore
-        if (data?.error?.data?.status === 400) {
-          //@ts-ignore
-          toast.error(data?.error?.data?.message, {});
-        }
-        //@ts-ignore
-        if (data?.data.status === 200) {
-          //@ts-ignore
-          showAlert("Added", data?.data.response?.message);
-        }
-        // setToastData(data);
-      } else {
-        swal("Not deleted");
-      }
-    });
-  };
+  const deleteSubmitHandler = useDeleteConfirmation({url:'admin/category', inValid:['categories']})
   const viewHander = (id: string) => {
     console.log(id);
   };

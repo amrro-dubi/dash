@@ -16,6 +16,7 @@ import { useTranslation } from "react-i18next";
 
 import usePermissionGurd from "../../hooks/permession/usePermissionGurd";
 import ServicesForm from "./ServicesForm";
+import useDeleteConfirmation from "../../hooks/useDeleteConfirmation";
 
 export default function Services() {
   const [page, setPage] = useState(1);
@@ -89,33 +90,7 @@ export default function Services() {
     setFinalKeys(colss);
   }, [colKeys, isSuccess]);
 
-  const deleteSubmitHandler = async (id: string) => {
-    console.log(id);
-    swal({
-      title: t('tableForms.confirmationDialog.title'),
-      icon: "error",
-      buttons: [t('tableForms.confirmationDialog.buttons.cancel'), t('tableForms.confirmationDialog.buttons.delete')],
-      dangerMode: true,
-    }).then(async (willDelete: any) => {
-      if (willDelete) {
-        const data = await deleteRecord({id, url:'admin/service', inValid:['services']});
-        console.log(data);
-        //@ts-ignore
-        if (data?.error?.data?.status === 400) {
-          //@ts-ignore
-          toast.error(data?.error?.data?.message, {});
-        }
-        //@ts-ignore
-        if (data?.data.status === 200) {
-          //@ts-ignore
-          showAlert("Added", data?.data.response?.message);
-        }
-        // setToastData(data);
-      } else {
-        swal(t('tableForms.confirmationDialog.fail'));
-      }
-    });
-  };
+  const deleteSubmitHandler = useDeleteConfirmation({url:"admin/service", inValid:'services'})
   const viewHander = (id: string) => {
     console.log(id);
   };
@@ -124,9 +99,9 @@ export default function Services() {
     setEditData(data);
     console.log(data);
   };
-  const canDelete = usePermissionGurd('developer', 'delete')
-  const canedit = usePermissionGurd('developer', 'edit')
-  const canAdd = usePermissionGurd('developer', 'create')
+  const canDelete = usePermissionGurd('service', 'delete')
+  const canedit = usePermissionGurd('service', 'edit')
+  const canAdd = usePermissionGurd('service', 'create')
   if (isLoading) {
     return (
       <div>

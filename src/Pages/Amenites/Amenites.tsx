@@ -15,6 +15,7 @@ import { showAlert } from "../../components/Error";
 import { useTranslation } from "react-i18next";
 import AmenitesForm from "./AmenitesForm";
 import usePermissionGurd from "../../hooks/permession/usePermissionGurd";
+import useDeleteConfirmation from "../../hooks/useDeleteConfirmation";
 
 export default function Amenites() {
   const [page, setPage] = useState(1);
@@ -84,33 +85,7 @@ export default function Amenites() {
     setFinalKeys(colss);
   }, [colKeys, isSuccess]);
 
-  const deleteSubmitHandler = async (id: string) => {
-    console.log(id);
-    swal({
-      title: t('tableForms.confirmationDialog.title'),
-      icon: "error",
-      buttons: [t('tableForms.confirmationDialog.buttons.cancel'), t('tableForms.confirmationDialog.buttons.delete')],
-      dangerMode: true,
-    }).then(async (willDelete: any) => {
-      if (willDelete) {
-        const data = await deleteRecord({id, url:'admin/amenity', inValid:['amenites']});
-        console.log(data);
-        //@ts-ignore
-        if (data?.error?.data?.status === 400) {
-          //@ts-ignore
-          toast.error(data?.error?.data?.message, {});
-        }
-        //@ts-ignore
-        if (data?.data.status === 200) {
-          //@ts-ignore
-          showAlert("Added", data?.data.response?.message);
-        }
-        // setToastData(data);
-      } else {
-        swal(t('tableForms.confirmationDialog.fail'));
-      }
-    });
-  };
+  const deleteSubmitHandler = useDeleteConfirmation({ url:'admin/amenity', inValid:['amenites']})
   const viewHander = (id: string) => {
     console.log(id);
   };

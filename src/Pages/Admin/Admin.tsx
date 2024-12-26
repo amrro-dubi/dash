@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
 
-import swal from "sweetalert";
-
+ 
 import { Loader } from "@mantine/core";
-import { useDeleteAdminMutation, useGetAdminsQuery } from "../../apis/serveces";
+import {  useGetAdminsQuery } from "../../apis/serveces";
 import Main_list from "../../components/reusableComponents/Main_list";
 
 import CustomModal from "../../components/reusableComponents/CustomModal";
 import ColumnChooser from "../../components/reusableComponents/tabels";
 import AdminForm from "./AdminForm";
-import { showAlert } from "../../components/Error";
-import { useTranslation } from "react-i18next";
+  import { useTranslation } from "react-i18next";
 import usePermissionGurd from "../../hooks/permession/usePermissionGurd";
 import useDeleteConfirmation from "../../hooks/useDeleteConfirmation";
 
@@ -25,7 +23,7 @@ export default function Admins() {
     per_page: 1,
   });
 
-  const [deleteAdmin] = useDeleteAdminMutation();
+ 
 
   const [colKeys, setColKeys] = useState<string[]>([]);
   const [finslColsKeys, setFinalKeys] = useState<

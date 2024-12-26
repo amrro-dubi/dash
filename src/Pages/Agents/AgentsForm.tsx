@@ -15,7 +15,7 @@ import {
 import Upload_cover from "../../components/reusableComponents/Upload_Cover";
 
 import { useTranslation } from "react-i18next";
-import { TagsInput } from "@mantine/core";
+
 
 interface formDataTyps {
   firstNameEn: string;
@@ -40,7 +40,7 @@ export default function AgentsForm({
   openCloseModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
 
-  const [tags, setTags] = useState<string[]>(['amr']);
+
   const { data: recordUpdateData, isLoading, isSuccess: recordIsSuccess } =
     useFindRecordQuery(
       { id: editData?.id, url: "admin/agent" },
@@ -87,7 +87,7 @@ export default function AgentsForm({
         email: recordUpdateData?.data?.email,
       });
       setFile(recordUpdateData?.data?.image);
-      // setTags(recordUpdateData?.data?.tags);
+     
     }
   }, [recordIsSuccess]);
   // const [options, setOptions] = useState<{ value: any; label: string }[]>([]);

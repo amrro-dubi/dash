@@ -9,6 +9,7 @@ import { useGetRecordsQuery } from "./apis/serveces"
 import { permissionsActions } from "./store/permisions"
 import { modelActions } from "./store/modelSlice"
 import { formatDateTime } from "./uitils/helpers"
+import { showAlert } from "./components/Error"
 
 const App: React.FC = () => {
     const dispatch = useDispatch()
@@ -47,7 +48,22 @@ const App: React.FC = () => {
 
    console.log( formatDateTime(date))
     console.log(date.getHours(), date.getMinutes(), date.getSeconds())
-      
+
+//   useEffect(()=>{
+
+//      const habndle = ()=>{
+//         console.log("offline")
+//         showAlert('error', 'You are offline')
+//      }
+//     // window.addEventListener('online', habndle);
+//     window.addEventListener('offline', habndle);
+
+   
+//   },[])
+
+
+
+
     return (
         <>
             <div className="dashboard-wrapper" >

@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
 
-import swal from "sweetalert";
-
+ 
 import { Loader } from "@mantine/core";
-import {  useDeleteRecordMutation, useGetRecordsQuery } from "../../apis/serveces";
+import {      useGetRecordsQuery } from "../../apis/serveces";
 import Main_list from "../../components/reusableComponents/Main_list";
 
 import CustomModal from "../../components/reusableComponents/CustomModal";
 import ColumnChooser from "../../components/reusableComponents/tabels";
 
-import { showAlert } from "../../components/Error";
-
+  
 import  { typesRecordesType } from "./PropertyForm";
 import { useTranslation } from "react-i18next";
 import PropertyForm from "./PropertyForm";
@@ -186,7 +184,7 @@ return { value: item?.id, label: item?.name };
 
 setCityOptions(optionss);
 }, [cityIsSuccess]);
-  const [deleteRecord] = useDeleteRecordMutation();
+   
 
 
 

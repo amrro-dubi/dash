@@ -8,6 +8,8 @@ import { RiAdminLine } from "react-icons/ri";
 import { LiaCriticalRole } from "react-icons/lia";  
 import { PiMapPinAreaFill } from "react-icons/pi"    
 import { LiaCitySolid } from "react-icons/lia";    
+import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowUp } from "react-icons/io";
 import { MdOutlineDeveloperMode } from "react-icons/md";
 import { PiLightbulbFilamentThin } from "react-icons/pi";
 import { LuTypeOutline } from "react-icons/lu";
@@ -18,6 +20,7 @@ import { MdProductionQuantityLimits } from "react-icons/md";
 import usePermissionGurd from "../../hooks/permession/usePermissionGurd"
 import { modelActions } from "../../store/modelSlice"
 import { useEffect, useState } from "react"
+import AnimatedDev from "../reusableComponents/animatedDev/AnimatedDev"
 
 const Sidebar = () => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
@@ -27,8 +30,29 @@ const Sidebar = () => {
     const location = useLocation()
     const pathname = location.pathname
     const navigate = useNavigate()
+    const [currentItem, setCurrentItem] = useState<number | null>(null)
     // Function to check if a route is active
-    const isActive = (path: string) => (pathname === path ? "active" : "")
+    const isActive = (path: string) => (pathname === path ? "bg-primary  rounded-[8px] " : "")
+    const isSubMenu = (path: string) => (pathname === path ? "bg-dark  rounded-[8px] " : "")
+    const isDrop = (id: number) => (id === currentItem ? "bg-primary  rounded-[8px] " : "")
+    const setOpenHandler = (id:number) => {
+        if(currentItem === null){
+            setCurrentItem(id)
+            setOpen(true)
+        }else if (currentItem ===id){
+            setCurrentItem(id)
+            setOpen(!open)
+        }else if (id !== currentItem){
+            setCurrentItem(id)
+            setOpen(true)
+        }
+        
+    else {
+            setCurrentItem(null)
+            setOpen(false)
+        }
+    }
+
     const handleLogOut = async () => {
         const data = await logout()
         console.log(data)
@@ -38,7 +62,7 @@ const Sidebar = () => {
         }
     }
 
-   
+   const [open , setOpen] = useState(false)
 
   useEffect(() => {
     const handleResize = () => {
@@ -54,12 +78,26 @@ const Sidebar = () => {
   },[])
 
   const dispatch = useDispatch()
-  const toggoleSideBar = ()=>{
+  const toggoleSideBar = (id:number)=>{
+    if(currentItem === null){
+        setCurrentItem(id)
+        
+    }else if (currentItem ===id){
+        setCurrentItem(id)
+       
+    }else {
+        setCurrentItem(id)
+        setOpen(false)
+        
+    }
     if(windowWidth < 1024){
       dispatch(modelActions.setOpenSidebar())
     }
+  
 
   }
+
+  const cityPermition = usePermissionGurd("city", "view")
     return (
         <div
             className={`dashboard-sidebar-wrapper fixed  overflow-y-scroll scrollbar-hide ${
@@ -111,26 +149,71 @@ const Sidebar = () => {
                             </Link>
                         </li>
                     )}
-                    {usePermissionGurd("role", "view") && (
+                     {usePermissionGurd("role", "view") && (
+                        <>
+                        <li  onClick={() => setOpenHandler(1)} className={`${isDrop(1)} flex pe-2 justify-between items-center text-white `}>
+                            {/* <Link to="/home/roles"> */}
+                            <div className="flex gap-2  text-primary w-full  py-[15px]  px-[25px] ">
+                            <LiaCriticalRole className="size-[21px]" />
+                            <h6 className="text-white text-[15px]">{t("tableForms.rolesTitle")} & {t("tableForms.citiesTitle")}</h6>
+                            </div>
+                           
+                            
+                            {open? <IoIosArrowUp  className="size-4"/>: (<IoIosArrowDown className="size-4" />) }
+                        </li>
+                        <AnimatedDev open={open}> 
+                             <li  className={` ${isSubMenu('/home/roles')} `} >
+                            <Link to="/home/roles" className="!p-3 ">
+                            
+                                <h6 className="!text-white">- &nbsp; {t("tableForms.rolesTitle")}</h6>
+                            </Link>
+                        </li>
+                        <li className={` ${isSubMenu('/home/cites')} `}>
+                            <Link to="/home/cites" className="!p-3 text-white">
+                            
+                                <h6> - &nbsp; {t("tableForms.citiesTitle")}</h6>
+                            </Link>
+                        </li>
+                        </AnimatedDev>
+                        {/* {cityPermition && (
+                        <AnimatedDev open={open}> 
+                        <li className={isActive("/home/cites")}>
+                            <Link to="/home/cites">
+                            <LiaCitySolid  className="size-5"/>
+                                <h6>{t("tableForms.citiesTitle")}</h6>
+                            </Link>
+                        </li>
+                        </AnimatedDev>
+                    )} */}
+                        </>
+
+                    )}
+
+
+                    {/* {usePermissionGurd("role", "view") && (
                         <li onClick={toggoleSideBar} className={isActive("/home/roles")}>
                             <Link to="/home/roles">
                             <LiaCriticalRole className="size-5" />
                                 <h6>{t("tableForms.rolesTitle")}</h6>
                             </Link>
                         </li>
-                    )}
+                    )} */}
 
-                    {usePermissionGurd("city", "view") && (
+                    {/* {usePermissionGurd("city", "view") && (
                         <li onClick={toggoleSideBar} className={isActive("/home/cites")}>
                             <Link to="/home/cites">
                             <LiaCitySolid  className="size-5"/>
                                 <h6>{t("tableForms.citiesTitle")}</h6>
                             </Link>
                         </li>
-                    )}
+                    )} */}
 
                     {usePermissionGurd("area", "view") && (
-                        <li onClick={toggoleSideBar}  className={isActive("/home/areas")}>
+                        <li onClick={()=>{
+                            // setCurrentItem(null)
+                            toggoleSideBar(4)
+                            
+                            }}  className={isDrop(4)}>
                             <Link to="/home/areas">
                             <PiMapPinAreaFill className="size-5" />
                                 <h6>{t("tableForms.areasTitle")}</h6>
@@ -169,6 +252,8 @@ const Sidebar = () => {
                             </Link>
                         </li>
                     )}
+
+                    
                     {usePermissionGurd("amenities", "view") && (
                         <li onClick={toggoleSideBar} className={isActive("/home/amenites")}>
                             <Link to="/home/amenites">

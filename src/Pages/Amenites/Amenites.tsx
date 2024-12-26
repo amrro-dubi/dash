@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
 
-import swal from "sweetalert";
-
+ 
 import { Loader } from "@mantine/core";
-import {  useDeleteRecordMutation, useGetRecordsQuery } from "../../apis/serveces";
+import {      useGetRecordsQuery } from "../../apis/serveces";
 import Main_list from "../../components/reusableComponents/Main_list";
 
 import CustomModal from "../../components/reusableComponents/CustomModal";
 import ColumnChooser from "../../components/reusableComponents/tabels";
 
-import { showAlert } from "../../components/Error";
-
+  
 
 import { useTranslation } from "react-i18next";
 import AmenitesForm from "./AmenitesForm";
@@ -33,7 +31,7 @@ export default function Amenites() {
     inValid:['amenites']
   });
 
-  const [deleteRecord] = useDeleteRecordMutation();
+   
 
 
   // const {refetch,data:recordUpdateData, isSuccess:recordIsSuccess} = useFindRecordQuery({id:editData.id, url:"admin/city"},{skip:!skipedId})
@@ -85,7 +83,7 @@ export default function Amenites() {
     setFinalKeys(colss);
   }, [colKeys, isSuccess]);
 
-  const deleteSubmitHandler = useDeleteConfirmation({ url:'admin/amenity', inValid:['amenites']})
+  const deleteSubmitHandler = useDeleteConfirmation({ url:'admin/amenity', inValid:'amenites'})
   const viewHander = (id: string) => {
     console.log(id);
   };

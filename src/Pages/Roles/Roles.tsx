@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
 
-import swal from "sweetalert";
-
+ 
 import { Loader } from "@mantine/core";
-import { useDeleteRoleMutation, useGetRolesQuery } from "../../apis/serveces";
+import {  useGetRolesQuery } from "../../apis/serveces";
 import Main_list from "../../components/reusableComponents/Main_list";
 
 import CustomModal from "../../components/reusableComponents/CustomModal";
 import ColumnChooser from "../../components/reusableComponents/tabels";
 
-import { showAlert } from "../../components/Error";
-import RolesForm from "./RolesForm";
+  import RolesForm from "./RolesForm";
 import { useTranslation } from "react-i18next";
 import usePermissionGurd from "../../hooks/permession/usePermissionGurd";
 import useDeleteConfirmation from "../../hooks/useDeleteConfirmation";
@@ -29,7 +27,7 @@ const {t} = useTranslation()
     per_page: 10,
   });
 
-  const [deleteRole] = useDeleteRoleMutation();
+
 
   const [colKeys, setColKeys] = useState<string[]>([]);
   const [finslColsKeys, setFinalKeys] = useState<

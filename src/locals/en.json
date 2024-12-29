@@ -88,7 +88,7 @@
     "serviceTitle": "Service", 
     "blogsTitle": "Blogs", 
     "blogTitle": "Blog", 
-    "agentsTitle": "Agents", 
+    "agentsTitle": "Our Team", 
     "agentTitle": "Agent", 
     "adminsTitle": "Admins",
     "Title": "Admin",
@@ -98,6 +98,7 @@
     "categoryTitle": "Category",
     "propertiesTitle": "Properties",
     "propertyTitle": "Property",
+    "permissionTitle" : "Permissions",
     
       "citiesTitle": "Cities",
       "cityTitle": "City"

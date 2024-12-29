@@ -89,6 +89,7 @@ export default function PropertyForm({
     const [arrTypes, setArrTypes] = useState<string[]>([])
     const [devOptions, setDevOptions] = useState<{ value: any; label: string }[]>([])
     const [catOptions, setCatOptions] = useState<{ value: any; label: string }[]>([])
+    //@ts-ignore
     const [editOptionId, setEditOptionId] = useState<{ value: any; label: string } | null>(null)
     const [isOffPlan, setIsOffPlan] = useState(false)
 
@@ -520,7 +521,7 @@ export default function PropertyForm({
 
                     <div className="lg:col-span-6 col-span-12">
                         <CustomSelect
-                            editOptionId={editOptionId}
+                            // editOptionId={editOptionId}
                             options={options}
                             label={t("tableForms.labels.city")}
                             onChange={handleSelectChange}
@@ -528,7 +529,7 @@ export default function PropertyForm({
                     </div>
                     <div className="lg:col-span-6 col-span-12">
                         <CustomSelect
-                            editOptionId={editOptionId}
+                            // editOptionId={editOptionId}
                             options={devOptions}
                             label={t("tableForms.developersTitle")}
                             onChange={handleSelectDevChange}
@@ -536,7 +537,7 @@ export default function PropertyForm({
                     </div>
                     <div className="lg:col-span-6 col-span-12">
                         <CustomSelect
-                            editOptionId={editOptionId}
+                            // editOptionId={editOptionId}
                             options={catOptions}
                             label={t("tableForms.categoriesTitle")}
                             onChange={handleSelectCatChange}

@@ -9,20 +9,19 @@ import {
   useCreatRecordMutation,
   useEditRecordMutation,
   useFindRecordQuery,
-  useGetRecordsQuery,
 } from "../../apis/serveces";
 
-import Upload_cover from "../../components/reusableComponents/Upload_Cover";
-import CustomSelect from "../../components/reusableComponents/CustomSelect";
+
 import { useTranslation } from "react-i18next";
 
 interface formDataTyps {
-  nameEn: string;
-  nameAr: string;
-  city_id: string;
+  qEn: string;
+  answerEn: string;
+  qAr: string;
+  answerAr: string;
 }
 
-export default function CitesForm({
+export default function FqaForm({
   editData,
   resetEditData,
   openCloseModal,
@@ -31,87 +30,49 @@ export default function CitesForm({
   resetEditData?: React.Dispatch<any>;
   openCloseModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
+
+  const {t} = useTranslation()
+  //@ts-ignore
   const { data: recordUpdateData, isSuccess: recordIsSuccess } =
     useFindRecordQuery(
-      { id: editData?.id, url: "admin/area" },
+      { id: editData?.id, url: "admin/type" },
       { skip: editData === null }
     );
-    const {t} = useTranslation()
-    
+
   const [formData, setFormData] = useState<formDataTyps>({
-    nameEn: "",
-    nameAr: "",
-    city_id:""
+    qEn: '',
+  answerEn: '',
+  qAr: '',
+  answerAr: '',
   });
-  const [options, setOptions] = useState<{ value: any; label: string }[]>([]);
-  const [editOption, setEditOption] = useState<{ value: any; label: string } |null>(null);
-  const handleSelectChange = (value: { value: any; label: string }) => {
-    console.log(value)
-    setFormData({ ...formData, city_id: value.value });
-  };
+
+ 
   
-  const [file, setFile] = useState<File | null>(null);
-  console.log(file);
   const closeModal = () => {
     openCloseModal((prevState) => !prevState);
     if (resetEditData) {
       resetEditData([]);
     }
   };
-  const { data, isLoading, isSuccess } = useGetRecordsQuery({
-   
-  
-    url:'admin/city',
-    inValid:['cites']
-  });
-
-  console.log(data)
-  useEffect(() => {
-        
-    //@ts-ignore
-    const optionss = data?.data?.data?.map((item: any) => {
-      return { value: item?.id, label: item?.name };
-    });
-        //@ts-ignore
-    
-        if(editData=== null ){
-          //@ts-ignore
-          setFormData({...formData, city_id: data?.data?.data[0]?.id})
-        }
-          //@ts-ignore
-        const updateOption   =  data?.data?.data?.find((item:any) => item.id === formData.city_id)
-        setEditOption({ value: updateOption?.id, label: updateOption?.name })
-
-
-    setOptions(optionss);
-  }, [isSuccess , formData.city_id]);
+  console.log(editData);
   useEffect(() => {
     if (recordIsSuccess) {
-      setFormData({
-        ...formData,
-        nameEn: recordUpdateData?.data?.locales?.en?.name,
-        nameAr: recordUpdateData?.data?.locales?.ar?.name,
-        city_id: recordUpdateData?.data?.city?.id,
-      });
-      setFile(recordUpdateData?.data?.image);
-
-
-      // const editOpitonn = options?.find((option:{ value: any; label: string }) => option.value === recordUpdateData?.data?.city?.id ) 
-      // console.log('defult opton', editOpitonn)
-      // if(recordUpdateData?.data?.city?.id){
-
-      //   setEditOption(recordUpdateData?.data?.city?.id)
-      // }
+      // setFormData({
+      //   ...formData,
+      //   nameEn: recordUpdateData?.data?.locales?.en?.name,
+      //   nameAr: recordUpdateData?.data?.locales?.ar?.name,
+      // });
+      
     }
   }, [recordIsSuccess]);
   // const [options, setOptions] = useState<{ value: any; label: string }[]>([]);
 
   const [toastData, setToastData] = useState<any>({});
 
-  const [createRecord, { isLoading:createIsLoading }] = useCreatRecordMutation();
+  const [createRecord, { isLoading }] = useCreatRecordMutation();
 
   // const [editCity ] = useEditCityMutation()
-  const [editRecord, {isLoading:editIsLoading}] = useEditRecordMutation();
+  const [editRecord] = useEditRecordMutation();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -136,7 +97,7 @@ export default function CitesForm({
       setToastData({});
     }
 
-    if (isLoading || createIsLoading || editIsLoading) {
+    if (isLoading) {
       toast.loading("Loading...", {
         toastId: "loginLoadingToast",
         autoClose: false,
@@ -144,35 +105,42 @@ export default function CitesForm({
     } else {
       toast.dismiss("loginLoadingToast");
     }
-  }, [toastData, isLoading, createIsLoading, editIsLoading]);
+  }, [toastData, isLoading]);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formDataRequest = new FormData();
+    // const formDataRequest = new FormData();
 
-    formDataRequest.append("locales[ar][name]", formData.nameAr);
-    formDataRequest.append("locales[en][name]", formData.nameEn);
-    formDataRequest.append("city_id", formData.city_id);
-    if (file) {
-      formDataRequest.append("image", file);
-    }
+    // formDataRequest.append("locales[ar][name]", formData.nameAr);
+    // formDataRequest.append("locales[en][name]", formData.nameEn);
     
+  const payload = {locales:{
+    ar:{
+      answer:formData.answerAr,
+      question:formData.qAr
+     },
+    en:{
+      answer:formData.answerEn,
+      question:formData.qEn}
+  
+  }}
     try {
       if (editData?.id) {
         // formDataRequest.append("_method", 'patch');
         const response = await editRecord({
           id: editData?.id,
-          formData: formDataRequest,
-          url: "admin/area",
-          inValid: ["areas",],
+          formData: payload,
+          url: "admin/faq",
+          method:"PATCH",
+          inValid: ["faqs"],
         });
         console.log(response);
         setToastData(response);
       } else {
         const response = await createRecord({
-          formData: formDataRequest,
-          url: "admin/area",
-          inValid: ["areas"],
+          formData: payload,
+          url: "admin/faq",
+          inValid: ["faqs"],
         });
 
         setToastData(response);
@@ -187,38 +155,55 @@ export default function CitesForm({
         <div className="grid gap-6  mb-4 grid-cols-12">
           <div className="lg:col-span-6 col-span-12">
             <InputComponent
-              label={t("tableForms.labels.nameEn")}
+            label={t("tableForms.labels.nameEn")}
               onChange={handleChange}
               required
               type="text"
-              name="nameEn"
+              name="qEn"
               placeholder={t("tableForms.placeholders.name")}
-              value={formData.nameEn}
+              value={formData.qEn}
             />
           </div>
           <div className="lg:col-span-6 col-span-12">
             <InputComponent
-              label={t("tableForms.labels.nameAr")}
+               label={t("tableForms.labels.nameAr")}
               onChange={handleChange}
               required
               type="text"
-              name="nameAr"
+              name="answerEn"
               placeholder={t("tableForms.placeholders.name")}
-              value={formData.nameAr}
+              value={formData.answerEn}
+            />
+          </div>
+
+          
+        </div>
+
+        <div className="grid gap-6  mb-4 grid-cols-12">
+          <div className="lg:col-span-6 col-span-12">
+            <InputComponent
+            label={t("tableForms.labels.nameEn")}
+              onChange={handleChange}
+              required
+              type="text"
+              name="qAr"
+              placeholder={t("tableForms.placeholders.name")}
+              value={formData.qAr}
             />
           </div>
           <div className="lg:col-span-6 col-span-12">
-            <CustomSelect
-            editOption={editOption}
-              options={options}
-              label={t("tableForms.labels.city")}
-              onChange={handleSelectChange}
-            />{" "}
+            <InputComponent
+               label={t("tableForms.labels.nameAr")}
+              onChange={handleChange}
+              required
+              type="text"
+              name="answerAr"
+              placeholder={t("tableForms.placeholders.name")}
+              value={formData.answerAr}
+            />
           </div>
-          <div className=" col-span-12 mt-7">
-            {/* @ts-ignore */}
-            <Upload_cover setFile={setFile} editImgUrl={file?.original_url} />
-          </div>
+
+          
         </div>
 
         <div className="w-full  flex justify-end">

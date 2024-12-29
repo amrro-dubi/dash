@@ -26,7 +26,7 @@ const AnimatedDev = ({ open, children}: { open: boolean, children: ReactNode }) 
   }, [open]);
  
   return (
-    <div className={`${open ? 'show flex-col ps-9 py-4 mb-[20px]' : 'close flex-col'} ${isInDom}  `}>
+    <div className={`${open ? 'show flex-col ps-9 py-4 mb-[20px]' : 'close flex-col '} ${isInDom}  `}>
       {children}
     </div>
   );

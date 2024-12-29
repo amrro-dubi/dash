@@ -2,28 +2,59 @@ import { useEffect, useState } from "react";
 
  
 import { Loader } from "@mantine/core";
-import {  useGetAdminsQuery } from "../../apis/serveces";
+import {     useGetRecordsQuery } from "../../apis/serveces";
 import Main_list from "../../components/reusableComponents/Main_list";
 
 import CustomModal from "../../components/reusableComponents/CustomModal";
 import ColumnChooser from "../../components/reusableComponents/tabels";
-import AdminForm from "./AdminForm";
-  import { useTranslation } from "react-i18next";
+
+  import FqaForm from "./FqaForm";
+import { useTranslation } from "react-i18next";
 import usePermissionGurd from "../../hooks/permession/usePermissionGurd";
 import useDeleteConfirmation from "../../hooks/useDeleteConfirmation";
 
-export default function Admins() {
+export default function FQA() {
   const [page, setPage] = useState(1);
-   const {t} = useTranslation()
+const {t}= useTranslation()
   const [open, setOpen] = useState(false);
-  const [editData, setEditData] = useState<any>([]);
+  const [editData, setEditData] = useState<any>(null);
+  // const [skipedId, setSkipedId]  = useState(false)
 
-  const { data, isLoading, isSuccess } = useGetAdminsQuery({
-    page: page,
+  const { data, isLoading, isSuccess } = useGetRecordsQuery({
+    page: Number(page),
     per_page: 10,
+    url:'admin/faq',
+    inValid:['faqs']
   });
 
- 
+  const canDelete = usePermissionGurd('type', 'delete')
+  const canedit = usePermissionGurd('type', 'edit')
+  const canAdd = usePermissionGurd('type', 'create')
+
+   
+
+
+  // const {refetch,data:recordUpdateData, isSuccess:recordIsSuccess} = useFindRecordQuery({id:editData.id, url:"admin/city"},{skip:!skipedId})
+
+
+// useEffect(()=>{
+//   if(skipedId === true){
+
+//     refetch()
+//   }
+
+// },[skipedId])
+
+// useEffect(()=>{
+//   if(recordIsSuccess){
+// setSkipedId(false)
+    
+//   }
+
+// },[recordIsSuccess])
+
+
+// console.log(recordUpdateData)
 
   const [colKeys, setColKeys] = useState<string[]>([]);
   const [finslColsKeys, setFinalKeys] = useState<
@@ -42,6 +73,8 @@ export default function Admins() {
   const colss: { accessor: string; title: string }[] = [];
   useEffect(() => {
     colKeys?.map((key: any, i: number) => {
+              //@ts-ignore
+
       colss?.push({ accessor: key, title: data?.data?.head[i] });
     });
     if (colss?.length > 0) {
@@ -50,18 +83,16 @@ export default function Admins() {
     setFinalKeys(colss);
   }, [colKeys, isSuccess]);
 
-  const deleteSubmitHandler = useDeleteConfirmation({url:"admin/admin", inValid:'admins'})
+  const deleteSubmitHandler = useDeleteConfirmation({url:"admin/faq", inValid:'faqs'})
   const viewHander = (id: string) => {
     console.log(id);
   };
   const EditHandelr = (data: any) => {
+    // setSkipedId(true)
     setEditData(data);
     console.log(data);
   };
-
-  const canDelete = usePermissionGurd('admin', 'delete')
-  const canedit = usePermissionGurd('admin', 'edit')
-  const canAdd = usePermissionGurd('admin', 'create')
+  
   if (isLoading) {
     return (
       <div>
@@ -70,22 +101,22 @@ export default function Admins() {
       </div>
     );
   }
-
+  console.log(finslColsKeys);
   return (
-    <Main_list title={t("tableForms.adminsTitle")}>
+    <Main_list title={t("tableForms.typesTitle")}>
       {/* <MainPageCard> */}
       {open && (
-        <CustomModal openCloseModal={setOpen} title={`${t("tableForms.add")} ${t("tableForms.adminTitle")}`}>
-          <AdminForm openCloseModal={setOpen} />
+        <CustomModal openCloseModal={setOpen} title={`${t("tableForms.add")} ${t("tableForms.typeTitle")}`}>
+          <FqaForm openCloseModal={setOpen} editData={null} />
         </CustomModal>
       )}
       {open && editData?.id && (
         <CustomModal
           openCloseModal={setOpen}
-          title={`${t("tableForms.edit")} ${t("tableForms.adminTitle")}`}
+          title={`${t("tableForms.edit")} ${t("tableForms.typeTitle")}`}
           resetEditData={setEditData}
         >
-          <AdminForm
+          <FqaForm
             editData={editData}
             resetEditData={setEditData}
             openCloseModal={setOpen}
@@ -96,14 +127,17 @@ export default function Admins() {
       <ColumnChooser
         setPage={setPage}
         page={page}
+        //@ts-ignore
         pagination={data?.data?.pagination}
-        
+       
+       
         //@ts-ignore
         TableBody={data?.data?.data?.length > 0 ? data?.data?.data : []}
         //@ts-ignore
         tabelHead={finslColsKeys ? finslColsKeys : []}
         Chcekbox={true}
         Page_Add={false}
+       
         onDelete={deleteSubmitHandler}
         onView={viewHander}
         onEdit={EditHandelr}

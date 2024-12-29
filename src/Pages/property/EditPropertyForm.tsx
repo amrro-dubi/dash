@@ -519,7 +519,7 @@ console.log(formData)
 
           <div className="lg:col-span-6 col-span-12">
             <CustomSelect
-            editOptionId={editOptionId}
+            // editOptionId={editOptionId}
               options={options}
               label={t("tableForms.labels.city")}
               onChange={handleSelectChange}
@@ -527,7 +527,7 @@ console.log(formData)
           </div>
           <div className="lg:col-span-6 col-span-12">
             <CustomSelect
-            editOptionId={editOptionId}
+            // editOptionId={editOptionId}
               options={devOptions}
               label={t("tableForms.labels.developersTitels")}
               onChange={handleSelectDevChange}
@@ -535,7 +535,7 @@ console.log(formData)
           </div>
           <div className="lg:col-span-6 col-span-12">
             <CustomSelect
-            editOptionId={editOptionId}
+            // editOptionId={editOptionId}
               options={catOptions}
               label={t("tableForms.labels.categoriesTitle")}
               onChange={handleSelectCatChange}

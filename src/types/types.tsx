@@ -84,7 +84,7 @@ export type customNumbersInputProps = {
 //components / reusableComponents/ customSelect
 export type customSelectProps = {
     options: { value: any; label: string }[];
-    editOptionId?:{ value: any; label: string } |null;
+    editOption?:{ value: any; label: string } |null;
     label?: string;
     onChange: (value: { value: any; label: string }) => void; // Add this prop
 };

@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 
 import "./login.css";
-
+import { IoIosEye,IoIosEyeOff } from "react-icons/io"
 import { useAdminloginMutation } from "../../../apis/authSlice";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
@@ -135,8 +135,10 @@ console.log(data)
                 </div>
               </div>
               <div className="">
-                <div className="form-inner">
+                <div className="form-inner   ">
                   <label>{t("auth.login.labels.password")}</label>
+                  <div className="relative">
+
                   <input
                     id="password6"
                     type={passwordVisible ? "text" : "password"}
@@ -145,12 +147,9 @@ console.log(data)
                     required
                     onChange={handleChange}
                     placeholder={t("auth.login.placeholders.password")}
-                  />
-                  <i
-                    className={`bi bi-${passwordVisible ? "eye" : "eye-slash"}`}
-                    onClick={togglePasswordVisibility}
-                    id="togglePassword"
-                  />
+                    />
+                  {!passwordVisible ? <IoIosEye onClick={togglePasswordVisibility} className="absolute text-red-300 size-5 top-[17px] ltr:right-[20px]" /> : <IoIosEyeOff onClick={togglePasswordVisibility} className="absolute text-red-300 size-5 top-[17px] ltr:right-[20px]" />}
+                    </div>
                 </div>
               </div>
               <div className="">

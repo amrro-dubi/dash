@@ -1,39 +1,38 @@
 {
-    "auth":{
-       
-        "login": {
-          "title": "تسجيل الدخول",
-          "labels": {
-            "email": "أدخل عنوان بريدك الإلكتروني*",
-            "password": "كلمة المرور*"
-          },
-          "placeholders": {
-            "email": "أدخل البريد الإلكتروني",
-            "password": "*** ***"
-          },
-          "buttons": {
-            "submit": "تسجيل الدخول"
-          },
-          "links": {
-            "forgotPassword": "نسيت كلمة المرور؟"
-          }
-        },
-        "forgotPassword": {
-          "title": "نسيت كلمة المرور",
-          "labels": {
-            "email": "أدخل عنوان بريدك الإلكتروني*"
-          },
-          "placeholders": {
-            "email": "أدخل البريد الإلكتروني"
-          },
-          "buttons": {
-            "submit": "إرسال"
-          },
-          "links": {
-            "rememberPassword": "تذكرت كلمة المرور؟"
-          }
-        },
-        "codeConfirmation": {
+  "auth": {
+    "login": {
+      "title": "تسجيل الدخول",
+      "labels": {
+        "email": "أدخل عنوان بريدك الإلكتروني*",
+        "password": "كلمة المرور*"
+      },
+      "placeholders": {
+        "email": "أدخل البريد الإلكتروني",
+        "password": "*** ***"
+      },
+      "buttons": {
+        "submit": "تسجيل الدخول"
+      },
+      "links": {
+        "forgotPassword": "نسيت كلمة المرور؟"
+      }
+    },
+    "forgotPassword": {
+      "title": "نسيت كلمة المرور",
+      "labels": {
+        "email": "أدخل عنوان بريدك الإلكتروني*"
+      },
+      "placeholders": {
+        "email": "أدخل البريد الإلكتروني"
+      },
+      "buttons": {
+        "submit": "إرسال"
+      },
+      "links": {
+        "rememberPassword": "تذكرت كلمة المرور؟"
+      }
+    },
+    "codeConfirmation": {
       "title": "تأكيد الرمز",
       "description": "لقد أرسلنا 6 أرقام إلى بريدك الإلكتروني. يرجى إدخالها للتأكيد.",
       "buttons": {
@@ -44,8 +43,7 @@
       }
     },
     "resetPassword": {
-      "confirmPass": "كلمة المرور غير مطابقة"
-,
+      "confirmPass": "كلمة المرور غير مطابقة",
       "title": "إعادة تعيين كلمة المرور",
       "changeTitle": "تغيير كلمة المرور",
       "labels": {
@@ -68,52 +66,52 @@
         "confirmPassword": "كلمات المرور غير متطابقة"
       }
     }
-    },
-    "tableForms":{
-        "yes": "نعم",
-        "no":"لا", 
-        "add": "اضافة",
-        "edit": "تعديل",
-        "areasTitle":"المناطق",
-        "areaTitle":"منطقة",
-        "developersTitle":"المطورين",
-        "developerTitle":"مطور",
-        "adminsTitle":"المتحكمون",
-        "adminTitle":"متحكم",
-        "citiesTitle": "المدن",
-        "amenitiesTitle": "المرافق",
-        "typesTitle": "الانواع",
-        "typeTitle": "نوع",
-        "categoriesTitle": "الفئات",
-        "categoryTitle": "فئة",
-        "propertiesTitle": "الخصائص",
-        "propertyTitle": "خاصية",
-        "servicesTitle": "الخدمات", 
-    "serviceTitle": "خدمة", 
-    "blogsTitle": "المدونات",  
-    "agentsTitle": "الوكلاء",  
-    "agentTitle": "وكيل", 
-    "blogTitle": "مدونة", 
-  "amenityTitle": "مرفق",
-  "cityTitle": "مدينة",
-   "rolesTitle": "الأدوار",
-  "roleTitle": "دور",
-   "dashboardTitle": "لوحة التحكم",
+  },
+  "tableForms": {
+    "yes": "نعم",
+    "no": "لا",
+    "add": "اضافة",
+    "edit": "تعديل",
+    "areasTitle": "المناطق",
+    "areaTitle": "منطقة",
+    "developersTitle": "المطورين",
+    "developerTitle": "مطور",
+    "adminsTitle": "المتحكمون",
+    "adminTitle": "متحكم",
+    "citiesTitle": "المدن",
+    "amenitiesTitle": "المرافق",
+    "typesTitle": "الانواع",
+    "typeTitle": "نوع",
+    "categoriesTitle": "الفئات",
+    "categoryTitle": "فئة",
+    "propertiesTitle": "الخصائص",
+    "propertyTitle": "خاصية",
+    "servicesTitle": "الخدمات",
+    "serviceTitle": "خدمة",
+    "blogsTitle": "المدونات",
+    "agentsTitle": "الوكلاء",
+    "agentTitle": "وكيل",
+    "blogTitle": "مدونة",
+    "amenityTitle": "مرفق",
+    "cityTitle": "مدينة",
+    "rolesTitle": "الأدوار",
+    "roleTitle": "دور",
+    "dashboardTitle": "لوحة التحكم",
+    "permissionTitle" : "الصلاحيات",
 
-         
-        "labels": {
-          "search" : "البحث...",
-           "nameEn": "الاسم بالإنجليزية",
-            "nameAr": "الاسم بالعربية", 
-           "descEn": "الوصف بالإنجليزية",
-           "images": "ارفق صور",
-            "descAr": "الوصف بالعربية", 
-              "titleEn": "العنوان بالإنجليزية",
-              "brochure": "ارفق كتيب", 
-               "layout": "ارفق مخطط",
-               "types": "التصفية حسب النوع",
-  "titleAr": "العنوان بالعربية",
-    "title": "العنوان",
+    "labels": {
+      "search": "البحث...",
+      "nameEn": "الاسم بالإنجليزية",
+      "nameAr": "الاسم بالعربية",
+      "descEn": "الوصف بالإنجليزية",
+      "images": "ارفق صور",
+      "descAr": "الوصف بالعربية",
+      "titleEn": "العنوان بالإنجليزية",
+      "brochure": "ارفق كتيب",
+      "layout": "ارفق مخطط",
+      "types": "التصفية حسب النوع",
+      "titleAr": "العنوان بالعربية",
+      "title": "العنوان",
       "roleTitlePlaceholder": "الرجاء إدخال عنوان الدور",
       "name": "الاسم",
       "username": "اسم المستخدم",
@@ -121,64 +119,62 @@
       "password": "كلمة المرور",
       "confirmPassword": "تأكيد كلمة المرور",
       "role": "الدور",
-            "city": "المدينة",
-            "upload":"ارفق صورة",
-            "cover":"ارفق غلاف",
-            "btnAdd": "اضافة",
-            "columns": "الاعمدة",
-             "logout": "تسجيل الخروج",
-             "sub_titleEn": "العنوان الفرعي (بالإنجليزية)",
-             "descriptionEn": "الوصف (بالإنجليزية)",
-             "addressEn": "العنوان (بالإنجليزية)",
-             "payment_planEn": "خطة الدفع (بالإنجليزية)",
-             "sub_titleAr": "العنوان الفرعي (بالعربية)",
-             "descriptionAr": "الوصف (بالعربية)",
-             "addressAr": "العنوان (بالعربية)",
-             "payment_planAr": "خطة الدفع (بالعربية)",
-             "max_size": "الحجم الأقصى",
+      "city": "المدينة",
+      "upload": "ارفق صورة",
+      "cover": "ارفق غلاف",
+      "btnAdd": "اضافة",
+      "columns": "الاعمدة",
+      "logout": "تسجيل الخروج",
+      "sub_titleEn": "العنوان الفرعي (بالإنجليزية)",
+      "descriptionEn": "الوصف (بالإنجليزية)",
+      "addressEn": "العنوان (بالإنجليزية)",
+      "payment_planEn": "خطة الدفع (بالإنجليزية)",
+      "sub_titleAr": "العنوان الفرعي (بالعربية)",
+      "descriptionAr": "الوصف (بالعربية)",
+      "addressAr": "العنوان (بالعربية)",
+      "payment_planAr": "خطة الدفع (بالعربية)",
+      "max_size": "الحجم الأقصى",
       "min_size": "الحجم الأدنى",
       "max_bathrooms_count": "عدد الحمامات الأقصى",
       "min_bathrooms_count": "عدد الحمامات الأدنى",
       "price": "السعر",
-      "firstNameEn": "الاسم الأول (بالإنجليزية)", 
-      "firstNameAr": "الاسم الأول (بالعربية)", 
-      "lastNameEn": "الاسم الأخير (بالإنجليزية)", 
-      "lastNameAr": "الاسم الأخير (بالعربية)", 
-      "positionEn": "المنصب (بالإنجليزية)", 
-      "positionAr": "المنصب (بالعربية)", 
-      "phone": "الهاتف", 
-      "whatsapp": "واتساب", 
-      "image": "صورة" 
-
-          },
-          "pagination":{
-            "display": "عرض",
-            "to": "إلى",
-            "of": "من",
-            "rows": "من الصفوف"
-            
-          },
-          "placeholders": {
-            "name": "يرجى إدخال الاسم",
-            "desc": "يرجى إدخال الوصف",
-            "username": "الرجاء إدخال اسم المستخدم",
-            "email": "الرجاء إدخال البريد الإلكتروني",
-            "password": "الرجاء إدخال كلمة المرور",
-            "confirmPassword": "الرجاء إدخال تأكيد كلمة المرور",
-            "title": "أدخل العنوان",
-            "sub_title": "أدخل العنوان الفرعي",
-            "description": "أدخل الوصف",
-            "address": "أدخل العنوان",
-            "payment_plan": "أدخل خطة الدفع",
-            "max_size": "أدخل الحجم الأقصى",
-            "min_size": "أدخل الحجم الأدنى",
-            "max_bathrooms_count": "أدخل عدد الحمامات الأقصى",
-            "min_bathrooms_count": "أدخل عدد الحمامات الأدنى",
-            "price": "أدخل السعر",
-            "phone": "أدخل رقم الهاتف", 
-            "whatsapp": "أدخل رقم واتساب" 
-          },
-          "confirmationDialog": {
+      "firstNameEn": "الاسم الأول (بالإنجليزية)",
+      "firstNameAr": "الاسم الأول (بالعربية)",
+      "lastNameEn": "الاسم الأخير (بالإنجليزية)",
+      "lastNameAr": "الاسم الأخير (بالعربية)",
+      "positionEn": "المنصب (بالإنجليزية)",
+      "positionAr": "المنصب (بالعربية)",
+      "phone": "الهاتف",
+      "whatsapp": "واتساب",
+      "image": "صورة"
+    },
+    "pagination": {
+      "display": "عرض",
+      "to": "إلى",
+      "of": "من",
+      "rows": "من الصفوف"
+    },
+    "placeholders": {
+      "name": "يرجى إدخال الاسم",
+      "desc": "يرجى إدخال الوصف",
+      "username": "الرجاء إدخال اسم المستخدم",
+      "email": "الرجاء إدخال البريد الإلكتروني",
+      "password": "الرجاء إدخال كلمة المرور",
+      "confirmPassword": "الرجاء إدخال تأكيد كلمة المرور",
+      "title": "أدخل العنوان",
+      "sub_title": "أدخل العنوان الفرعي",
+      "description": "أدخل الوصف",
+      "address": "أدخل العنوان",
+      "payment_plan": "أدخل خطة الدفع",
+      "max_size": "أدخل الحجم الأقصى",
+      "min_size": "أدخل الحجم الأدنى",
+      "max_bathrooms_count": "أدخل عدد الحمامات الأقصى",
+      "min_bathrooms_count": "أدخل عدد الحمامات الأدنى",
+      "price": "أدخل السعر",
+      "phone": "أدخل رقم الهاتف",
+      "whatsapp": "أدخل رقم واتساب"
+    },
+    "confirmationDialog": {
       "title": "هل أنت متأكد أنك تريد حذف هذا العنصر؟",
       "text": "يرجى كتابة 'حذف' للتأكيد.",
       "placeholder": "اكتب 'حذف' هنا...",
@@ -189,5 +185,5 @@
         "delete": "حذف"
       }
     }
-    }
+  }
 }

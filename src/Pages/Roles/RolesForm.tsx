@@ -176,17 +176,18 @@ export default function RolesForm({
               placeholder={t("tableForms.labels.roleTitlePlaceholder")}
               value={formData.title}
             />
-            <div className="flex flex-col justify-between w-full gap-7">
+            <div className="flex flex-col justify-between w-full gap-[50px]">
+            <span>{t("tableForms.permissionTitle")}</span>
               {data?.data?.map((item:any) => {
                 for (const [key, value] of Object.entries(item)) {
                   return (
-                    <div className="flex justify-between  w-full">
-                      {" "}
-                      <div className="flex">{key} </div>{" "}
-                      <div className="flex justify-between items-center gap-3">
+                    <div className="flex flex-col    w-full">
+                      
+                      <div className="flex">{key} </div>
+                        <div className="flex justify-around items-center gap-3 pt-3">
                         {/* @ts-ignore */}
                         {value?.permissions?.map((per:any) => (
-                          <span>{per?.title}  <input type="checkbox" checked={formData?.permissions?.includes(per?.id)} onChange={()=>permissionHandler(per?.id)} className="form-checkbox" /></span>
+                          <span className="flex gap-3 items-center"> <input type="checkbox" checked={formData?.permissions?.includes(per?.id)} onChange={()=>permissionHandler(per?.id)} className="form-checkbox" />{per?.title} </span>
                         ))}
                       </div>
                     </div>

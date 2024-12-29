@@ -15,7 +15,7 @@ import Cites from "../Pages/cites/Cites";
 import Areas from "../Pages/Area/Area";
 import Developers from "../Pages/Developers/Developers";
 import Amenites from "../Pages/Amenites/Amenites";
-import CanvasComponent from "../Pages/Canvas";
+// import CanvasComponent from "../Pages/Canvas";
 import Types from "../Pages/PropertyTypes/Types";
 import Categories from "../Pages/Categories/Categories";
 import Properties from "../Pages/property/Properties";
@@ -25,6 +25,8 @@ import ChangePassword from "../Pages/ChangePassword";
 import Services from "../Pages/services/Services";
 import Blogs from "../Pages/blogs/Blogs";
 import Agents from "../Pages/Agents/Agents";
+import FQA from "../Pages/FQA/FQA";
+import Terms from "../Pages/terms/Terms";
 
 
 
@@ -99,6 +101,16 @@ const routes = [
             element: <Agents />,
             children: [],
         },
+        {
+            path: "/home/faqs",
+            element: <FQA />,
+            children: [],
+        },
+        {
+            path: "/home/terms",
+            element: <Terms />,
+            children: [],
+        },
             {
             path: "/home/properties",
             element: <Properties />,
@@ -114,11 +126,11 @@ const routes = [
             element: <EditPropertyForm />,
             children: [],
         },
-            {
-            path: "/home/canvas",
-            element: <CanvasComponent />,
-            children: [],
-        },
+        //     {
+        //     path: "/home/canvas",
+        //     element: <CanvasComponent />,
+        //     children: [],
+        // },
             {
             path: "/home/changePassword",
             element: <ChangePassword />,

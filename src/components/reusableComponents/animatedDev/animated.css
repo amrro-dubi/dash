@@ -1,6 +1,6 @@
 .show{
-    height: 100px;
-    transition: all .3s ease-in;
+    min-height: 100px;
+    transition: all 5s ease-in;
     background-color: transparent;
     /* display: flex; */
     opacity: 1;
@@ -9,5 +9,5 @@
 .close{
     height: 0;
     opacity: 4;
-    transition: all .3s ease-in;
+    transition: all 5s ease-in;
 }

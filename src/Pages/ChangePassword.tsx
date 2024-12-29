@@ -9,6 +9,7 @@ import { z } from "zod";
 import { useTranslation } from "react-i18next";
 import { useValidationMessages } from "../components/Auth/authValidation";
 import { useChangePasswordMutation } from "../apis/authSlice";
+import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 const formSchema = (message: any) =>
   z
     .object({
@@ -138,7 +139,7 @@ console.log(data)
   
     <div className="flex !w-full">
       <div className="login-page">
-        <div className="login-content">
+        <div className="login-content !w-[50%]">
           <div className="flex flex-col mb-[40px] ">
             <h4 className="font-bold text-[20px]" id="logInModal01Label">
             {t("auth.resetPassword.changeTitle")}
@@ -147,71 +148,54 @@ console.log(data)
   
           <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 gap-4">
-              <div className="">
-                <div className="form-inner">
-                  <label>{t("auth.resetPassword.labels.current")}</label>
-                  {/* <label>Curent Password</label> */}
-                  <input
-                    id="password6"
-                    type={passwordVisible ? "text" : "password"}
-                    value={formData.current_password}
-                    name="current_password"
-                    required
-                    onChange={handleChange}
-                    placeholder={t("auth.resetPassword.placeholders.password")}
-                  />
-                  <i
-                    className={`bi bi-${passwordVisible ? "eye" : "eye-slash"}`}
-                    onClick={togglePasswordVisibility}
-                    id="togglePassword"
-                  />
-                </div>
-              </div>
-              <div className="">
-                <div className="form-inner">
-                  <label>{t("auth.resetPassword.labels.password")}</label>
-                  <input
-                    id="password6"
-                    type={passwordVisible ? "text" : "password"}
-                    value={formData.password}
-                    name="password"
-                    required
-                    onChange={handleChange}
-                    placeholder={t("auth.resetPassword.placeholders.password")}
-                  />
-                  <i
-                    className={`bi bi-${passwordVisible ? "eye" : "eye-slash"}`}
-                    onClick={togglePasswordVisibility}
-                    id="togglePassword"
-                  />
-                </div>
-              </div>
-  
-              <div className="">
-                <div className="form-inner">
-                  <label>{t("auth.resetPassword.labels.confirmPassword")}</label>
-                  <input
-                    id="password6"
-                    type={passwordVisible ? "text" : "password"}
-                    value={formData.confirmPassword}
-                    name="confirmPassword"
-                    required
-                    onChange={handleChange}
-                    placeholder={t("auth.resetPassword.placeholders.confirmPassword")}
-                  />
-                  <i
-                    className={`bi bi-${passwordVisible ? "eye" : "eye-slash"}`}
-                    onClick={togglePasswordVisibility}
-                    id="togglePassword"
-                  />
-                  {errors.confirmPassword && (
-                    <p className="text-[#FF0000] text-[12px]">
-                      {errors.confirmPassword}
-                    </p>
-                  )}
-                </div>
-              </div>
-  
+            <div className="">
+                                       <div className="form-inner   ">
+                                         <label>{t("auth.resetPassword.labels.current")}</label>
+                                         <div className="relative">
+                       
+                                         <input
+                                           id="password6"
+                                           type={passwordVisible ? "text" : "password"}
+                                           value={formData.current_password}
+                                           name="current_password"
+                                           required
+                                           onChange={handleChange}
+                                           placeholder={t("auth.login.placeholders.password")}
+                                           />
+                                         {!passwordVisible ? <IoIosEye onClick={togglePasswordVisibility} className="absolute text-red-300 size-5 top-[17px] ltr:right-[20px]" /> : <IoIosEyeOff onClick={togglePasswordVisibility} className="absolute text-red-300 size-5 top-[17px] ltr:right-[20px]" />}
+                                           </div>
+                                       </div>
+                                     </div>
+      
+
+
+             
+                    A
+              
+                                     <div className="">
+                            <div className="form-inner   ">
+                              
+                              <label>{t("auth.resetPassword.labels.confirmPassword")}</label>
+                              <div className="relative">
+            
+                              <input
+                                id="password6"
+                                type={passwordVisible ? "text" : "password"}
+                                value={formData.confirmPassword}
+                                name="confirmPassword"
+                                required
+                                onChange={handleChange}
+                                placeholder={t("auth.resetPassword.placeholders.confirmPassword")}
+                              />
+                              {!passwordVisible ? <IoIosEye onClick={togglePasswordVisibility} className="absolute text-red-300 size-5 top-[17px] ltr:right-[20px]" /> : <IoIosEyeOff onClick={togglePasswordVisibility} className="absolute text-red-300 size-5 top-[17px] ltr:right-[20px]" />}
+                                </div>
+                                {errors.confirmPassword && (
+                                <p className="text-[#FF0000] text-[12px]">
+                                  {errors.confirmPassword}
+                                </p>
+                              )}
+                            </div>
+                          </div>
              
   
               <div className="">

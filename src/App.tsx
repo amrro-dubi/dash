@@ -9,7 +9,7 @@ import { useGetRecordsQuery } from "./apis/serveces"
 import { permissionsActions } from "./store/permisions"
 import { modelActions } from "./store/modelSlice"
 import { formatDateTime } from "./uitils/helpers"
-import { showAlert } from "./components/Error"
+// import { showAlert } from "./components/Error"
 
 const App: React.FC = () => {
     const dispatch = useDispatch()

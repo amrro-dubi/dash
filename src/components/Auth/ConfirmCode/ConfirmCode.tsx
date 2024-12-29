@@ -116,7 +116,7 @@ const PinInput: React.FC = () => {
           </div>
   
           <form onSubmit={handleSubmit}>
-            <div className="flex justify-center">
+            <div className="flex justify-center form-inner">
               {pin.map((digit, index) => (
                 <input
                   key={index}

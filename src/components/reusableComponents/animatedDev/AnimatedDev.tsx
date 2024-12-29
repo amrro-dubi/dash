@@ -13,10 +13,10 @@ const AnimatedDev = ({ open, children}: { open: boolean, children: ReactNode }) 
         let timeoutId: NodeJS.Timeout;
 
     if (!open && isInDom === "flex") {
-      timeoutId = setTimeout(() => {
+      // timeoutId = setTimeout(() => {
         setIsInDom("hidden");
        
-      }, 500);
+      // }, 500);
     } 
 
     return () => {

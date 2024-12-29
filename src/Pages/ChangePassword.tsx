@@ -170,7 +170,24 @@ console.log(data)
 
 
              
-                    A
+                           <div className="">
+                                       <div className="form-inner   ">
+                                         <label>{t("auth.login.labels.password")}</label>
+                                         <div className="relative">
+                       
+                                         <input
+                                           id="password6"
+                                           type={passwordVisible ? "text" : "password"}
+                                           value={formData.password}
+                                           name="password"
+                                           required
+                                           onChange={handleChange}
+                                           placeholder={t("auth.login.placeholders.password")}
+                                           />
+                                         {!passwordVisible ? <IoIosEye onClick={togglePasswordVisibility} className="absolute text-red-300 size-5 top-[17px] ltr:right-[20px]" /> : <IoIosEyeOff onClick={togglePasswordVisibility} className="absolute text-red-300 size-5 top-[17px] ltr:right-[20px]" />}
+                                           </div>
+                                       </div>
+                                     </div>
               
                                      <div className="">
                             <div className="form-inner   ">

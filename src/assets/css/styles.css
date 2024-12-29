@@ -20,7 +20,7 @@
   --black-color2: #1D1D1D;
   --title-color: #16191E;
   --text-color: #5E5E5E;
-  --primary-color1: #EFB93F;
+  --primary-color1: #eabf92;
 }
 
 /*================================================
@@ -24741,7 +24741,7 @@ button {
 
 .dashboard-wrapper .dashboard-sidebar-wrapper {
   transition: all 0.8s ease-out 0s;
-  background: #16191E;
+  background: #fafafa;
   padding: 20px 25px;
   max-width: 305px;
   width: 100%;
@@ -24841,8 +24841,8 @@ button {
    
   }
 }
-.dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu > ul li a svg {
-  fill: var(--primary-color1);
+.dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu > ul li  svg {
+  fill: var(--black-color) !important;
 }
 @media (max-width: 767px) {
   .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu > ul li a svg {
@@ -24851,7 +24851,7 @@ button {
   }
 }
 .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu > ul li a h6 {
-  color: var(--white-color);
+  color: #373837 !important  ;
   font-family: var(--font-montserrat);
   font-size: 15px;
   font-weight: 600;
@@ -24867,10 +24867,10 @@ button {
   border-radius: 5px;
 }
 .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu > ul li.active a svg {
-  fill: var(--title-color);
+  fill: var(--white-color) !important;
 }
 .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu > ul li.active a h6 {
-  color: var(--title-color);
+  color: var(--white-color) !important;
 }
 .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu .logout {
   line-height: 1;

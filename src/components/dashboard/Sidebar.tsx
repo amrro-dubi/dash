@@ -14,7 +14,7 @@ import { MdOutlineDeveloperMode } from "react-icons/md";
 // import { PiLightbulbFilamentThin } from "react-icons/pi";
 // import { LuTypeOutline } from "react-icons/lu";
 // import { BiCategoryAlt } from "react-icons/bi";
-import { MdProductionQuantityLimits } from "react-icons/md";
+// import { MdProductionQuantityLimits } from "react-icons/md";
 
 import usePermissionGurd from "../../hooks/permession/usePermissionGurd";
 import { modelActions } from "../../store/modelSlice";
@@ -32,14 +32,14 @@ const Sidebar = () => {
   const [currentItem, setCurrentItem] = useState<number | null>(null);
   const [currentSubItem, setCurrentSubItem] = useState<number | null>(null);
 
-//   const isActive = (path: string) =>
-//     pathname === path ? "bg-primary  rounded-[8px] " : "";
+  //   const isActive = (path: string) =>
+  //     pathname === path ? "bg-primary  rounded-[8px] " : "";
   const isSubMenu = (path: string) => {
     // setCurrentItem(null)
-    return pathname === path ? "bg-dark  rounded-[8px] " : "";
+    return pathname === path ? "!text-primary  rounded-[8px] " : "";
   };
   const isDrop = (id: number) =>
-    id === currentItem ? "bg-primary  rounded-[8px] " : "";
+    id === currentItem ? "bg-primary active rounded-[8px] " : "";
 
   const setOpenHandler = (id: number) => {
     setCurrentSubItem(null);
@@ -81,7 +81,6 @@ const Sidebar = () => {
     };
   }, []);
 
-
   const dispatch = useDispatch();
   const toggoleSideBar = (id: number) => {
     setCurrentSubItem(null);
@@ -105,8 +104,6 @@ const Sidebar = () => {
       setCurrentSubItem(null);
     } else setCurrentSubItem(id);
   };
-
-
 
   const categoryPermission = usePermissionGurd("category", "view");
   const rolePermisstion = usePermissionGurd("role", "view");
@@ -136,7 +133,7 @@ const Sidebar = () => {
 
       <div className="dashboard-sidebar-menu">
         <ul>
-          <li className={isDrop(1)} onClick={() => toggoleSideBar(1)}>
+          {/* <li className={isDrop(1)} onClick={() => toggoleSideBar(1)}>
             <Link to="/">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -150,7 +147,7 @@ const Sidebar = () => {
               </svg>
               <h6>{t("tableForms.dashboardTitle")}</h6>
             </Link>
-          </li>
+          </li> */}
 
           {(areasPermission ||
             cityPermission ||
@@ -163,11 +160,31 @@ const Sidebar = () => {
                 onClick={() => setOpenHandler(3)}
                 className={`${isDrop(
                   3
-                )} flex pe-2 justify-between items-center text-white `}
+                )} flex pe-2 justify-between items-center  `}
               >
-                <div className="flex gap-2  text-primary w-full  py-[15px]  px-[25px] ">
-                  <LiaCriticalRole className="size-[21px]" />
-                  <h6 className="text-white text-[15px]">Property settings</h6>
+                <div className="flex gap-2   w-full  py-[15px]  px-[25px] ">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 30 29"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M14.999 4.87973L26.998 16.8787V25.292C26.998 26.0876 26.6819 26.8506 26.1194 27.4132C25.5568 27.9757 24.7938 28.2918 23.9982 28.2918H5.99975C5.20416 28.2918 4.44117 27.9757 3.87861 27.4132C3.31604 26.8506 3 26.0876 3 25.292V16.8787L14.999 4.87973ZM24.9981 3.29386V10.2933L20.9985 6.29361V3.29386C20.9985 3.02867 21.1038 2.77433 21.2914 2.58681C21.4789 2.39929 21.7332 2.29395 21.9984 2.29395H23.9982C24.2634 2.29395 24.5178 2.39929 24.7053 2.58681C24.8928 2.77433 24.9981 3.02867 24.9981 3.29386Z"
+                      fill="white"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M13.5861 1.29402C13.9611 0.919109 14.4697 0.708496 15 0.708496C15.5303 0.708496 16.0389 0.919109 16.4139 1.29402L29.7068 14.5849C29.8945 14.7727 30 15.0273 30 15.2928C30 15.5584 29.8945 15.813 29.7068 16.0008C29.519 16.1885 29.2644 16.294 28.9988 16.294C28.7333 16.294 28.4786 16.1885 28.2909 16.0008L15 2.7079L1.70912 16.0008C1.52136 16.1885 1.26671 16.294 1.00118 16.294C0.73565 16.294 0.480996 16.1885 0.293239 16.0008C0.105481 15.813 0 15.5584 0 15.2928C0 15.0273 0.105481 14.7727 0.293239 14.5849L13.5861 1.29402Z"
+                      fill="white"
+                    />
+                  </svg>
+
+                  <h6 className=" text-[15px]">Property settings</h6>
                 </div>
                 {open && currentItem === 3 ? (
                   <IoIosArrowUp className="size-4" />
@@ -178,11 +195,11 @@ const Sidebar = () => {
 
               <AnimatedDev open={open && currentItem == 3}>
                 {categoryPermission && (
-                  <li className={isSubMenu("/home/categories")}>
+                  <li>
                     <Link to="/home/categories" className="!p-3 ">
                       {/* <BiCategoryAlt /> */}
                       {/* <h6>{t("tableForms.categoriesTitle")}</h6> */}
-                      <h6 className="!text-white">
+                      <h6 className={isSubMenu("/home/categories")}>
                         - &nbsp; {t("tableForms.categoriesTitle")}
                       </h6>
                     </Link>
@@ -211,9 +228,9 @@ const Sidebar = () => {
                     </li>
                     <AnimatedDev open={open && currentSubItem == 3}>
                       {areasPermission && (
-                        <li className={` ${isSubMenu("/home/areas")} `}>
+                        <li>
                           <Link to="/home/areas" className="!p-3 ">
-                            <h6 className="!text-white">
+                            <h6 className={` ${isSubMenu("/home/areas")} `}>
                               - &nbsp; {t("tableForms.areasTitle")}
                             </h6>
                           </Link>
@@ -221,9 +238,12 @@ const Sidebar = () => {
                       )}
 
                       {cityPermission && (
-                        <li className={` ${isSubMenu("/home/cites")} `}>
+                        <li>
                           <Link to="/home/cites" className="!p-3 text-white">
-                            <h6> - &nbsp; {t("tableForms.citiesTitle")}</h6>
+                            <h6 className={` ${isSubMenu("/home/cites")} `}>
+                              {" "}
+                              - &nbsp; {t("tableForms.citiesTitle")}
+                            </h6>
                           </Link>
                         </li>
                       )}
@@ -237,23 +257,32 @@ const Sidebar = () => {
                 )}
 
                 {typePermission && (
-                  <li className={isSubMenu("/home/types")}>
+                  <li>
                     <Link to="/home/types" className="!p-3 text-white">
-                      <h6> - &nbsp; {t("tableForms.typesTitle")}</h6>
+                      <h6 className={isSubMenu("/home/types")}>
+                        {" "}
+                        - &nbsp; {t("tableForms.typesTitle")}
+                      </h6>
                     </Link>
                   </li>
                 )}
                 {developerPermission && (
                   <li className={isSubMenu("/home/developers")}>
                     <Link to="/home/developers" className="!p-3 text-white">
-                      <h6> - &nbsp; {t("tableForms.developersTitle")}</h6>
+                      <h6 className={isSubMenu("/home/developers")}>
+                        {" "}
+                        - &nbsp; {t("tableForms.developersTitle")}
+                      </h6>
                     </Link>
                   </li>
                 )}
                 {aminityPermission && (
-                  <li className={isSubMenu("/home/amenites")}>
+                  <li>
                     <Link to="/home/amenites" className="!p-3 text-white">
-                      <h6> - &nbsp; {t("tableForms.amenitiesTitle")}</h6>
+                      <h6 className={isSubMenu("/home/amenites")}>
+                        {" "}
+                        - &nbsp; {t("tableForms.amenitiesTitle")}
+                      </h6>
                     </Link>
                   </li>
                 )}
@@ -262,9 +291,28 @@ const Sidebar = () => {
           )}
 
           {usePermissionGurd("product", "view") && (
-            <li onClick={() => toggoleSideBar(4)} className={isDrop(4)}>
+            <li onClick={() => toggoleSideBar(4)} className={`${isDrop(4)}`}>
               <Link to="/home/properties">
-                <MdProductionQuantityLimits />
+              <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 30 29"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M14.999 4.87973L26.998 16.8787V25.292C26.998 26.0876 26.6819 26.8506 26.1194 27.4132C25.5568 27.9757 24.7938 28.2918 23.9982 28.2918H5.99975C5.20416 28.2918 4.44117 27.9757 3.87861 27.4132C3.31604 26.8506 3 26.0876 3 25.292V16.8787L14.999 4.87973ZM24.9981 3.29386V10.2933L20.9985 6.29361V3.29386C20.9985 3.02867 21.1038 2.77433 21.2914 2.58681C21.4789 2.39929 21.7332 2.29395 21.9984 2.29395H23.9982C24.2634 2.29395 24.5178 2.39929 24.7053 2.58681C24.8928 2.77433 24.9981 3.02867 24.9981 3.29386Z"
+                      fill="white"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M13.5861 1.29402C13.9611 0.919109 14.4697 0.708496 15 0.708496C15.5303 0.708496 16.0389 0.919109 16.4139 1.29402L29.7068 14.5849C29.8945 14.7727 30 15.0273 30 15.2928C30 15.5584 29.8945 15.813 29.7068 16.0008C29.519 16.1885 29.2644 16.294 28.9988 16.294C28.7333 16.294 28.4786 16.1885 28.2909 16.0008L15 2.7079L1.70912 16.0008C1.52136 16.1885 1.26671 16.294 1.00118 16.294C0.73565 16.294 0.480996 16.1885 0.293239 16.0008C0.105481 15.813 0 15.5584 0 15.2928C0 15.0273 0.105481 14.7727 0.293239 14.5849L13.5861 1.29402Z"
+                      fill="white"
+                    />
+                  </svg>
 
                 <h6>{t("tableForms.propertiesTitle")}</h6>
               </Link>
@@ -302,7 +350,6 @@ const Sidebar = () => {
               <Link to="/home/faqs">
                 <MdOutlineDeveloperMode className="size-5" />
                 <h6>FAQ</h6>
-             
               </Link>
             </li>
           )}
@@ -311,11 +358,9 @@ const Sidebar = () => {
               <Link to="/home/terms">
                 <MdOutlineDeveloperMode className="size-5" />
                 <h6>Terms</h6>
-             
               </Link>
             </li>
           )}
-          
 
           {(adminPermission || rolePermisstion) && (
             <>
@@ -359,14 +404,14 @@ const Sidebar = () => {
               </AnimatedDev>
             </>
           )}
-  
-            <li onClick={() => toggoleSideBar(9)} className={isDrop(9)}>
-              <Link to="/home/changePassword">
-                <MdOutlineDeveloperMode className="size-5" />
-                <h6>{t("auth.resetPassword.changeTitle")}</h6>
-              </Link>
-            </li>
-          
+
+          <li onClick={() => toggoleSideBar(9)} className={isDrop(9)}>
+            <Link to="/home/changePassword">
+              <MdOutlineDeveloperMode className="size-5" />
+              <h6>{t("auth.resetPassword.changeTitle")}</h6>
+            </Link>
+          </li>
+
           <button onClick={handleLogOut} className="logout">
             <svg
               xmlns="http://www.w3.org/2000/svg"

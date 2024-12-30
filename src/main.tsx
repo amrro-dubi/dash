@@ -1,5 +1,6 @@
 import * as ReactDOM from "react-dom/client"
-
+import { PhotoProvider } from 'react-photo-view';
+import 'react-photo-view/dist/react-photo-view.css';
 import "react-toastify/dist/ReactToastify.css"
 
 import "./globals.css"
@@ -28,7 +29,12 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <MantineProvider>
         <Provider store={store}>
             {" "}
+            <PhotoProvider>
+          
             <ToastContainer position="bottom-right" /> <RouterProvider router={router} />
+
+            </PhotoProvider>
         </Provider>
+        
     </MantineProvider>
 )

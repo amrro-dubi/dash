@@ -16,6 +16,7 @@ import { useTranslation } from "react-i18next"
 import CustomSelect from "./CustomSelect"
 import useLanguage from "../../hooks/useLanguage"
 import { formatDateTime } from "../../uitils/helpers"
+import { PhotoView } from "react-photo-view"
 
 const ColumnChooser = (props: tabelProps) => {
     console.log(props.pagination)
@@ -162,7 +163,10 @@ console.log(selectedRecords)
             : accessor === "image"
             ? ({ image }: any) => (
                   <div className="flex  justify-between w-max  gap-3">
-                      <img src={image?.original_url} alt="" className="w-[50px] text-left h-[50px] rounded-full" />
+                     <PhotoView src={image?.original_url}>
+        
+                      <img src={image?.original_url} alt="" className="w-[50px] text-left  h-[50px] rounded-full" />
+      </PhotoView>
                   </div>
               )
             : accessor === "created_at"

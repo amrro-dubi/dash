@@ -7,11 +7,11 @@ const [isRtl,setIsRtl] = useState(false)
 
     const savedLanguage = window.localStorage.getItem("language");
 
-    document.documentElement.dir = savedLanguage
-        ? savedLanguage === "ar"
-            ? "rtl"
-            : "ltr"
-        : "ltr";
+    // document.documentElement.dir = savedLanguage
+    //     ? savedLanguage === "ar"
+    //         ? "rtl"
+    //         : "ltr"
+    //     : "ltr";
     setIsRtl(savedLanguage === "ar" ? true : false)
 
 },[])

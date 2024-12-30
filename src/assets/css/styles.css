@@ -24845,12 +24845,12 @@ button {
   fill: var(--black-color) !important;
 }
 @media (max-width: 767px) {
-  .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu > ul li a svg {
+  .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu > ul li svg {
     width: 25px;
     height: 25px;
   }
 }
-.dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu > ul li a h6 {
+.dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu > ul li  h6 {
   color: #373837 !important  ;
   font-family: var(--font-montserrat);
   font-size: 15px;
@@ -24858,7 +24858,7 @@ button {
   margin-bottom: 0;
 }
 @media (max-width: 767px) {
-  .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu > ul li a h6 {
+  .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu > ul li  h6 {
     display: none;
   }
 }
@@ -24866,10 +24866,10 @@ button {
   background-color: var(--primary-color1);
   border-radius: 5px;
 }
-.dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu > ul li.active a svg {
+.dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu > ul li.active  svg {
   fill: var(--white-color) !important;
 }
-.dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu > ul li.active a h6 {
+.dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu > ul li.active  h6 {
   color: var(--white-color) !important;
 }
 .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu .logout {
@@ -24877,7 +24877,7 @@ button {
   display: flex;
   align-items: center;
   gap: 10px;
-  color: var(--white-color);
+  color: var(--black-color);
   white-space: nowrap;
   padding: 20px 25px;
 }
@@ -24906,7 +24906,7 @@ button {
   }
 }
 .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu .logout h6 {
-  color: var(--white-color);
+  color: var(--balck2-color);
   font-family: var(--font-montserrat);
   font-size: 16px;
   font-weight: 600;

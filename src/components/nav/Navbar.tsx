@@ -3,15 +3,26 @@ import i18n from "../../i18n";
 import { modelActions } from "../../store/modelSlice";
 import { useDispatch } from "react-redux";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import useLanguage from "../../hooks/useLanguage";
+import './navbar.css'
+import { FaUser } from "react-icons/fa6";
+import { IoMdSettings } from "react-icons/io";
+import { LuLogOut  } from "react-icons/lu";
+import { useLogoutMutation } from "../../apis/authSlice";
+import enFlag from '../../assets/img/dashboard/en flag.svg'
+import frFlag from '../../assets/img/dashboard/fr flag.jpg'
+
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+
   const dropdownRef = useRef<HTMLDivElement>(null);
   const {t} = useTranslation()
    useLanguage()
+
+   const [logout] = useLogoutMutation();
   const handleClickOutside = (event: MouseEvent) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
       setIsOpen(false);
@@ -28,19 +39,26 @@ const Navbar = () => {
     i18n.changeLanguage(lng);
 
     window.localStorage.setItem("language", lng);
-    document.documentElement.dir = lng === "ar" ? "rtl" : "ltr";
+    // document.documentElement.dir = lng === "ar" ? "rtl" : "ltr";
   };
-
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const toggoleSideBar = ()=>{
     dispatch(modelActions.setOpenSidebar())
   }
 
-  
+  const handleLogOut = async () => {
+    const data = await logout();
+    console.log(data);
+    if (data?.data?.status === 200) {
+      localStorage.removeItem("auth_data");
+      navigate("/");
+    }
+  };
   return (
     <div>
       <header className="antialiased">
-        <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
+        <nav className="bg-white border-gray-200 px-4 lg:px-6 py-5 dark:bg-gray-800">
           <div className="flex flex-wrap justify-between items-center">
             <div className="flex justify-start items-center">
               <button
@@ -92,44 +110,57 @@ const Navbar = () => {
               </button>
             </div>
 
+            
+
             <div className="flex items-center lg:order-2 gap-4 ">
-              {i18n.language === "en" ? (
+
+             <div className="flex gap-10 items-center">
+             {i18n.language === "en" ? (
                 <a
                   href=""
                   onClick={() => changeLanguage("ar")}
-                   className="font-medium cursor-pointer text-[#efb93f] border-[1px] border-[#efb93f] px-[3px] rounded-[4px]"
+                   className=" cursor-pointer flex gap-3 items-center font-semibold px-[3px] rounded-[4px]"
                 >
-                  Ar
+                  <img src={frFlag} className="h-5 w-7 rounded-[4px]" alt="" /> <span>Fr</span>
                 </a>
               ) : (
                 <a
                   href=""
                   onClick={() => changeLanguage("en")}
-                  className="font-medium cursor-pointer text-[#efb93f] border-[1px] border-[#efb93f] px-[3px] rounded-[4px]"
+                   className=" cursor-pointer flex gap-3 items-center font-semibold px-[3px] rounded-[4px]"
                 >
-                  En
+                  <img src={enFlag} className="h-7 w-7 rounded-[4px]" alt="" /> <span>En</span>
                 </a>
               )}
-           <div className="relative">
+<div className="h-5 border border-gray-300"></div>
+              <div className="flex">
+                <h6>admin</h6>
+              </div>
+             </div>
+           <div  className="relative rounded-full">
            <button
                 type="button"
-                className="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                className="flex mx-3 text-sm bg-gray-800 border-[2px] border-gray-200 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
                 id="user-menu-button"
                 aria-expanded="false"
                 data-dropdown-toggle="dropdown"
                 onClick={() => setIsOpen(!isOpen)}
+             
               >
                 <span className="sr-only">Open user menu</span>
                 <img
-                  className="w-8 h-8 rounded-full"
+                  className="w-10 h-10 rounded-full "
                   src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
                   alt="user photo"
                 />
               </button>
 
-              <div ref={dropdownRef} className={`  bg-white ${isOpen? "flex": "hidden"} transition-all ease-out duration-1000 absolute top-[50px] text-[#efb93f] ltr:right-0 rtl:left-0 px-2 py-4 w-[170px] shadow-lg`}>
-                <Link to="/home/changePassword">  {t("auth.resetPassword.changeTitle")}</Link>
-          </div>
+              <div ref={dropdownRef} className={`  bg-white ${isOpen? "flex": "hidden"} flex-col transition-all ease-out duration-1000 absolute top-[50px]   z-50 ltr:right-0 rtl:left-0 p-2 w-[130px]  rounded-[4px] border-[1px] border-[#eaebed]`}>
+                <Link to="" className="flex gap-2 text-[16px] font-semibold  items-center"> <FaUser className="size-5" /> Profile</Link>
+                <Link to="" className="flex gap-2 text-[16px] font-semibold  items-center"> <IoMdSettings  className="size-5" /> settings</Link>
+                <button onClick={handleLogOut}  className="flex gap-2 text-[16px] font-semibold  items-center"> <LuLogOut   className="size-5" /> log out</button>
+               
+              </div>
            </div>
         
             </div>

@@ -184,13 +184,19 @@ console.log(selectedRecords)
             : accessor === "brochure"
             ? ({ brochure }: any) => (
                   <div className="flex  justify-between w-max  gap-3">
-                      <img src={brochure?.original_url} alt="" className="w-[50px] text-left h-[50px] rounded-full" />
+                      <PhotoView src={brochure?.original_url}>
+        
+        <img src={brochure?.original_url} alt="" className="w-[50px] text-left  h-[50px] rounded-full" />
+</PhotoView>
                   </div>
               )
             : accessor === "layout"
             ? ({ layout }: any) => (
                   <div className="flex  justify-between w-max  gap-3">
-                      <img src={layout?.original_url} alt="" className="w-[50px] text-left h-[50px] rounded-full" />
+                       <PhotoView src={layout?.original_url}>
+        
+        <img src={layout?.original_url} alt="" className="w-[50px] text-left  h-[50px] rounded-full" />
+</PhotoView>
                   </div>
               )
             : accessor === "highlighted_in_apartment"

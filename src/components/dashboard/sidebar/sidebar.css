@@ -1,0 +1,174 @@
+
+.dashboard-wrapper .open-sidebar {
+    transition: all 0.8s ease-out 0s ;
+    background: #fafafa;
+    padding: 20px 25px;
+    width: 350px;
+  opacity: 1;
+    height: 100vh;
+    transform: translateX(0);
+   
+    /* transition-delay: 0.5s; */
+   
+    
+    
+  }
+  .dashboard-wrapper  .close-sidebar {
+    transition: all 0.8s ease-out 0s ;
+    background: #fafafa;
+    padding: 20px 0px;
+    width: 0px;
+   opacity: 0;
+    height: 100vh;
+    transform: translateX(-305px);
+   
+    /* transition-delay: 0.5s; */
+   
+    
+  }
+
+  @media (max-width: 1399px) {
+   .dashboard-wrapper .open-sidebar {
+    transition: all 0.8s ease-out 0s ;
+    background: #fafafa;
+    padding: 20px 25px;
+    width: 350px;
+  opacity: 1;
+    height: 100vh;
+    transform: translateX(0);
+    position: fixed;
+    z-index: 999;
+    /* transition-delay: 0.5s; */
+   
+    
+    
+  }
+  .dashboard-wrapper  .close-sidebar {
+    transition: all 0.8s ease-out 0s ;
+    background: #fafafa;
+    padding: 20px 0px;
+    width: 0px;
+   opacity: 0;
+    height: 100vh;
+    transform: translateX(-305px);
+   position: fixed;
+   z-index: 999;
+    /* transition-delay: 0.5s; */
+   
+    
+  }
+  }
+  /* Hide scrollbar for WebKit browsers */
+  .dashboard-sidebar-wrapper::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+  
+  /* Hide scrollbar for Firefox */
+  .dashboard-sidebar-wrapper {
+    scrollbar-width: none; /* Firefox */
+  }
+  
+ 
+ 
+  .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-logo {
+    padding-bottom: 0px;
+  }
+  .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu > ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    
+  }
+  .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu > ul li a {
+    color: var(--white-color);
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 25px;
+    
+  }
+  @media (min-width: 1400px) and (max-width: 1599px) {
+    .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu > ul li a {
+      padding: 15px 25px;
+    }
+  }
+  @media (max-width: 1399px) {
+    .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu > ul li a {
+      padding: 15px 25px;
+    }
+  }
+  @media (min-width: 1200px) and (max-width: 1399px) {
+    .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu > ul li a {
+      font-size: 14px;
+    }
+  }
+ 
+  .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu > ul li  svg {
+    fill: var(--black-color) !important;
+  }
+  @media (max-width: 767px) {
+    .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu > ul li svg {
+      width: 25px;
+      height: 25px;
+    }
+  }
+  .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu > ul li  h6 {
+    color: #373837   ;
+    font-family: var(--font-montserrat);
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 0;
+  }
+
+  .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu > ul li.active a {
+    background-color: var(--primary-color1);
+    border-radius: 5px;
+  }
+  .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu > ul li.active  svg {
+    fill: var(--white-color) !important;
+  }
+  .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu > ul li.active  h6 {
+    color: var(--white-color) ;
+  }
+  .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu > ul li.activee  h6 {
+    color: var(--primary-color1) !important;
+  }
+  .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu .logout {
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--black-color);
+    white-space: nowrap;
+    padding: 20px 25px;
+  }
+  @media (max-width: 1199px) {
+    .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu .logout {
+      flex-direction: column;
+    }
+  }
+  @media (max-width: 767px) {
+    .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu .logout {
+      justify-content: center;
+    }
+  }
+ 
+  .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu .logout svg {
+    fill: var(--primary-color1);
+  }
+  @media (max-width: 767px) {
+    .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu .logout svg {
+      width: 25px;
+      height: 25px;
+    }
+  }
+  .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu .logout h6 {
+    color: var(--balck2-color);
+    font-family: var(--font-montserrat);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1;
+  }
+  

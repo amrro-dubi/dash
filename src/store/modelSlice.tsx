@@ -6,7 +6,7 @@ type AuthModelState = {
 };
 
 const initialState: AuthModelState = {
-    openSidebar: false,
+    openSidebar: true,
   openModelMenu: false,
 
 };

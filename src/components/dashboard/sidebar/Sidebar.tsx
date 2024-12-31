@@ -1,27 +1,29 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { RootState } from "../../store";
-import sideBarImg from "../../assets/img/dashboard/goldLogo.png";
-import { useLogoutMutation } from "../../apis/authSlice";
+import { RootState } from "../../../store";
+import sideBarImg from "../../../assets/img/dashboard/goldLogo.png";
+import { useLogoutMutation } from "../../../apis/authSlice";
 import { useTranslation } from "react-i18next";
 
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
 import { MdAdminPanelSettings, MdOutlineDeveloperMode } from "react-icons/md";
 
-import usePermissionGurd from "../../hooks/permession/usePermissionGurd";
-import { modelActions } from "../../store/modelSlice";
+import usePermissionGurd from "../../../hooks/permession/usePermissionGurd";
+import { modelActions } from "../../../store/modelSlice";
 import { useEffect, useState } from "react";
-import AnimatedDev from "../reusableComponents/animatedDev/AnimatedDev";
+import AnimatedDev from "../../reusableComponents/animatedDev/AnimatedDev";
 
 import { RiTeamFill } from "react-icons/ri";
 
-import ProperitiesIcon from "../Icon/ProperitiesIcon";
-import PropSettingsIcon from "../Icon/PropSettingsIcon";
+import ProperitiesIcon from "../../Icon/ProperitiesIcon";
+import PropSettingsIcon from "../../Icon/PropSettingsIcon";
 
 import { MdLogout } from "react-icons/md";
-import BlogsIcon from "../Icon/BlogsIcon";
+import BlogsIcon from "../../Icon/BlogsIcon";
 import { GrServices } from "react-icons/gr";
+import { IoClose } from "react-icons/io5";
+import './sidebar.css'
 
 const Sidebar = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -38,7 +40,9 @@ const Sidebar = () => {
   //     pathname === path ? "bg-primary  rounded-[8px] " : "";
   const isSubMenu = (path: string) => {
     // setCurrentItem(null)
+   
     return pathname === path ? "!text-primary " : "";
+   
   };
   const isDrop = (id: number) =>
     id === currentItem ? "bg-primary active rounded-[8px] " : "";
@@ -58,6 +62,7 @@ const Sidebar = () => {
       setCurrentItem(null);
       setOpen(false);
     }
+    
   };
 
   const handleLogOut = async () => {
@@ -83,6 +88,7 @@ const Sidebar = () => {
     };
   }, []);
 
+ 
   const dispatch = useDispatch();
   const toggoleSideBar = (id: number) => {
     setCurrentSubItem(null);
@@ -105,6 +111,7 @@ const Sidebar = () => {
     if (id === currentSubItem) {
       setCurrentSubItem(null);
     } else setCurrentSubItem(id);
+    
   };
 
   const categoryPermission = usePermissionGurd("category", "view");
@@ -116,17 +123,18 @@ const Sidebar = () => {
   const areasPermission = usePermissionGurd("area", "view");
   const adminPermission = usePermissionGurd("admin", "view");
 
-  console.log(categoryPermission);
+  
+
   return (
+    <div className={`  ${openSidebar? "open-sidebar" : "close-sidebar"}   `}>
     <div
-      className={`dashboard-sidebar-wrapper fixed  overflow-y-scroll scrollbar-hide ${
-        openSidebar ? "z-10" : "!w-[0px] !px-0 !overflow-hidden  -z-40 "
-      }`}
+      className={`dashboard-sidebar-wrapper  relative `}
     >
+      <button className="absolute top-0 right-1 xl:hidden" onClick={()=>toggoleSideBar(0)} > <IoClose className="size-6 font-bold text-primary" /></button>
       <div className="dashboard-sidebar-logo">
         <Link to="/">
           <img
-            className="d-md-block d-none"
+            className="w-[200px] h-[200px]"
             src={sideBarImg}
             alt="Dashboard Sidebar Logo"
           />
@@ -165,7 +173,7 @@ const Sidebar = () => {
               <AnimatedDev open={open && currentItem == 3}>
                 {categoryPermission && (
                   <li>
-                    <Link to="/home/categories" className="!p-3 ">
+                    <Link  to="/home/categories" className="!p-3 ">
                       <h6 className={isSubMenu("/home/categories")}>
                         - &nbsp; {t("tableForms.categoriesTitle")}
                       </h6>
@@ -372,6 +380,7 @@ const Sidebar = () => {
           </button>
         </ul>
       </div>
+    </div>
     </div>
   );
 };

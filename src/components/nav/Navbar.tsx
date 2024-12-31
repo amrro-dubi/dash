@@ -75,14 +75,13 @@ const Navbar = () => {
                   fill="none"
                   viewBox="0 0 16 12"
                 >
-                  {" "}
                   <path
                     stroke="currentColor"
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     stroke-width="2"
                     d="M1 1h14M1 6h14M1 11h7"
-                  />{" "}
+                  />
                 </svg>
               </button>
               <button

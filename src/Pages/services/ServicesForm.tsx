@@ -204,7 +204,7 @@ export default function ServicesForm({
          
           <div className=" col-span-12 mt-7">
             {/* @ts-ignore */}
-            <Upload_cover setFile={setFile} editImgUrl={file?.original_url} />
+            <Upload_cover setFile={setFile} editImgUrl={file?.original_url}  />
           </div>
         </div>
 

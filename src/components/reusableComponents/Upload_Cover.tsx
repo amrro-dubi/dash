@@ -1,8 +1,9 @@
 import React, { useRef, useState } from "react";
 
-import { IoMdAdd } from "react-icons/io";
 
-import { IoClose, IoCloudUploadOutline } from "react-icons/io5";
+import uploadImg from '../../assets/img/dashboard/icon/upload-img-field-icon.svg'
+import uploadPdf from '../../assets/img/dashboard/icon/upload-pdf-icon.svg'
+import { IoClose } from "react-icons/io5";
 import { PhotoView } from "react-photo-view";
 
 type UploadImageProps = {
@@ -12,6 +13,7 @@ type UploadImageProps = {
   cover?:boolean
   multi?:boolean
   label?:string
+  acceptType?:string
 };
 const Upload_cover = (props: UploadImageProps) => {
 
@@ -85,29 +87,38 @@ const imgPreview = useRef<HTMLImageElement>(null)
         ref={fileInputRef}
         onChange={handleFileChange}
         style={{ display: "none" }}
-        accept="image/*"
+        accept={`${props.acceptType? props.acceptType:"image/*"}`}
+        
       />
 
       <div   className="flex gap-7">
+        <div onClick={handleButtonClick} className="flex bg-white p-4 gap-4 items-center rounded-[8px] w-[300px] border border-gray-300">
+        <img src={ props.acceptType === ".pdf" ? uploadPdf :uploadImg} alt="upload imag" className="w-5 h-5"   />
+          {files.length > 0? <p>{files[0].name}</p> : "No file Chosen"}
+        </div>
+
+        {/* <button type="button"  onClick={handleButtonClick}  className="flex bg-[#f9f9f9] p-8 gap-4 items-center rounded-[8px] text-[#5079b8]"><IoMdAdd className="size-6" /></button> */}
+      </div> 
+
+{/* <div   className="flex gap-7">
         <div onClick={handleButtonClick} className="flex bg-[#f9f9f9] p-8 gap-4 items-center rounded-[8px] text-[#5079b8]">
         <IoCloudUploadOutline className="size-6"  />
           <p>Upload your data here with high quality</p>
         </div>
 
         <button type="button"  onClick={handleButtonClick}  className="flex bg-[#f9f9f9] p-8 gap-4 items-center rounded-[8px] text-[#5079b8]"><IoMdAdd className="size-6" /></button>
-      </div> 
-
+      </div>  */}
 
      <div className="flex gap-4 flex-wrap relative">
 
-      {imageList.length > 0 ? imageList.map((imgUrl, index:number)=>(
- <div className="rounded-[8px] w-[150px] h-[100px] relative">
+      {imageList.length > 0  && props.acceptType !== ".pdf" ? imageList.map((imgUrl, index:number)=>(
+ <div key={imgUrl} className="rounded-[8px] w-[150px] h-[100px] relative">
   <div className="overlay  rounded-[8px]" onClick={handleImgPrevClick} ></div>
   <div className="z-50 absolute top-0 right-0 mx-2 my-2 " ><button type="button" onClick={ ()=>handleRemoveImg(index)} ><IoClose className="size-7 text-[red]" /></button></div>
- <PhotoView src={imgUrl} >
+ <PhotoView src={imgUrl}  >
    
    {/* <img src={layout?.original_url} alt="" className="w-[50px] text-left  h-[50px] rounded-full" /> */}
-   <img ref={imgPreview} src={imgUrl} alt="uploaded image" className="w-full rounded-[8px] h-full object"/>
+   <img ref={imgPreview} src={imgUrl} alt="uploaded image" className="w-full object-cover rounded-[8px] h-full object"/>
 </PhotoView>
  </div>
       )) : ""}

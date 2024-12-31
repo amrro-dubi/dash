@@ -165,7 +165,7 @@ console.log(selectedRecords)
                   <div className="flex  justify-between w-max  gap-3">
                      <PhotoView src={image?.original_url}>
         
-                      <img src={image?.original_url} alt="" className="w-[50px] text-left  h-[50px] rounded-full" />
+                      <img src={image?.original_url} alt="" className="w-[50px] object-cover text-left  h-[50px] rounded-full" />
       </PhotoView>
                   </div>
               )
@@ -432,7 +432,7 @@ console.log(selectedRecords)
                                         </>
                                     }
                                 >
-                                    <ul className="!min-w-[180px] z-0">
+                                    <ul className="!min-w-[180px]  ">
                                         {cols.map((col, i) => {
                                             return (
                                                 <li
@@ -468,7 +468,7 @@ console.log(selectedRecords)
                         <div className=" flex gap-2">
                             {selectedRecords?.length > 0 && selectedRecords ? (
                                 <>
-                                    <button className="btn bg-[#EFB93F] rounded-xl shadow-none text-white">
+                                    <button className="btn bg-primary rounded-xl shadow-none text-white">
                                         <span className="mr-1">
                                             <svg
                                                 width="16"

@@ -55,7 +55,7 @@ const Dropdown = (props : any, forwardedRef: any) => {
                 ref={popperRef}
                 style={styles.popper}
                 {...attributes.popper}
-                className="z-50"
+                className=" absolute top-0 !z-50"
                 onClick={() => setVisibility(!visibility)}
                 >
                     {visibility && props.children}

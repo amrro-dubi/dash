@@ -4,27 +4,26 @@ import { RootState } from "../../store"
 import sideBarImg from "../../assets/img/dashboard/goldLogo.png"
 import { useLogoutMutation } from "../../apis/authSlice"
 import { useTranslation } from "react-i18next"
-// import { RiAdminLine } from "react-icons/ri";
-import { LiaCriticalRole } from "react-icons/lia"
-// import { PiMapPinAreaFill } from "react-icons/pi";
-// import { LiaCitySolid } from "react-icons/lia";
+
 import { IoIosArrowDown } from "react-icons/io"
 import { IoIosArrowUp } from "react-icons/io"
-import { MdAdminPanelSettings, MdOutlineDeveloperMode, MdOutlineMiscellaneousServices } from "react-icons/md"
-// import { PiLightbulbFilamentThin } from "react-icons/pi";
-// import { LuTypeOutline } from "react-icons/lu";
-// import { BiCategoryAlt } from "react-icons/bi";
-// import { MdProductionQuantityLimits } from "react-icons/md";
+import { MdAdminPanelSettings, MdOutlineDeveloperMode } from "react-icons/md"
+
 
 import usePermissionGurd from "../../hooks/permession/usePermissionGurd"
 import { modelActions } from "../../store/modelSlice"
 import { useEffect, useState } from "react"
 import AnimatedDev from "../reusableComponents/animatedDev/AnimatedDev"
-import { AiFillHome } from "react-icons/ai"
-// import { TbHomeStar } from "react-icons/tb";
-import { RiHomeGearLine, RiTeamFill } from "react-icons/ri"
-import { FaQuestion, FaScroll } from "react-icons/fa"
-import { LuBookText } from "react-icons/lu"
+
+
+import {  RiTeamFill } from "react-icons/ri"
+
+import ProperitiesIcon from "../Icon/ProperitiesIcon"
+import PropSettingsIcon from "../Icon/PropSettingsIcon"
+
+import { MdLogout } from "react-icons/md";
+import BlogsIcon from "../Icon/BlogsIcon"
+import { GrServices } from "react-icons/gr";
 
 const Sidebar = () => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth)
@@ -37,11 +36,12 @@ const Sidebar = () => {
     const [currentItem, setCurrentItem] = useState<number | null>(null)
     const [currentSubItem, setCurrentSubItem] = useState<number | null>(null)
 
+
     //   const isActive = (path: string) =>
     //     pathname === path ? "bg-primary  rounded-[8px] " : "";
     const isSubMenu = (path: string) => {
         // setCurrentItem(null)
-        return pathname === path ? "!text-primary  rounded-[8px] " : ""
+        return pathname === path ? "!text-primary " : ""
     }
     const isDrop = (id: number) => (id === currentItem ? "bg-primary active rounded-[8px] " : "")
 
@@ -160,8 +160,8 @@ const Sidebar = () => {
                                 onClick={() => setOpenHandler(3)}
                                 className={`${isDrop(3)}  flex pe-2 justify-between items-center  `}
                             >
-                                <div className="flex gap-2    w-full  py-[15px]  px-[25px] ">
-                                    <RiHomeGearLine className="size-5" />
+                                <div className="flex gap-2    w-full  py-[15px] ps-[25px] pe-[7px] ">
+                                <ProperitiesIcon color={currentItem === 3 ? 'white' :'black'}/>
 
                                     <h6 className=" text-[15px]">Property settings</h6>
                                 </div>
@@ -207,9 +207,9 @@ const Sidebar = () => {
                                         </li>
                                         <AnimatedDev open={open && currentSubItem == 3}>
                                             {areasPermission && (
-                                                <li>
+                                                <li >
                                                     <Link to="/home/areas" className="!p-3 ">
-                                                        <h6 className={` ${isSubMenu("/home/areas")} `}>
+                                                        <h6 className={` ${isSubMenu("/home/areas")} `} >
                                                             - &nbsp; {t("tableForms.areasTitle")}
                                                         </h6>
                                                     </Link>
@@ -237,7 +237,7 @@ const Sidebar = () => {
 
                                 {typePermission && (
                                     <li>
-                                        <Link to="/home/types" className="!p-3 text-white">
+                                        <Link to="/home/types" className="!p-3 ">
                                             <h6 className={isSubMenu("/home/types")}>
                                                 {" "}
                                                 - &nbsp; {t("tableForms.typesTitle")}
@@ -246,8 +246,8 @@ const Sidebar = () => {
                                     </li>
                                 )}
                                 {developerPermission && (
-                                    <li className={isSubMenu("/home/developers")}>
-                                        <Link to="/home/developers" className="!p-3 text-white">
+                                    <li >
+                                        <Link to="/home/developers" className="!p-3 ">
                                             <h6 className={isSubMenu("/home/developers")}>
                                                 {" "}
                                                 - &nbsp; {t("tableForms.developersTitle")}
@@ -256,8 +256,8 @@ const Sidebar = () => {
                                     </li>
                                 )}
                                 {aminityPermission && (
-                                    <li>
-                                        <Link to="/home/amenites" className="!p-3 text-white">
+                                    <li >
+                                        <Link to="/home/amenites" className="!p-3">
                                             <h6 className={isSubMenu("/home/amenites")}>
                                                 {" "}
                                                 - &nbsp; {t("tableForms.amenitiesTitle")}
@@ -272,7 +272,7 @@ const Sidebar = () => {
                     {usePermissionGurd("product", "view") && (
                         <li onClick={() => toggoleSideBar(4)} className={`${isDrop(4)}`}>
                             <Link to="/home/properties">
-                                <AiFillHome className="size-6" />
+                                <PropSettingsIcon color1={currentItem === 4 ? '#eabf92' :'white'} color={currentItem === 4 ? 'white' :'black'}/>
 
                                 <h6>{t("tableForms.propertiesTitle")}</h6>
                             </Link>
@@ -282,7 +282,7 @@ const Sidebar = () => {
                     {usePermissionGurd("service", "view") && (
                         <li onClick={() => toggoleSideBar(5)} className={isDrop(5)}>
                             <Link to="/home/services">
-                                <MdOutlineMiscellaneousServices className="size-5" />
+                            <GrServices className={`${currentItem === 5 ? 'text-white' : 'text-black'} size-5`} />
                                 <h6>{t("tableForms.servicesTitle")}</h6>
                             </Link>
                         </li>
@@ -300,27 +300,27 @@ const Sidebar = () => {
                     {usePermissionGurd("blog", "view") && (
                         <li onClick={() => toggoleSideBar(6)} className={isDrop(6)}>
                             <Link to="/home/blogs">
-                                <LuBookText className="size-5" />
+                            <BlogsIcon color={currentItem === 6 ? 'white' :'black'}/>
                                 <h6>{t("tableForms.blogsTitle")}</h6>
                             </Link>
                         </li>
                     )}
-                    {usePermissionGurd("faq", "view") && (
+                    {/* {usePermissionGurd("faq", "view") && (
                         <li onClick={() => toggoleSideBar(10)} className={isDrop(10)}>
                             <Link to="/home/faqs">
                                 <FaQuestion className="size-5" />
                                 <h6>FAQ</h6>
                             </Link>
                         </li>
-                    )}
-                    {usePermissionGurd("terms_and_conditions", "view") && (
+                    )} */}
+                    {/* {usePermissionGurd("terms_and_conditions", "view") && (
                         <li onClick={() => toggoleSideBar(11)} className={isDrop(11)}>
                             <Link to="/home/terms">
                                 <FaScroll className="size-5" />
                                 <h6>Terms</h6>
                             </Link>
                         </li>
-                    )}
+                    )} */}
 
                     {(adminPermission || rolePermisstion) && (
                         <>
@@ -329,9 +329,9 @@ const Sidebar = () => {
                                 className={`${isDrop(7)} flex pe-2 justify-between items-center text-white `}
                             >
                                 <div className="flex gap-2  text-primary w-full  py-[15px]  px-[25px] ">
-                                    <MdAdminPanelSettings className="size-[21px]" />
+                                    <MdAdminPanelSettings className="size-[25px]" />
                                     <h6 className="text-white text-[15px]">
-                                        {t("tableForms.adminsTitle")} & {t("tableForms.rolesTitle")}
+                                        {t("tableForms.adminsTitle")} 
                                     </h6>
                                 </div>
                                 {open && currentItem === 7 ? (
@@ -345,7 +345,7 @@ const Sidebar = () => {
                                 {adminPermission && (
                                     <li className={isSubMenu("/home/admins")}>
                                         <Link to="/home/admins" className="!p-3 ">
-                                            <h6 className="!text-white">- &nbsp; {t("tableForms.adminsTitle")}</h6>
+                                            <h6 className={` ${isSubMenu("/home/admins")} `} >- &nbsp; {t("tableForms.adminsTitle")}</h6>
                                         </Link>
                                     </li>
                                 )}
@@ -353,7 +353,7 @@ const Sidebar = () => {
                                 {rolePermisstion && (
                                     <li className={isSubMenu("/home/roles")}>
                                         <Link to="/home/roles" className="!p-3 text-white">
-                                            <h6> - &nbsp; {t("tableForms.rolesTitle")}</h6>
+                                            <h6 className={` ${isSubMenu("/home/roles")} `} > - &nbsp; {t("tableForms.rolesTitle")}</h6>
                                         </Link>
                                     </li>
                                 )}
@@ -368,22 +368,14 @@ const Sidebar = () => {
                         </Link>
                     </li>
 
-                    <button onClick={handleLogOut} className="logout ">
-                        <svg xmlns="http://www.w3.org/2000/svg" width={18} height={18} viewBox="0 0 18 18">
-                            <g clipPath="url(#clip0_998_2016)">
-                                <path
-                                    fillRule="evenodd"
-                                    clipRule="evenodd"
-                                    d="M6.75 14.0625C6.75 14.2117 6.80926 14.3548 6.91475 14.4602C7.02024 14.5657 7.16332 14.625 7.3125 14.625H16.3125C16.4617 14.625 16.6048 14.5657 16.7102 14.4602C16.8157 14.3548 16.875 14.2117 16.875 14.0625V3.9375C16.875 3.78832 16.8157 3.64524 16.7102 3.53975C16.6048 3.43426 16.4617 3.375 16.3125 3.375H7.3125C7.16332 3.375 7.02024 3.43426 6.91475 3.53975C6.80926 3.64524 6.75 3.78832 6.75 3.9375V6.1875C6.75 6.33668 6.69074 6.47976 6.58525 6.58525C6.47976 6.69074 6.33668 6.75 6.1875 6.75C6.03832 6.75 5.89524 6.69074 5.78975 6.58525C5.68426 6.47976 5.625 6.33668 5.625 6.1875V3.9375C5.625 3.48995 5.80279 3.06072 6.11926 2.74426C6.43572 2.42779 6.86495 2.25 7.3125 2.25H16.3125C16.7601 2.25 17.1893 2.42779 17.5057 2.74426C17.8222 3.06072 18 3.48995 18 3.9375V14.0625C18 14.5101 17.8222 14.9393 17.5057 15.2557C17.1893 15.5722 16.7601 15.75 16.3125 15.75H7.3125C6.86495 15.75 6.43572 15.5722 6.11926 15.2557C5.80279 14.9393 5.625 14.5101 5.625 14.0625V11.8125C5.625 11.6633 5.68426 11.5202 5.78975 11.4148C5.89524 11.3093 6.03832 11.25 6.1875 11.25C6.33668 11.25 6.47976 11.3093 6.58525 11.4148C6.69074 11.5202 6.75 11.6633 6.75 11.8125V14.0625Z"
-                                />
-                                <path
-                                    fillRule="evenodd"
-                                    clipRule="evenodd"
-                                    d="M0.164279 9.39823C0.111895 9.34598 0.0703346 9.2839 0.0419773 9.21557C0.0136201 9.14723 -0.000976563 9.07397 -0.000976562 8.99998C-0.000976563 8.92599 0.0136201 8.85273 0.0419773 8.78439C0.0703346 8.71605 0.111895 8.65398 0.164279 8.60173L3.53928 5.22673C3.59158 5.17443 3.65367 5.13294 3.722 5.10464C3.79033 5.07634 3.86357 5.06177 3.93753 5.06177C4.01149 5.06177 4.08473 5.07634 4.15306 5.10464C4.22139 5.13294 4.28348 5.17443 4.33578 5.22673C4.38808 5.27903 4.42956 5.34111 4.45787 5.40945C4.48617 5.47778 4.50074 5.55102 4.50074 5.62498C4.50074 5.69894 4.48617 5.77218 4.45787 5.84051C4.42956 5.90884 4.38808 5.97093 4.33578 6.02323L1.9204 8.43748H11.8125C11.9617 8.43748 12.1048 8.49674 12.2103 8.60223C12.3158 8.70772 12.375 8.85079 12.375 8.99998C12.375 9.14916 12.3158 9.29224 12.2103 9.39773C12.1048 9.50322 11.9617 9.56248 11.8125 9.56248H1.9204L4.33578 11.9767C4.38808 12.029 4.42956 12.0911 4.45787 12.1594C4.48617 12.2278 4.50074 12.301 4.50074 12.375C4.50074 12.4489 4.48617 12.5222 4.45787 12.5905C4.42956 12.6588 4.38808 12.7209 4.33578 12.7732C4.28348 12.8255 4.22139 12.867 4.15306 12.8953C4.08473 12.9236 4.01149 12.9382 3.93753 12.9382C3.86357 12.9382 3.79033 12.9236 3.722 12.8953C3.65367 12.867 3.59158 12.8255 3.53928 12.7732L0.164279 9.39823Z"
-                                />
-                            </g>
-                        </svg>
+                    <button onClick={handleLogOut} className="logout  ">
+                      
+                       <li className="flex gap-3 items-center ">
+
+                       <MdLogout    className="size-5 !text-black" />
                         <h6 className="">{t("tableForms.labels.logout")}</h6>
+                       </li>
+                      
                     </button>
                 </ul>
             </div>

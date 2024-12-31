@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 
 import { IoMdAdd } from "react-icons/io";
-import { useTranslation } from "react-i18next";
+
 import { IoClose, IoCloudUploadOutline } from "react-icons/io5";
 import { PhotoView } from "react-photo-view";
 
@@ -15,20 +15,19 @@ type UploadImageProps = {
 };
 const Upload_cover = (props: UploadImageProps) => {
 
-  const {t} = useTranslation()
+ 
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [imageSrc, setImageSrc] = useState<string | null>(null);
   const [imageList, setImageList] = useState<string[]>([]);
   const [files, setFiles] = useState<File[]>([]);
-const imgPreview = useRef(null)
+const imgPreview = useRef<HTMLImageElement>(null)
   const handleButtonClick = () => {
-    // Programmatically click the hidden file input
+    
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
   };
   const handleImgPrevClick = () => {
-    // Programmatically click the hidden file input
+
     if (imgPreview.current) {
       imgPreview.current.click();
     }
@@ -38,7 +37,7 @@ const imgPreview = useRef(null)
     setImageList(imageList.filter((_, i) => i !== index))
 
     const newFiles = files.filter((_, i) => i !== index)
-console.log(newFiles)
+
 
     setFiles(newFiles)
 
@@ -51,7 +50,7 @@ console.log(newFiles)
     }
   }
 
-  console.log("files" , files)
+ 
   console.log("imagurl files" , imageList)
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event?.target?.files;
@@ -73,11 +72,7 @@ console.log(newFiles)
       //  const urls = Array.from(files).map(file => URL.createObjectURL(file));
 
        setImageList(urls)
-      const fileReader = new FileReader();
-      fileReader.onload = () => {
-        setImageSrc(fileReader.result as string);
-      };
-      fileReader.readAsDataURL(file);
+     
     }
   };
 
@@ -93,8 +88,8 @@ console.log(newFiles)
         accept="image/*"
       />
 
-      <div onClick={handleButtonClick}  className="flex gap-7">
-        <div className="flex bg-[#f9f9f9] p-8 gap-4 items-center rounded-[8px] text-[#5079b8]">
+      <div   className="flex gap-7">
+        <div onClick={handleButtonClick} className="flex bg-[#f9f9f9] p-8 gap-4 items-center rounded-[8px] text-[#5079b8]">
         <IoCloudUploadOutline className="size-6"  />
           <p>Upload your data here with high quality</p>
         </div>

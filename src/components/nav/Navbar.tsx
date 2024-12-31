@@ -4,7 +4,7 @@ import { modelActions } from "../../store/modelSlice";
 import { useDispatch } from "react-redux";
 
 import { Link, useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+
 import useLanguage from "../../hooks/useLanguage";
 import './navbar.css'
 import { FaUser } from "react-icons/fa6";
@@ -19,7 +19,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const {t} = useTranslation()
+  // const {t} = useTranslation()
    useLanguage()
 
    const [logout] = useLogoutMutation();

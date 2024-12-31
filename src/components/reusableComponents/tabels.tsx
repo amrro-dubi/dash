@@ -118,7 +118,7 @@ console.log(selectedRecords)
                       {" "}
                       {status === 1 ? (
                           <>
-                              <span className="text-[#FFC107]">معلق</span>
+                              <span className="text-primary">معلق</span>
                           </>
                       ) : status === 3 ? (
                           <>
@@ -374,14 +374,14 @@ console.log(selectedRecords)
                             <div className="dropdown">
                                 <Dropdown
                                     placement={`${isRtl ? "bottom-end" : "bottom-start"}`}
-                                    btnClassName="!flex items-center border font-semibold px-2 border-[#EFB93F] border-solid dark:border-[#253b5c] rounded-md py-2 text-sm dark:bg-[#1b2e4b] dark:text-white-dark"
+                                    btnClassName="!flex items-center border font-semibold px-2 border-primary border-solid dark:border-[#253b5c] rounded-md py-2 text-sm dark:bg-[#1b2e4b] dark:text-white-dark"
                                     button={
                                         <>
-                                            <span className="ltr:mr-1 rtl:ml-1 text-[#EFB93F]">
+                                            <span className="ltr:mr-1 rtl:ml-1 text-primary">
                                                 {" "}
                                                 {t("tableForms.labels.types")}{" "}
                                             </span>
-                                            <IconCaretDown className="w-5 h-5 text-[#EFB93F]" />
+                                            <IconCaretDown className="w-5 h-5 text-primary" />
                                         </>
                                     }
                                 >
@@ -421,14 +421,14 @@ console.log(selectedRecords)
                             <div className="dropdown">
                                 <Dropdown
                                     placement={`${isRtl ? "bottom-end" : "bottom-start"}`}
-                                    btnClassName="!flex items-center border  font-semibold border-[#EFB93F] border-solid dark:border-[#253b5c] rounded-md px-4 py-2 text-sm dark:bg-[#1b2e4b] dark:text-white-dark"
+                                    btnClassName="!flex items-center border  font-semibold border-primary border-solid dark:border-[#253b5c] rounded-md px-4 py-2 text-sm dark:bg-[#1b2e4b] dark:text-white-dark"
                                     button={
                                         <>
-                                            <span className="ltr:mr-1 rtl:ml-1 text-[#EFB93F]">
+                                            <span className="ltr:mr-1 rtl:ml-1 text-primary">
                                                 {" "}
                                                 {t("tableForms.labels.columns")}{" "}
                                             </span>
-                                            <IconCaretDown className="w-5 h-5 text-[#EFB93F]" />
+                                            <IconCaretDown className="w-5 h-5 text-primary" />
                                         </>
                                     }
                                 >
@@ -517,7 +517,7 @@ console.log(selectedRecords)
                                 <>
                                     <Link
                                         to={`${props.Link_Navigation}`}
-                                        className="btn bg-gradient-to-r from-[#EFB93F] to-[#EFB93F] rounded-full shadow-none text-white"
+                                        className="btn bg-primary rounded-full shadow-none text-white"
                                     >
                                         <span>
                                             <svg

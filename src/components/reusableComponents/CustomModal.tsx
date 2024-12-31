@@ -17,7 +17,7 @@ const CustomModal = (props: ModalProps) => {
         >
             <div className="rounded-2xl shadow dark:bg-gray-700 bg-white w-[90%] lg:w-[60%] max-h-[80%] flex flex-col">
            
-                <div className="flex items-center bg-gradient-to-r from-[#af7a3d] to-[#ecb022] justify-between p-4 md:p-5 rounded-t-xl">
+                <div className="flex items-center bg-primary justify-between p-4 md:p-5 rounded-t-xl">
                     <h3 className="text-lg font-semibold text-white">{props.title}</h3>
                     <button
                         type="button"

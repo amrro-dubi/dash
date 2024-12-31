@@ -31,7 +31,7 @@ const Home = () => {
                     </div>
                     </div>
                     <div className="counter-area">
-                    <div className="row g-3">
+                    <div className="flex gap-3">
                         <div className="col-xl-3 col-md-6">
                         <div className="counter-single">
                             <div className="counter-icon">

@@ -535,7 +535,7 @@ p {
   font-family: var(--font-open-sans);
   font-weight: 600;
   font-size: 15px;
-  color: #13141A;
+  color: white;
   white-space: nowrap;
   padding: 10px 20px;
   display: inline-flex;
@@ -1042,7 +1042,7 @@ p {
   width: 100%;
 }
 .top-bar .search-area form .form-inner input {
-  background: #FAF8FB;
+  background: #fafafa !important;
   border: 1px solid #EEEEEE;
   border-radius: 5px 0px 0px 5px;
   width: 100%;
@@ -1731,7 +1731,7 @@ p {
 .signUp-modal .modal-dialog .modal-content .form-inner input {
   border-radius: 5px;
   border: 1px solid #EEE;
-  background: #FBF7FB;
+  background: #fafafa !important;
   height: 50px;
   color: var(--text-color);
   font-family: var(--font-open-sans);
@@ -1874,7 +1874,7 @@ p {
   border-radius: 5px;
   border: 1px solid #EEE;
   outline: none;
-  background: #FBF7FB;
+  background: #fafafa;
   min-height: 100px;
   color: var(--text-color);
   font-family: var(--font-open-sans);
@@ -2205,7 +2205,7 @@ p {
 .adSearch-modal .modal-dialog .modal-content .form-inner input {
   border-radius: 5px;
   border: 1px solid #EEE;
-  background: #FBF7FB;
+  background: #fafafa;
   height: 50px;
   color: var(--text-color);
   font-family: var(--font-open-sans);
@@ -2227,7 +2227,7 @@ p {
 .adSearch-modal .modal-dialog .modal-content .form-inner textarea {
   border-radius: 5px;
   border: 1px solid #EEE;
-  background: #FBF7FB;
+  background: #fafafa;
   height: 50px;
   color: var(--text-color);
   font-family: var(--font-open-sans);
@@ -19946,7 +19946,7 @@ button {
 .product-details-page .tab-content2 .review-form .form-inner input {
   border-radius: 5px;
   border: 1px solid #EEE;
-  background: #FBF7FB;
+  background: #fafafa;
   height: 50px;
   color: var(--text-color);
   font-family: var(--font-open-sans);
@@ -19968,7 +19968,7 @@ button {
 .product-details-page .tab-content2 .review-form .form-inner textarea {
   border-radius: 5px;
   border: 1px solid #EEE;
-  background: #FBF7FB;
+  background: #fafafa;
   min-height: 150px;
   color: var(--text-color);
   font-family: var(--font-open-sans);
@@ -23434,7 +23434,7 @@ button {
 .faq-inquiery-form .form-inner input {
   border-radius: 5px;
   border: 1px solid #EEE;
-  background: #FBF7FB;
+  background: #fafafa;
   height: 50px;
   color: var(--text-color);
   font-family: var(--font-open-sans);
@@ -23456,7 +23456,7 @@ button {
 .faq-inquiery-form .form-inner textarea {
   border-radius: 5px;
   border: 1px solid #EEE;
-  background: #FBF7FB;
+  background: #fafafa;
   min-height: 150px;
   color: var(--text-color);
   font-family: var(--font-open-sans);
@@ -23482,7 +23482,7 @@ button {
 
 .pricing-plan-section .single-plan {
   border-radius: 10px;
-  background: #FBF7FB;
+  background: #fafafa;
   padding: 60px 35px;
   position: relative;
 }
@@ -24321,7 +24321,7 @@ button {
 
 .pricing-checkout-page .package-and-login-area {
   border-radius: 10px;
-  background: #FBF7FB;
+  background: #fafafa;
   padding: 25px 40px;
   display: flex;
   align-items: center;
@@ -24851,7 +24851,7 @@ button {
   }
 }
 .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu > ul li  h6 {
-  color: #373837 !important  ;
+  color: #373837   ;
   font-family: var(--font-montserrat);
   font-size: 15px;
   font-weight: 600;
@@ -24870,7 +24870,10 @@ button {
   fill: var(--white-color) !important;
 }
 .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu > ul li.active  h6 {
-  color: var(--white-color) !important;
+  color: var(--white-color) ;
+}
+.dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu > ul li.activee  h6 {
+  color: var(--primary-color1) !important;
 }
 .dashboard-wrapper .dashboard-sidebar-wrapper .dashboard-sidebar-menu .logout {
   line-height: 1;

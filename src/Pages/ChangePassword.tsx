@@ -162,7 +162,7 @@ console.log(data)
                                            onChange={handleChange}
                                            placeholder={t("auth.login.placeholders.password")}
                                            />
-                                         {!passwordVisible ? <IoIosEye onClick={togglePasswordVisibility} className="absolute text-red-300 size-5 top-[17px] ltr:right-[20px]" /> : <IoIosEyeOff onClick={togglePasswordVisibility} className="absolute text-red-300 size-5 top-[17px] ltr:right-[20px]" />}
+                                         {!passwordVisible ? <IoIosEye onClick={togglePasswordVisibility} className="absolute text-primary size-5 top-[17px] ltr:right-[20px]" /> : <IoIosEyeOff onClick={togglePasswordVisibility} className="absolute text-primary size-5 top-[17px] ltr:right-[20px]" />}
                                            </div>
                                        </div>
                                      </div>
@@ -184,7 +184,7 @@ console.log(data)
                                            onChange={handleChange}
                                            placeholder={t("auth.login.placeholders.password")}
                                            />
-                                         {!passwordVisible ? <IoIosEye onClick={togglePasswordVisibility} className="absolute text-red-300 size-5 top-[17px] ltr:right-[20px]" /> : <IoIosEyeOff onClick={togglePasswordVisibility} className="absolute text-red-300 size-5 top-[17px] ltr:right-[20px]" />}
+                                         {!passwordVisible ? <IoIosEye onClick={togglePasswordVisibility} className="absolute text-primary size-5 top-[17px] ltr:right-[20px]" /> : <IoIosEyeOff onClick={togglePasswordVisibility} className="absolute text-primary size-5 top-[17px] ltr:right-[20px]" />}
                                            </div>
                                        </div>
                                      </div>
@@ -204,7 +204,7 @@ console.log(data)
                                 onChange={handleChange}
                                 placeholder={t("auth.resetPassword.placeholders.confirmPassword")}
                               />
-                              {!passwordVisible ? <IoIosEye onClick={togglePasswordVisibility} className="absolute text-red-300 size-5 top-[17px] ltr:right-[20px]" /> : <IoIosEyeOff onClick={togglePasswordVisibility} className="absolute text-red-300 size-5 top-[17px] ltr:right-[20px]" />}
+                              {!passwordVisible ? <IoIosEye onClick={togglePasswordVisibility} className="absolute text-primary size-5 top-[17px] ltr:right-[20px]" /> : <IoIosEyeOff onClick={togglePasswordVisibility} className="absolute text-primary size-5 top-[17px] ltr:right-[20px]" />}
                                 </div>
                                 {errors.confirmPassword && (
                                 <p className="text-[#FF0000] text-[12px]">

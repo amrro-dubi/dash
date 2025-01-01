@@ -20,7 +20,7 @@ const GoogleMapComponent = ({handleLocagtion} :{handleLocagtion: (lat: string, l
     const center = useMemo(() => ({ lat: -3.745, lng: -38.523 }), [])
 
 
-    const containerStyle = useMemo(() => ({ width: "100%", height: "580px" }), [])
+    const containerStyle = useMemo(() => ({ width: "100%", height: "300px" }), [])
 
     useEffect(() => {
         // Clean up Google Map instance when component unmounts
@@ -45,7 +45,7 @@ const GoogleMapComponent = ({handleLocagtion} :{handleLocagtion: (lat: string, l
       };
 
     return isLoaded ? (
-        <div className="w-full h-full col-span-full">
+        <div className="w-full  ">
             <GoogleMap onClick={handleMapClick}  mapContainerStyle={containerStyle} center={center} zoom={10} onLoad={onLoad}>
                 <Marker position={markerPosition} />
             </GoogleMap>

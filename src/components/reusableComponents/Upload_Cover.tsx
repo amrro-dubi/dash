@@ -112,7 +112,7 @@ const imgPreview = useRef<HTMLImageElement>(null)
      <div className="flex gap-4 flex-wrap relative">
 
       {imageList.length > 0  && props.acceptType !== ".pdf" ? imageList.map((imgUrl, index:number)=>(
- <div key={imgUrl} className="rounded-[8px] w-[150px] h-[100px] relative">
+ <div key={imgUrl} className="rounded-[8px] w-[100px] h-[70px] relative">
   <div className="overlay  rounded-[8px]" onClick={handleImgPrevClick} ></div>
   <div className="z-50 absolute top-0 right-0 mx-2 my-2 " ><button type="button" onClick={ ()=>handleRemoveImg(index)} ><IoClose className="size-7 text-[red]" /></button></div>
  <PhotoView src={imgUrl}  >
